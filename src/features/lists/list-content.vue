@@ -1,0 +1,165 @@
+<template>
+  <section class="content flex-grow-1 bd-highlight">
+    <loading-container :isLoading="isLoading && todoItems.length === 0">
+      <completed-wrapper
+        v-if="completedTodoItems.length > 0"
+        :todo-items="completedTodoItems"
+        :list-id="id"
+        v-on:todo-item-removed="todoRemoved"
+        v-on:todo-item-opened="todoOpened"
+      />
+      <draggable
+        v-model="todoItems"
+        :options="{group:{ name: 'todoItems', pull: false}}"
+        @start="drag=true"
+        @end="drag=false"
+      >
+        <todo-item
+          v-for="todoItem in todoItems"
+          v-bind:key="todoItem.id"
+          v-on:todo-item-deleted="todoRemoved"
+          v-on:todo-item-completed="todoCompleted"
+          v-on:todo-item-opened="todoOpened"
+          :todo-item="todoItem"
+          :listId="id"
+        />
+      </draggable>
+      <new-todo-item
+        v-if="isListActive"
+        :list-id="id"
+        v-on:todo-item-added="newTodoItemAdded"
+        :is-focused="focusNewTodoItemField"
+      />
+    </loading-container>
+  </section>
+</template>
+
+<script>
+import completedWrapper from "@/features/todoitems/completed-wrapper";
+import todoItem from "@/features/todoitems/todo-item.vue";
+import newTodoItem from "@/features/todoitems/new-todo-item.vue";
+import draggable from "vuedraggable";
+
+export default {
+  name: "list-content",
+  components: {
+    completedWrapper,
+    todoItem,
+    newTodoItem,
+    draggable
+  },
+  props: {
+    id: {
+      type: Number,
+      required: true
+    },
+    state: {
+      type: Number,
+      required: true
+    }
+  },
+  data: function() {
+    return {
+      isLoading: true,
+      completedTodoItems: [],
+      todoItems: [],
+      skipLoad: true,
+      focusNewTodoItemField: false
+    };
+  },
+  watch: {
+    todoItems: function() {
+      if (!this.skipLoad && this.todoItems.length > 0) {
+        this.$http.post(`/lists/${this.id}/todoItems/order`, {
+          todoItemIds: this._.map(this.todoItems, "id")
+        });
+      }
+      if (this.skipLoad) {
+        this.skipLoad = false;
+      }
+    }
+  },
+  mounted: function() {
+    this.loadTodoItems();
+
+    this.$root.$on("refresh-todo-list", () => {
+      this.todoItems = [];
+      this.loadTodoItems();
+    });
+  },
+  beforeDestroy: function() {
+    this.$root.$off("refresh-todo-list");
+  },
+  computed: {
+    isListActive: function() {
+      return this.state === 1;
+    }
+  },
+  methods: {
+    newTodoItemAdded: function() {
+      this.focusNewTodoItemField = true;
+      this.loadTodoItems();
+    },
+    loadTodoItems: function() {
+      this.skipLoad = true;
+      this.isLoading = true;
+
+      this.$http.get(`/lists/${this.id}/todoItems`).then(response => {
+        let openTodoItems = this._.filter(response.data, function(tdo) {
+          return tdo.state === "Open";
+        });
+
+        this.todoItems = this._.orderBy(
+          openTodoItems,
+          ["position", "dateCreated"],
+          ["asc", "asc"]
+        );
+
+        this.completedTodoItems = this._.filter(response.data, function(tdo) {
+          return tdo.state === "Completed";
+        });
+
+        if (
+          this.todoItems.length === 0 &&
+          this.completedTodoItems.length === 0
+        ) {
+          this.focusNewTodoItemField = true;
+        }
+
+        this.communicateProgress();
+        this.isLoading = false;
+      });
+    },
+    todoRemoved: function() {
+      this.loadTodoItems();
+    },
+    todoCompleted: function() {
+      this.loadTodoItems();
+    },
+    todoOpened: function() {
+      this.loadTodoItems();
+    },
+    communicateProgress: function() {
+      var completedCount = this.completedTodoItems.length;
+      var openCount = this.todoItems.length;
+      var totalCount = completedCount + openCount;
+
+      this.$root.$emit(
+        "list-count-refresh",
+        (completedCount / totalCount) * 100
+      );
+    }
+  }
+};
+</script>
+
+<style>
+section.content {
+  background-image: url("https://shinestorage.azureedge.net/productimages/lined-background.png");
+  min-height: calc(100vh - 316px);
+}
+section.standard {
+  background-color: white;
+  min-height: calc(100vh - 316px);
+}
+</style>

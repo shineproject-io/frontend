@@ -1,0 +1,102 @@
+@font-face {
+	font-family: brand-regular;
+	src: url('https://listsstorage.blob.core.windows.net/productfonts/regular.ttf')
+		format('truetype');
+}
+
+@font-face {
+	font-family: brand-bold;
+	src: url('https://listsstorage.blob.core.windows.net/productfonts/bold.ttf')
+		format('truetype');
+}
+
+@font-face {
+	font-family: brand-light;
+	src: url('https://listsstorage.blob.core.windows.net/productfonts/light.ttf')
+		format('truetype');
+}
+
+html {
+	font-size: 16px;
+}
+
+@media (max-width: 500px) {
+	html {
+		font-size: 14px;
+	}
+}
+
+body {
+	font-family: brand-regular !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: brand-regular !important;
+}
+
+.font-weight-bold {
+	font-family: brand-bold !important;
+}
+.font-weight-light {
+	font-family: brand-light !important;
+}
+
+.display-1 {
+	font-size: 3.5rem !important;
+}
+
+.display-2 {
+	font-size: 2.5rem !important;
+}
+
+.display-3 {
+	font-size: 2rem !important;
+}
+
+.btn-primary {
+	background-color: #db5461 !important;
+	border-color: #db5461 !important;
+}
+
+a:hover {
+	color: black !important;
+}
+
+.no-select {
+	user-select: none;
+}
+
+.no-events {
+	pointer-events: none;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.bg-glass {
+	background: rgba(0, 0, 0, 0.6);
+}
+
+.bg-transparent {
+	background: rgba(0, 0, 0, 0.6);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.2s ease-out;
+}
+
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
+}
+
+.animated.animate-fast {
+	animation-duration: 0.5s;
+}
