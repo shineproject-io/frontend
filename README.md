@@ -1,4 +1,7 @@
 # ShineProject-Web
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/92db1a6b20204b6cad80f38a7437639e)](https://app.codacy.com/app/spam_2/ShineProject-Web?utm_source=github.com&utm_medium=referral&utm_content=tommcclean/ShineProject-Web&utm_campaign=Badge_Grade_Dashboard)
+
 Stay organised by creating to-do lists to help you finish what matters.
 
 ShineProject is a modern web application which allows end users to create to-do lists to stay organised. This is a personal project which i have decided to put on GitHub.
