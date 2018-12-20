@@ -19,3 +19,4 @@ ShineProject is a modern web application which allows end users to create to-do 
 
 ## Notes
 - I am in the process of reviewing this code base, to bring it in line with best practices, its robust and performant, but some areas need a little bit of work to reduce  the code footprint and improve resiliency if the API were to go down or encounter a breaking change.
+- to run this locally you will need to grab the API repository as well. Run them in tandem and all will be well in the world.
