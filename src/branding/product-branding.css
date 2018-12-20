@@ -100,3 +100,11 @@ a:hover {
 .animated.animate-fast {
 	animation-duration: 0.5s;
 }
+
+a {
+	color: black;
+}
+
+a:hover {
+	text-decoration: none;
+}

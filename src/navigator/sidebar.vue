@@ -32,6 +32,7 @@
             <creator-link/>
           </div>
         </div>
+
         <div v-else>
           <profile-link class="link-border"/>
           <sidebar-link
@@ -52,7 +53,7 @@
 
 <script>
 import sidebarLink from "@/navigator/sidebar-link.vue";
-import CreatorLink from "@/navigator/creator-link.vue";
+import creatorLink from "@/navigator/creator-link.vue";
 import profileLink from "@/features/profile/profile-link";
 import listLinkWrapper from "@/features/lists/list-link-wrapper.vue";
 import signOutLink from "@/navigator/sign-out-link";
@@ -65,7 +66,7 @@ export default {
     listLinkWrapper,
     siteLink,
     profileLink,
-    CreatorLink,
+    creatorLink,
     signOutLink
   },
   props: {
