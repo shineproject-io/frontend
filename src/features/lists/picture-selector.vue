@@ -69,7 +69,7 @@ export default {
     };
   },
   methods: {
-    selectPicture: function(imageSource) {
+    selectPicture(imageSource) {
       this.$http.put(`/lists/${this.listId}/picture`, {
         imageSource: imageSource
       });
@@ -80,7 +80,7 @@ export default {
     show() {
       this.$refs.listBackgroundModal.show();
     },
-    fileInputChange: function(fileList) {
+    fileInputChange(fileList) {
       this.imageFileName = fileList[0].name;
       this.file = fileList[0];
       this.uploadPhoto();

@@ -6,7 +6,7 @@
     <div class="change-password-wrapper" v-if="token">
       <h1 class="display-2">Change Password</h1>
       <p class="lead">We are sorry to see you locked out, change your password below to get back in!</p>
-      
+
       <form
         v-on:submit.prevent="changePassword"
         class="change-password-form animated fadeInDown animate-fast"

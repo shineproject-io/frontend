@@ -19,7 +19,7 @@ export default {
   name: "invisible-input",
   directives: {
     focus: {
-      inserted: function(el, binding) {
+      inserted(el, binding) {
         if (binding.value === true) {
           el.focus();
         }

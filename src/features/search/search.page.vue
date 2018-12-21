@@ -43,7 +43,7 @@ export default {
     this.isLoaded = true;
   },
   methods: {
-    search: function(searchQuery) {
+    search(searchQuery) {
       this.isSearching = true;
       if (searchQuery.length > 2) {
         this.$http.get(`/search?searchQuery=${searchQuery}`).then(response => {

@@ -56,10 +56,10 @@ export default {
     toggleExpansion() {
       this.isExpanded = !this.isExpanded;
     },
-    todoItemOpened: function(todoItemId) {
+    todoItemOpened(todoItemId) {
       this.$emit("todo-item-opened", todoItemId);
     },
-    todoItemRemoved: function(todoItemId) {
+    todoItemRemoved(todoItemId) {
       this.$emit("todo-item-removed", todoItemId);
     }
   }

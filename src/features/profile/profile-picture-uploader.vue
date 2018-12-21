@@ -110,7 +110,7 @@ export default {
 
       return false;
     },
-    fileInputChange: function(fileList) {
+    fileInputChange(fileList) {
       this.imageFileName = fileList[0].name;
       this.file = fileList[0];
     }

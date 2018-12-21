@@ -37,7 +37,7 @@ export default {
     };
   },
   methods: {
-    addTodoItem: function(todoItemName) {
+    addTodoItem(todoItemName) {
       this.todoItemName = todoItemName;
       this.isSubmitting = true;
 

@@ -151,7 +151,7 @@ export default {
         this.$root.$emit("load-default-list");
       });
     },
-    changeListState: function(state) {
+    changeListState(state) {
       window.$(".complete-popover").popover("hide");
 
       this.$http
@@ -166,7 +166,7 @@ export default {
           }
         });
     },
-    saveName: function(newValue) {
+    saveName(newValue) {
       this.$http
         .put(`/lists/${this.id}/name`, {
           name: newValue
@@ -175,7 +175,7 @@ export default {
           this.$root.$emit("refresh-lists");
         });
     },
-    saveDescription: function(newValue) {
+    saveDescription(newValue) {
       this.$http.put(`/lists/${this.id}/description`, {
         description: newValue
       });

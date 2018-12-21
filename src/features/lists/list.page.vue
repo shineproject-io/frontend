@@ -62,7 +62,7 @@ export default {
         this.isLoading = false;
       });
     },
-    updateBackground: function(imageSource) {
+    updateBackground(imageSource) {
       this.list.imageSource = imageSource;
     }
   }

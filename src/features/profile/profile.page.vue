@@ -123,7 +123,7 @@ export default {
     }
   },
   methods: {
-    createList: function(title, description, image) {
+    createList(title, description, image) {
       this.isSubmitting = true;
 
       this.$http

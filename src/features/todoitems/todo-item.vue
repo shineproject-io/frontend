@@ -88,7 +88,7 @@ export default {
           this.isSubmitting = false;
         });
     },
-    saveTitle: function(newValue) {
+    saveTitle(newValue) {
       this.isSubmitting = true;
 
       this.$http
@@ -99,7 +99,7 @@ export default {
           this.isSubmitting = false;
         });
     },
-    completeTodoItem: function(todoItemId) {
+    completeTodoItem(todoItemId) {
       this.isSubmitting = true;
 
       this.$http
@@ -111,7 +111,7 @@ export default {
           this.$emit("todo-item-completed", todoItemId);
         });
     },
-    openTodoItem: function(todoItemId) {
+    openTodoItem(todoItemId) {
       this.isSubmitting = true;
 
       this.$http

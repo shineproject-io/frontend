@@ -66,7 +66,7 @@ export default {
         this.isLoading = false;
       });
     },
-    submit: function(newListId) {
+    submit(newListId) {
       if (this.isSubmitting) {
         return;
       }

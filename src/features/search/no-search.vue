@@ -12,5 +12,5 @@
 <script>
 export default {
 	name: 'no-search',
-}
+};
 </script>
