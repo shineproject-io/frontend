@@ -1,6 +1,9 @@
 <template>
   <div class="text-center text-lg-left">
-    <div class="text-white animated slideInDown animate-fast" style="background-image: url('https://shinestorage.azureedge.net/productimages/texture.png');">
+    <div
+      class="text-white animated slideInDown animate-fast"
+      style="background-image: url('https://shinestorage.azureedge.net/productimages/texture.png');"
+    >
       <div class="container text-center text-lg-left pt-3">
         <div class="row">
           <div class="col-12 col-lg-6 pt-5 px-5">
@@ -27,7 +30,11 @@
           </div>
           <div class="col-12 col-lg-6">
             <div class="px-4 pt-4 pb-0">
-              <img src="https://shinestorage.azureedge.net/productimages/product-highlight.png" style="width: 103%;">
+              <img
+                src="https://shinestorage.azureedge.net/productimages/product-highlight.png"
+                alt="product screenshot"
+                style="width: 103%;"
+              >
             </div>
           </div>
         </div>
@@ -38,7 +45,11 @@
       <div class="container py-5">
         <div class="d-flex flex-column flex-column-reverse flex-lg-row align-items-center py-5">
           <div class="flex-column flex-lg-fill text-center desktop-50">
-            <img src="https://shinestorage.azureedge.net/productimages/ideas.png" height="400">
+            <img
+              src="https://shinestorage.azureedge.net/productimages/ideas.png"
+              alt="List ideas screenshot"
+              height="400"
+            >
           </div>
           <div class="flex-lg-fill mb-3 desktop-50">
             <h2 class="display-3 mb-3">
@@ -65,7 +76,11 @@
           </div>
 
           <div class="flex-column flex-lg-fill text-center desktop-50 mb-2">
-            <img src="https://shinestorage.azureedge.net/productimages/ipad-landscape.png" style="width: 95%;">
+            <img
+              src="https://shinestorage.azureedge.net/productimages/ipad-landscape.png"
+              alt="iPad screenshot"
+              style="width: 95%;"
+            >
           </div>
         </div>
       </div>
@@ -75,7 +90,12 @@
       <div class="container py-5">
         <div class="d-flex flex-column flex-column-reverse flex-lg-row align-items-center py-5">
           <div class="flex-column flex-lg-fill text-center desktop-50">
-            <img src="https://shinestorage.azureedge.net/productimages/customise.png" class="rounded" height="400">
+            <img
+              src="https://shinestorage.azureedge.net/productimages/customise.png"
+              class="rounded"
+              alt="Customise list background screenshot"
+              height="400"
+            >
           </div>
           <div class="flex-lg-fill mb-3 desktop-50">
             <h2 class="display-3 mb-3">
@@ -102,18 +122,29 @@
           </div>
 
           <div class="flex-column flex-lg-fill text-center desktop-50">
-            <img src="https://shinestorage.azureedge.net/productimages/todo-progress.png" height="300">
+            <img
+              src="https://shinestorage.azureedge.net/productimages/todo-progress.png"
+              alt="Todo list progress screenshot"
+              height="300"
+            >
           </div>
         </div>
       </div>
     </div>
 
-    <div class="text-white" style="background-image: url('https://shinestorage.azureedge.net/productimages/texture.png');">
+    <div
+      class="text-white"
+      style="background-image: url('https://shinestorage.azureedge.net/productimages/texture.png');"
+    >
       <div class="container text-center text-lg-left p-5">
         <div class="row py-4">
           <div class="col-12 col-lg-6 mb-4">
             <div>
-              <img src="https://shinestorage.azureedge.net/productimages/laptop-front.png" style="width: 100%;">
+              <img
+                src="https://shinestorage.azureedge.net/productimages/laptop-front.png"
+                alt="Surface book screenshot"
+                style="width: 100%;"
+              >
             </div>
           </div>
           <div class="col-12 col-lg-6 px-3">
