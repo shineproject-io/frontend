@@ -1,64 +1,40 @@
 <template>
-  <div>
-    <profile-cover
-      background-image="https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg"
-    >
-      <div class style="width: 800px; max-width: 95%; margin: 0 auto;">
-        <div class="d-flex align-items-center mb-3 mb-lg-5">
-          <div class="mr-4">
-            <profile-picture-spinner
-              v-if="!userProfile || userProfile.profilePicturePath === ''"
-              :size="100"
-            />
-            <profile-picture-uploader
-              v-if="userProfile && userProfile.profilePicturePath !== ''"
-              :size="100"
-              :canUpload="true"
-              :imagePath="userProfile.profilePicturePath"
-            />
-          </div>
-          <div class="flex-grow-1">
-            <h1 class="display-2">{{welcomeMessage}}</h1>
-            <p class="lead mb-0">It's time to get stuff done, so lets get cracking.</p>
-          </div>
-          <profile-editor v-if="userProfile" :user-profile="userProfile"/>
-        </div>
-
-        <div v-bind:class="{'no-events': isSubmitting}" class="p-2">
-          <list-suggestion
-            title="Want a blank list?"
-            description="How about a fresh canvas to start jotting down your thoughts."
-            icon="fas fa-plus"
-            v-on:perform="createList('New list', 'My new list', 'https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg')"
+  <profile-cover background-image="https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg">
+    <div class="profile-page-wrapper">
+      <div class="d-flex align-items-center mb-3 mb-lg-5">
+        <div class="mr-4">
+          <profile-picture-spinner
+            v-if="!userProfile || userProfile.profilePicturePath === ''"
+            :size="100"
           />
-          <list-suggestion
-            title="Planning to hit the supermarket?"
-            description="Lets create a shopping list so you can jot down the things you need to get"
-            icon="fas fa-shopping-basket"
-            v-on:perform="createList('Shopping list', 'Lets remember to buy these items when we get to the supermarket', 'https://shinestorage.azureedge.net/bespokebackgrounds/shopping.jpg')"
-          />
-          <list-suggestion
-            title="Christmas is coming, are you ready?"
-            description="No need to stress, lets create a list to help us with our Christmas shopping!"
-            icon="fas fa-gift"
-            v-on:perform="createList('Christmas shopping', 'Lets spread the Christmas cheer by remembering to get everybody a gift this year!', 'https://shinestorage.azureedge.net/bespokebackgrounds/christmas.jpg')"
-          />
-          <list-suggestion
-            title="Need to organise your day tomorrow?"
-            description="We like your thinking, we can create a list to help you succeed tomorrow."
-            icon="fas fa-calendar"
-            v-on:perform="createList(tomorrowsDate, 'Failing to plan is planning to fail, so today we are going to do things the right way', 'https://shinestorage.azureedge.net/bespokebackgrounds/tomorrow.jpg')"
-          />
-          <list-suggestion
-            title="Sorting out some odd jobs?"
-            description="Nobody likes chores, but the sooner you get them done, the better."
-            icon="fas fa-bolt"
-            v-on:perform="createList('Odd jobs', 'These things have been building up, its time to smash them', 'https://shinestorage.azureedge.net/bespokebackgrounds/jobs.jpg')"
+          <profile-picture-uploader
+            v-if="userProfile && userProfile.profilePicturePath !== ''"
+            :size="100"
+            :canUpload="true"
+            :imagePath="userProfile.profilePicturePath"
           />
         </div>
+        <div class="flex-grow-1">
+          <h1 class="display-2">{{welcomeMessage}}</h1>
+          <p class="lead mb-0">It's time to get stuff done, so lets get cracking.</p>
+        </div>
+        <profile-editor v-if="userProfile" :user-profile="userProfile"/>
       </div>
-    </profile-cover>
-  </div>
+
+      <div v-bind:class="{'no-events': isSubmitting}" class="p-2">
+        <loading-container :is-loading="suggestions.length === 0">
+          <list-suggestion
+            v-for="suggestion in suggestions"
+            v-bind:key="suggestion.suggestionTitle"
+            :title="suggestion.suggestionTitle"
+            :description="suggestion.suggestionDescription"
+            :icon="suggestion.suggestionIcon"
+            v-on:perform="createList(suggestion.listTitle, suggestion.listDescription, suggestion.listBackgroundImageUrl)"
+          />
+        </loading-container>
+      </div>
+    </div>
+  </profile-cover>
 </template>
 
 <script>
@@ -76,18 +52,14 @@ export default {
   },
   data() {
     return {
-      isSubmitting: false
+      isSubmitting: false,
+      suggestions: []
     };
-  },
-  created() {
-    var isWelcome = this.$route.query.welcome;
-
-    if (isWelcome) {
-      this.createWelcomeExperience();
-    }
   },
   mounted() {
     this.loadProfile();
+    this.loadSuggestions();
+    this.createWelcomeExperience();
 
     this.$root.$on("user-profile-updated", () => {
       this.loadProfile();
@@ -106,23 +78,14 @@ export default {
       } else {
         return `Hi ${this.userProfile.givenName}`;
       }
-    },
-    tomorrowsDate() {
-      var today = new Date();
-      var dd = today.getDate() + 1;
-      var mm = today.getMonth() + 1;
-
-      var yyyy = today.getFullYear();
-      if (dd < 10) {
-        dd = "0" + dd;
-      }
-      if (mm < 10) {
-        mm = "0" + mm;
-      }
-      return dd + "/" + mm + "/" + yyyy;
     }
   },
   methods: {
+    loadSuggestions() {
+      this.$http.get("/lists/suggestions").then(response => {
+        this.suggestions = response.data;
+      });
+    },
     createList(title, description, image) {
       this.isSubmitting = true;
 
@@ -150,9 +113,14 @@ export default {
       }
     },
     createWelcomeExperience() {
-      this.$http.post(`/lists/welcome`, {}).then(listResponse => {
+      var isWelcome = this.$route.query.welcome;
+
+      if (!isWelcome) {
+        return;
+      }
+
+      this.$http.post("/lists/welcome").then(listResponse => {
         this.$http.post(`/lists/${listResponse.data}/welcome`).then(() => {
-          this.userProfile.profilePicturePath = "";
           this.$root.$emit("refresh-lists");
           this.$router.push({
             path: "list",
@@ -164,3 +132,11 @@ export default {
   }
 };
 </script>
+
+<style>
+.profile-page-wrapper {
+  width: 800px;
+  max-width: 95%;
+  margin: 0 auto;
+}
+</style>
