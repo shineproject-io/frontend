@@ -37,7 +37,7 @@ export default {
       Required: true
     }
   },
-  data: function() {
+  data() {
     return {
       isSubmitting: false
     };

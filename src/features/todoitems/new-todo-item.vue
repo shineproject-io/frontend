@@ -30,7 +30,7 @@ export default {
       default: false
     }
   },
-  data: function() {
+  data() {
     return {
       todoItemName: "",
       isSubmitting: false

@@ -27,14 +27,14 @@ export default {
     listLink,
     draggable
   },
-  data: function() {
+  data() {
     return {
       lists: [],
       isLoadingLists: true,
       skipLoad: true
     };
   },
-  mounted: function() {
+  mounted() {
     this.loadLists();
 
     this.$root.$on("refresh-lists", () => {
@@ -45,12 +45,12 @@ export default {
       this.loadDefaultList();
     });
   },
-  beforeDestroy: function() {
+  beforeDestroy() {
     this.$root.$off("refresh-lists");
     this.$root.$off("load-default-list");
   },
   watch: {
-    lists: function() {
+    lists() {
       if (!this.skipLoad && this.lists.length > 0) {
         this.$http.post(`/lists/order`, {
           listIds: this._.map(this.lists, "id")
@@ -61,7 +61,7 @@ export default {
     }
   },
   methods: {
-    loadLists: function() {
+    loadLists() {
       if (this.lists.length === 0) {
         this.isLoadingLists = true;
       }
@@ -76,7 +76,7 @@ export default {
         this.isLoadingLists = false;
       });
     },
-    loadDefaultList: function() {
+    loadDefaultList() {
       if (this.lists.length <= 1) {
         this.$router.push({ name: "profile" });
       } else {
@@ -89,7 +89,7 @@ export default {
         );
 
         var defaultList = this._.find(listsInDescendingOrder, function(lst) {
-          return lst.id != currentListId;
+          return lst.id !== currentListId;
         });
 
         this.$router.push({ path: "list", query: { listId: defaultList.id } });

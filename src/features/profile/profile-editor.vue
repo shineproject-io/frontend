@@ -50,7 +50,7 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       isSubmitting: false,
       updatedGivenName: "",
@@ -58,13 +58,13 @@ export default {
       updatedEmailAddress: ""
     };
   },
-  mounted: function() {
+  mounted() {
     this.updatedGivenName = this.userProfile.givenName;
     this.updatedFamilyName = this.userProfile.familyName;
     this.updatedEmailAddress = this.userProfile.emailAddress;
   },
   methods: {
-    save: function() {
+    save() {
       this.isSubmitting = true;
 
       if (

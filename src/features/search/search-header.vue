@@ -15,12 +15,12 @@ const debounce = require("lodash/debounce");
 
 export default {
   name: "list",
-  data: function() {
+  data() {
     return {
       searchQuery: ""
     };
   },
-  mounted: function() {
+  mounted() {
     this.$nextTick(() => this.$refs.searchField.focus());
   },
   methods: {
@@ -29,7 +29,7 @@ export default {
     }, 500)
   },
   watch: {
-    searchQuery: function() {
+    searchQuery() {
       this.search();
     }
   }

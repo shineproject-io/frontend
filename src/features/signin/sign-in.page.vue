@@ -3,7 +3,7 @@
     <page-cover class="container-fluid p-4">
       <div class="sign-in-wrapper">
         <h1 class="display-2">Sign in</h1>
-        <p>
+        <p class="mb-5">
           <span>Welcome back, please sign in below or&nbsp;</span>
           <router-link to="/welcome/register">create a free account</router-link>
         </p>
@@ -49,7 +49,7 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
       emailAddress: "",
       password: "",
@@ -58,7 +58,7 @@ export default {
     };
   },
   methods: {
-    signIn: function() {
+    signIn() {
       if (this.isSubmitting) {
         return;
       }
@@ -91,10 +91,6 @@ export default {
   width: 600px;
   text-align: center;
   max-width: 100%;
-}
-
-.sign-in-form {
-  padding-top: 40px;
 }
 
 a {

@@ -16,7 +16,7 @@
 export default {
   name: "site-link",
   methods: {
-    signOut: function() {
+    signOut() {
       window.sessionStorage.clear();
       this.$store.commit("clearStore");
       this.$router.push({ name: "features" });

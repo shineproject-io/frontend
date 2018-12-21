@@ -47,13 +47,13 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       isExpanded: false
     };
   },
   methods: {
-    toggleExpansion: function() {
+    toggleExpansion() {
       this.isExpanded = !this.isExpanded;
     },
     todoItemOpened: function(todoItemId) {

@@ -74,40 +74,40 @@ export default {
     profileEditor,
     profileCover
   },
-  data: function() {
+  data() {
     return {
       isSubmitting: false
     };
   },
-  created: function() {
+  created() {
     var isWelcome = this.$route.query.welcome;
 
     if (isWelcome) {
       this.createWelcomeExperience();
     }
   },
-  mounted: function() {
+  mounted() {
     this.loadProfile();
 
     this.$root.$on("user-profile-updated", () => {
       this.loadProfile();
     });
   },
-  beforeDestroy: function() {
+  beforeDestroy() {
     this.$root.$off("user-profile-updated");
   },
   computed: {
-    userProfile: function() {
+    userProfile() {
       return this.$store.getters.userProfile;
     },
-    welcomeMessage: function() {
+    welcomeMessage() {
       if (!this.userProfile) {
         return "Loading your Profile...";
       } else {
         return `Hi ${this.userProfile.givenName}`;
       }
     },
-    tomorrowsDate: function() {
+    tomorrowsDate() {
       var today = new Date();
       var dd = today.getDate() + 1;
       var mm = today.getMonth() + 1;
@@ -140,7 +140,7 @@ export default {
           });
         });
     },
-    loadProfile: function() {
+    loadProfile() {
       let userProfile = this.$store.getters.userProfile;
 
       if (userProfile === null) {
@@ -149,7 +149,7 @@ export default {
         });
       }
     },
-    createWelcomeExperience: function() {
+    createWelcomeExperience() {
       this.$http.post(`/lists/welcome`, {}).then(listResponse => {
         this.$http.post(`/lists/${listResponse.data}/welcome`).then(() => {
           this.userProfile.profilePicturePath = "";

@@ -21,6 +21,7 @@ export default {
 	background: rgba(0, 0, 0, 0.6);
 }
 
+/* iPad Portrait */
 @media (max-width: 767px) {
 	.overlay {
 		padding-left: 5px !important;	

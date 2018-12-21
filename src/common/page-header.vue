@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
-    <div class="page-header text-white" :style="'background-image: url(' + backgroundImage + ');'">
-      <menu-activator></menu-activator>
+    <div class="page-header" :style="'background-image: url(' + backgroundImage + ');'">
+      <menu-activator/>
       <overlay class="d-flex align-items-center">
         <div class="inner">
           <slot></slot>
@@ -34,7 +34,6 @@ export default {
   position: relative;
   background-size: cover;
   background-position: center center;
-  border-bottom: 1px solid #eeeeee;
 }
 
 .page-header .inner {
@@ -42,6 +41,7 @@ export default {
   width: 100%;
 }
 
+/* iPad Portrait */
 @media (max-width: 767px) {
   .page-header {
     height: 325px;

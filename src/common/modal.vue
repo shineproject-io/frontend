@@ -30,16 +30,16 @@
 <script>
 export default {
   name: "modal",
-  data: function() {
+  data() {
     return {
       isVisible: false
     };
   },
   methods: {
-    show: function() {
+    show() {
       this.isVisible = true;
     },
-    hide: function() {
+    hide() {
       this.isVisible = false;
     }
   }

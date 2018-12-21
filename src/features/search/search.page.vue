@@ -31,7 +31,7 @@ export default {
     noSearch,
     noResults
   },
-  data: function() {
+  data() {
     return {
       searchResults: [],
       hasSearch: false,
@@ -39,7 +39,7 @@ export default {
       isSearching: false
     };
   },
-  mounted: function() {
+  mounted() {
     this.isLoaded = true;
   },
   methods: {

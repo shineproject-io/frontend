@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
-    <div class="page-cover text-white" :style="'background-image: url(' + backgroundImage + ');'">
-      <menu-activator></menu-activator>
+    <div class="page-cover" :style="'background-image: url(' + backgroundImage + ');'">
+      <menu-activator/>
       <overlay class="d-flex align-items-center">
         <div class="container">
           <slot></slot>
@@ -34,5 +34,6 @@ export default {
   position: relative;
   background-size: cover;
   background-position: center center;
+  color: white;
 }
 </style>

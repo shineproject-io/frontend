@@ -75,17 +75,17 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       menuDismissed: true
     };
   },
-  mounted: function() {
+  mounted() {
     this.$root.$on("show-menu", () => {
       this.menuDismissed = false;
     });
   },
-  beforeDestroy: function() {
+  beforeDestroy() {
     this.$root.$off("show-menu");
   }
 };

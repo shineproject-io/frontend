@@ -38,7 +38,7 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       otherLists: [],
       isLoading: true,
@@ -46,7 +46,7 @@ export default {
     };
   },
   methods: {
-    show: function() {
+    show() {
       this.$refs.listMigratorModal.show();
 
       this.isLoading = true;

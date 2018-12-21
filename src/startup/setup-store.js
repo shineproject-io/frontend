@@ -1,16 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const vuexPersist = new VuexPersist({
-    key: 'shine-storage',
-    storage: localStorage
-  })
+	key: 'shine-storage',
+	storage: localStorage,
+});
 
 const store = new Vuex.Store({
-    plugins: [vuexPersist.plugin],
+	plugins: [vuexPersist.plugin],
 	state: {
 		userProfile: null,
 	},
@@ -20,11 +20,11 @@ const store = new Vuex.Store({
 	mutations: {
 		setUserProfile: (state, userProfile) => {
 			state.userProfile = userProfile;
-        },
-        clearStore: (state) => {
-            state.userProfile = null;
-        }
+		},
+		clearStore: state => {
+			state.userProfile = null;
+		},
 	},
-})
+});
 
-export default store
+export default store;

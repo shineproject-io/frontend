@@ -17,7 +17,7 @@ export default {
     sidebar,
     addList
   },
-  data: function() {
+  data() {
     return {
       isLoading: true,
       isProductPage: false,
@@ -25,21 +25,21 @@ export default {
     };
   },
   watch: {
-    "$route.name": function() {
+    "$route.name"() {
       this.isLoading = true;
       this.initialiseAuthentication();
       this.identifyProductPage();
     }
   },
-  mounted: function() {
+  mounted() {
     this.initialiseAuthentication();
     this.identifyProductPage();
   },
   methods: {
-    identifyProductPage: function() {
+    identifyProductPage() {
       this.isProductPage = this.$route.name === "features";
     },
-    initialiseAuthentication: function() {
+    initialiseAuthentication() {
       this.token = window.sessionStorage.token;
 
       if (

@@ -48,13 +48,13 @@ export default {
       default: false
     }
   },
-  data: function() {
+  data() {
     return {
       currentText: "",
       storedText: ""
     };
   },
-  mounted: function() {
+  mounted() {
     this.currentText = this.text;
     this.storedText = this.text;
   },
@@ -63,7 +63,7 @@ export default {
       this.currentText = evt.target.innerText;
       this.evaluateValue();
     },
-    evaluateValue: function() {
+    evaluateValue() {
       if (this.storedText !== this.currentText && this.currentText.length > 0) {
         this.storedText = this.currentText;
         this.$emit("updated", this.currentText);

@@ -27,7 +27,7 @@ html {
 }
 
 body {
-	font-family: brand-regular !important;
+	font-family: brand-regular;
 }
 
 h1,
@@ -36,35 +36,31 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: brand-regular !important;
+	font-family: brand-regular;
 }
 
 .font-weight-bold {
-	font-family: brand-bold !important;
+	font-family: brand-bold;
 }
 .font-weight-light {
-	font-family: brand-light !important;
+	font-family: brand-light;
 }
 
 .display-1 {
-	font-size: 3.5rem !important;
+	font-size: 3.5rem;
 }
 
 .display-2 {
-	font-size: 2.5rem !important;
+	font-size: 2.5rem;
 }
 
 .display-3 {
-	font-size: 2rem !important;
+	font-size: 2rem;
 }
 
-.btn-primary {
-	background-color: #db5461 !important;
-	border-color: #db5461 !important;
-}
-
-a:hover {
-	color: black !important;
+.btn-primary, .btn-primary:hover {
+	background-color: #db5461;
+	border-color: #db5461;
 }
 
 .no-select {
@@ -107,4 +103,5 @@ a {
 
 a:hover {
 	text-decoration: none;
+	color: black;
 }

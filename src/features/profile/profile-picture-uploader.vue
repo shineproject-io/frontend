@@ -65,7 +65,7 @@ export default {
         "https://shinestorage.azureedge.net/productimages/medium-avatar.png"
     }
   },
-  data: function() {
+  data() {
     return {
       statusCode: 0,
       imageFileName: "Choose a picture...",
@@ -74,7 +74,7 @@ export default {
     };
   },
   methods: {
-    submit: function() {
+    submit() {
       if (this.isSubmitting) {
         return;
       }
@@ -116,7 +116,7 @@ export default {
     }
   },
   computed: {
-    errorMessage: function() {
+    errorMessage() {
       switch (this.statusCode) {
         case -1:
           return "Please attach a picture";

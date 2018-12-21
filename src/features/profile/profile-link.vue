@@ -47,23 +47,23 @@ export default {
     profilePictureUploader,
     profilePictureSpinner
   },
-  mounted: function() {
+  mounted() {
     this.loadProfile();
 
     this.$root.$on("user-profile-updated", () => {
       this.loadProfile();
     });
   },
-  beforeDestroy: function() {
+  beforeDestroy() {
     this.$root.$off("user-profile-updated");
   },
   computed: {
-    userProfile: function() {
+    userProfile() {
       return this.$store.getters.userProfile;
     }
   },
   methods: {
-    loadProfile: function() {
+    loadProfile() {
       let userProfile = this.$store.getters.userProfile;
 
       if (userProfile == null) {

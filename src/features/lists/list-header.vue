@@ -109,12 +109,12 @@ export default {
       default: ""
     }
   },
-  data: function() {
+  data() {
     return {
       progressValue: 0
     };
   },
-  mounted: function() {
+  mounted() {
     this.$root.$on("list-count-refresh", progressValue => {
       this.progressValue = progressValue;
       window.$(".complete-popover").popover("hide");
@@ -130,19 +130,19 @@ export default {
       }
     });
   },
-  beforeDestroy: function() {
+  beforeDestroy() {
     this.$root.$off("list-count-refresh");
   },
   computed: {
-    isListActive: function() {
+    isListActive() {
       return this.state === 1;
     },
-    isListCompleted: function() {
+    isListCompleted() {
       return this.state === 3;
     }
   },
   methods: {
-    deleteList: function() {
+    deleteList() {
       Promise.all([
         this.$http.delete(`/lists/${this.id}`),
         this.$http.delete(`/lists/${this.id}/todoItems`)

@@ -1,16 +1,18 @@
 <template>
   <div class="todo-item d-flex align-items-center">
+    <loading-circle v-if="isSubmitting"/>
+
     <active-circle
       v-if="!isSubmitting && todoItem.state === 'Open'"
       :todo-item-id="todoItem.id"
       v-on:complete-todo-item="completeTodoItem"
     />
+
     <completed-circle
       v-if="!isSubmitting && todoItem.state === 'Completed'"
       :todo-item-id="todoItem.id"
       v-on:open-todo-item="openTodoItem"
     />
-    <loading-circle v-if="isSubmitting"/>
 
     <invisible-input
       class="flex-grow-1 border-0"
@@ -66,17 +68,17 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       modifiedTodoItem: null,
       isSubmitting: false
     };
   },
-  mounted: function() {
+  mounted() {
     this.modifiedTodoItem = this.todoItem;
   },
   methods: {
-    deleteTodoItem: function() {
+    deleteTodoItem() {
       this.isSubmitting = true;
 
       this.$http
@@ -125,10 +127,19 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .todo-item {
   height: 62px;
   cursor: move;
+}
+
+.todo-circle {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.todo-circle:hover {
+  color: #c0ea67;
 }
 
 .todo-button-primary {
@@ -148,9 +159,7 @@ export default {
 .todo-button-secondary:hover {
   color: #e5b25d;
 }
-</style>
 
-<style>
 .todo-title {
   padding-top: 20px !important;
   padding-bottom: 20px !important;

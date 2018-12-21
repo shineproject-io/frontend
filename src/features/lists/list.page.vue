@@ -35,27 +35,27 @@ export default {
     listMigrator
   },
   watch: {
-    "$route.query.listId": function() {
+    "$route.query.listId"() {
       window.$(".complete-popover").popover("hide");
       this.list = null;
       this.listId = this.$route.query.listId;
       this.loadList();
     }
   },
-  data: function() {
+  data() {
     return {
       isLoading: true,
       listId: 0,
       list: null
     };
   },
-  created: function() {
+  created() {
     this.listId = this.$route.query.listId;
 
     this.loadList();
   },
   methods: {
-    loadList: function() {
+    loadList() {
       this.isLoading = true;
       this.$http.get(`/lists/${this.listId}`).then(response => {
         this.list = response.data;

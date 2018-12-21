@@ -23,7 +23,7 @@ export default {
 		},
 	},
 	computed: {
-		navigationLink: function() {
+		navigationLink() {
 			return `/secure/list?listId=${this.result.listId}&todoItemId=${this.result.todoItemId}`;
 		},
 	},

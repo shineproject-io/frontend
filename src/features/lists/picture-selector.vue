@@ -60,7 +60,7 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       statusCode: 0,
       imageFileName: "Choose a photo...",
@@ -77,7 +77,7 @@ export default {
       this.$emit("background-updated", imageSource);
       this.$refs.listBackgroundModal.hide();
     },
-    show: function() {
+    show() {
       this.$refs.listBackgroundModal.show();
     },
     fileInputChange: function(fileList) {
@@ -85,7 +85,7 @@ export default {
       this.file = fileList[0];
       this.uploadPhoto();
     },
-    uploadPhoto: function() {
+    uploadPhoto() {
       if (this.isSubmitting) {
         return;
       }
@@ -122,7 +122,7 @@ export default {
     }
   },
   computed: {
-    errorMessage: function() {
+    errorMessage() {
       switch (this.statusCode) {
         case -1:
           return "Please attach a picture";

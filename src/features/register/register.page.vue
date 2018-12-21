@@ -74,7 +74,7 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
       emailAddress: "",
       password: "",
@@ -85,7 +85,7 @@ export default {
     };
   },
   methods: {
-    createAccount: function() {
+    createAccount() {
       if (this.isSubmitting) {
         return;
       }

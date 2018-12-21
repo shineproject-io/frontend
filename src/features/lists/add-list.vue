@@ -14,13 +14,13 @@
 <script>
 export default {
   name: "new-list-link",
-  data: function() {
+  data() {
     return {
       isSubmitting: false
     };
   },
   methods: {
-    newList: function() {
+    newList() {
       if (!this.isSubmitting) {
         this.isSubmitting = true;
         this.$http

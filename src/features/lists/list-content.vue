@@ -58,7 +58,7 @@ export default {
       required: true
     }
   },
-  data: function() {
+  data() {
     return {
       isLoading: true,
       completedTodoItems: [],
@@ -68,7 +68,7 @@ export default {
     };
   },
   watch: {
-    todoItems: function() {
+    todoItems() {
       if (!this.skipLoad && this.todoItems.length > 0) {
         this.$http.post(`/lists/${this.id}/todoItems/order`, {
           todoItemIds: this._.map(this.todoItems, "id")
@@ -79,7 +79,7 @@ export default {
       }
     }
   },
-  mounted: function() {
+  mounted() {
     this.loadTodoItems();
 
     this.$root.$on("refresh-todo-list", () => {
@@ -87,20 +87,20 @@ export default {
       this.loadTodoItems();
     });
   },
-  beforeDestroy: function() {
+  beforeDestroy() {
     this.$root.$off("refresh-todo-list");
   },
   computed: {
-    isListActive: function() {
+    isListActive() {
       return this.state === 1;
     }
   },
   methods: {
-    newTodoItemAdded: function() {
+    newTodoItemAdded() {
       this.focusNewTodoItemField = true;
       this.loadTodoItems();
     },
-    loadTodoItems: function() {
+    loadTodoItems() {
       this.skipLoad = true;
       this.isLoading = true;
 
@@ -130,16 +130,16 @@ export default {
         this.isLoading = false;
       });
     },
-    todoRemoved: function() {
+    todoRemoved() {
       this.loadTodoItems();
     },
-    todoCompleted: function() {
+    todoCompleted() {
       this.loadTodoItems();
     },
-    todoOpened: function() {
+    todoOpened() {
       this.loadTodoItems();
     },
-    communicateProgress: function() {
+    communicateProgress() {
       var completedCount = this.completedTodoItems.length;
       var openCount = this.todoItems.length;
       var totalCount = completedCount + openCount;

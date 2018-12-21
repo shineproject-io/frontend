@@ -1,6 +1,6 @@
 <template>
   <div class="page-cover text-white" :style="'background-image: url(' + backgroundImage + ');'">
-    <menu-activator></menu-activator>
+    <menu-activator/>
     <overlay class="d-flex align-items-center"/>
     <div class="position-relative" style="z-index: 2001;">
       <div class="container py-2 py-md-4 py-lg-5">

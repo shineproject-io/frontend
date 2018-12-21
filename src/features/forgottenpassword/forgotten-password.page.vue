@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  data: function() {
+  data() {
     return {
       emailAddress: "",
       isSubmitting: false,
@@ -50,7 +50,7 @@ export default {
     };
   },
   methods: {
-    requestToken: function() {
+    requestToken() {
       if (this.isSubmitting) {
         return;
       }
