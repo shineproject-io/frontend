@@ -3,6 +3,7 @@
     <div class="profile-picture-uploader">
       <img
         :src="imagePath"
+        alt="Profile picture"
         :width="size"
         :height="size"
         class="profile-picture thumbnail rounded-circle"
