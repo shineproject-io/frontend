@@ -1,10 +1,12 @@
 <template>
-  <div class="page-cover text-white" :style="'background-image: url(' + backgroundImage + ');'">
-    <menu-activator/>
-    <overlay class="d-flex align-items-center"/>
-    <div class="position-relative" style="z-index: 2001;">
-      <div class="container py-2 py-md-4 py-lg-5">
-        <slot></slot>
+  <div class="profile-cover text-white" :style="'background-image: url(' + backgroundImage + ');'">
+    <div class="profile-cover-inner">
+      <menu-activator/>
+      <overlay class="d-flex align-items-center"/>
+      <div class="position-relative" style="z-index: 2001;">
+        <div class="container py-2 py-md-4 py-lg-5">
+          <slot></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -14,7 +16,6 @@
 import menuActivator from "@/navigator/menu-activator.vue";
 
 export default {
-  name: "page-cover",
   components: {
     menuActivator
   },
@@ -28,10 +29,14 @@ export default {
 </script>
 
 <style>
-.page-cover {
+.profile-cover {
   min-height: 100vh;
   position: relative;
   background-size: cover;
   background-position: center center;
+}
+.profile-cover-inner {
+  max-height: 100vh;
+  overflow-y: auto;
 }
 </style>

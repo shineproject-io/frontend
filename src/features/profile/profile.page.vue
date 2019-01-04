@@ -1,7 +1,7 @@
 <template>
-  <profile-cover background-image="https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg">
+  <profile-cover :background-image="backgroundImage">
     <div class="profile-page-wrapper">
-      <div class="d-flex align-items-center mb-3 mb-lg-5">
+      <div class="d-flex align-items-center mb-3">
         <div class="mr-4">
           <profile-picture-spinner
             v-if="!userProfile || userProfile.profilePicturePath === ''"
@@ -21,8 +21,37 @@
         <profile-editor v-if="userProfile" :user-profile="userProfile"/>
       </div>
 
-      <div v-bind:class="{'no-events': isSubmitting}" class="p-2">
-        <loading-container :is-loading="suggestions.length === 0">
+      <loading-container :is-loading="isLoading" class="p-2">
+        <div v-if="pinnedList">
+          <ul class="profile-switcher nav nav-tabs mb-3">
+            <li
+              class="nav-item nav-link cursor-pointer mr-2"
+              v-bind:class="{'active': viewport === 'list'}"
+              v-on:click.prevent="viewport = 'list'"
+            >
+              <i class="fas fa-thumbtack fa-fw mr-1"/>
+              <span>Pinned list</span>
+            </li>
+            <li
+              class="nav-item nav-link cursor-pointer"
+              v-bind:class="{'active': viewport === 'ideas'}"
+              v-on:click.prevent="viewport = 'ideas'"
+            >
+              <i class="fas fa-lightbulb fa-fw mr-1"/>
+              <span>What could you do?</span>
+            </li>
+          </ul>
+        </div>
+
+        <div v-if="pinnedList && viewport === 'list'">
+          <pinned-list
+            :list="pinnedList"
+            :todo-items="pinnedTodoItems"
+            v-on:refresh-todo-items="loadContentPanel"
+          />
+        </div>
+
+        <div v-if="viewport === 'ideas'" v-bind:class="{'no-events': isSubmitting}">
           <list-suggestion
             v-for="suggestion in suggestions"
             v-bind:key="suggestion.suggestionTitle"
@@ -31,8 +60,8 @@
             :icon="suggestion.suggestionIcon"
             v-on:perform="createList(suggestion.listTitle, suggestion.listDescription, suggestion.listBackgroundImageUrl)"
           />
-        </loading-container>
-      </div>
+        </div>
+      </loading-container>
     </div>
   </profile-cover>
 </template>
@@ -42,23 +71,29 @@ import profilePictureUploader from "@/features/profile/profile-picture-uploader.
 import profilePictureSpinner from "@/features/profile/profile-picture-spinner.vue";
 import profileEditor from "@/features/profile/profile-editor.vue";
 import profileCover from "@/features/profile/profile-cover.vue";
+import pinnedList from "@/features/lists/pinned-list.vue";
 
 export default {
   components: {
     profilePictureUploader,
     profilePictureSpinner,
     profileEditor,
-    profileCover
+    profileCover,
+    pinnedList
   },
   data() {
     return {
+      viewport: "ideas",
       isSubmitting: false,
-      suggestions: []
+      isLoading: true,
+      suggestions: [],
+      pinnedList: null,
+      pinnedTodoItems: []
     };
   },
   mounted() {
     this.loadProfile();
-    this.loadSuggestions();
+    this.loadContentPanel();
     this.createWelcomeExperience();
 
     this.$root.$on("user-profile-updated", () => {
@@ -78,12 +113,34 @@ export default {
       } else {
         return `Hi ${this.userProfile.givenName}`;
       }
+    },
+    backgroundImage() {
+      if (this.pinnedList) {
+        return this.pinnedList.imageSource;
+      }
+      return "https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg";
     }
   },
   methods: {
-    loadSuggestions() {
-      this.$http.get("/lists/suggestions").then(response => {
-        this.suggestions = response.data;
+    loadContentPanel() {
+      Promise.all([
+        this.$http.get("/lists/suggestions"),
+        this.$http.get("/userprofiles/me/lists/pinned")
+      ]).then(responses => {
+        this.suggestions = responses[0].data;
+        this.pinnedList = responses[1].data;
+
+        if (this.pinnedList) {
+          this.$http
+            .get(`/lists/${this.pinnedList.id}/todoItems`)
+            .then(response => {
+              this.pinnedTodoItems = response.data;
+              this.viewport = "list";
+              this.isLoading = false;
+            });
+        } else {
+          this.isLoading = false;
+        }
       });
     },
     createList(title, description, image) {
@@ -138,5 +195,9 @@ export default {
   width: 800px;
   max-width: 95%;
   margin: 0 auto;
+}
+
+.profile-switcher .nav-link {
+  color: white;
 }
 </style>

@@ -26,6 +26,10 @@
           style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-196px, 0px, 0px);"
         >
           <div class="dropdown-header">Edit list</div>
+          <a href="#" class="dropdown-item" v-on:click.prevent="pinList()">
+            <i class="fas fa-thumbtack fa-fw mr-2"></i>
+            <span>Pin this list</span>
+          </a>
           <a href="#" class="dropdown-item" v-on:click.prevent="$emit('show-picture-selector')">
             <i class="fas fa-image fa-fw mr-2"></i>
             <span>Change picture</span>
@@ -142,6 +146,13 @@ export default {
     }
   },
   methods: {
+    pinList(){
+      this.$http
+        .put(`/userprofiles/me/lists/${this.id}/pin`)
+        .then(() => {
+          this.$router.push({ name: "profile" });
+        });
+    },
     deleteList() {
       Promise.all([
         this.$http.delete(`/lists/${this.id}`),
