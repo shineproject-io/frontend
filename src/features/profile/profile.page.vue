@@ -21,7 +21,7 @@
         <profile-editor v-if="userProfile" :user-profile="userProfile"/>
       </div>
 
-      <loading-container :is-loading="isLoading" class="p-2">
+      <loading-container :is-loading="isLoading" class="p-2 mb-4">
         <div v-if="pinnedList">
           <ul class="profile-switcher nav nav-tabs mb-3">
             <li
@@ -38,7 +38,7 @@
               v-on:click.prevent="viewport = 'ideas'"
             >
               <i class="fas fa-lightbulb fa-fw mr-1"/>
-              <span>What could you do?</span>
+              <span>List ideas</span>
             </li>
           </ul>
         </div>
