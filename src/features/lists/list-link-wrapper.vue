@@ -3,7 +3,7 @@
     <loading-container :is-loading="isLoadingLists" message-suffix="lists">
       <draggable
         v-model="lists"
-        :options="{group:{name: 'lists', pull: false}}"
+        :pull="false"
         @start="drag=true"
         @end="drag=false"
       >

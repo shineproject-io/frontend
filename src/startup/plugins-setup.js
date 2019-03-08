@@ -1,6 +1,5 @@
 import Vue from 'vue';
-
-import VueLodash from 'vue-lodash';
+import lodash from 'lodash'
 import 'animate.css';
 
-Vue.use(VueLodash, { name: '_' });
+Vue.prototype._ = lodash

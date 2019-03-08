@@ -10,7 +10,7 @@
       />
       <draggable
         v-model="todoItems"
-        :options="{group:{ name: 'todoItems', pull: false}}"
+        :pull="false"
         @start="drag=true"
         @end="drag=false"
       >
