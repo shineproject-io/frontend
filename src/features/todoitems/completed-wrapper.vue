@@ -1,27 +1,32 @@
 <template>
-  <div class="completed-wrapper">
+  <div>
     <div
-      class="completed-expander d-flex align-items-center cursor-pointer"
+      class="d-flex align-items-center cursor-pointer"
       v-on:click.prevent="toggleExpansion()"
     >
-      <div class="active-circle px-3 py-1">
+      <div class="todo-circle px-3 py-1">
         <i class="far fa-check-square fa-fw"></i>
       </div>
-      <p class="flex-grow-1 mb-0">
+
+      <p class="todo-title flex-grow-1 mb-0">
         <span v-if="!isExpanded">Show&nbsp;</span>
         <span v-if="isExpanded">Hide&nbsp;</span>
         <span class="mr-2">completed to-do's</span>
         <span class="badge badge-secondary">{{todoItems.length}}</span>
       </p>
-      <i v-if="!isExpanded" class="fas fa-chevron-down fa-fw p-4 mr-2"/>
-      <i v-if="isExpanded" class="fas fa-chevron-up fa-fw p-4 mr-2"/>
+
+      <div class="p-3 mr-1">
+        <i v-if="!isExpanded" class="fas fa-chevron-down fa-fw"/>
+        <i v-if="isExpanded" class="fas fa-chevron-up fa-fw"/>
+      </div>
     </div>
-    <div class="completed-inner" v-if="isExpanded">
+
+    <div v-if="isExpanded">
       <todo-item
         v-for="todoItem in todoItems"
         v-bind:key="todoItem.id"
-        v-on:todo-item-deleted="todoItemRemoved"
-        v-on:todo-item-opened="todoItemOpened"
+        v-on:todo-item-deleted="$emit('todo-item-removed', todoItemId);"
+        v-on:todo-item-opened="$emit('todo-item-opened', todoItemId);"
         :todo-item="todoItem"
         :listId="listId"
         class="animated fadeInDown animate-fast"
@@ -55,20 +60,7 @@ export default {
   methods: {
     toggleExpansion() {
       this.isExpanded = !this.isExpanded;
-    },
-    todoItemOpened(todoItemId) {
-      this.$emit("todo-item-opened", todoItemId);
-    },
-    todoItemRemoved(todoItemId) {
-      this.$emit("todo-item-removed", todoItemId);
     }
   }
 };
 </script>
-
-<style>
-.completed-expander p {
-  padding-top: 20px !important;
-  padding-bottom: 20px !important;
-}
-</style>

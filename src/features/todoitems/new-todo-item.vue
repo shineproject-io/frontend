@@ -1,8 +1,8 @@
 <template>
-  <div class="todo-item d-flex align-items-center cursor-pointer text-muted">
+  <div class="todo-item d-flex align-items-center text-muted">
     <div class="px-3 py-1">
-      <i v-if="!isSubmitting" class="todo-circle far fa-circle fa-fw"></i>
-      <i v-if="isSubmitting" class="todo-circle fas fa-spinner fa-spin fa-fw"></i>
+      <i v-if="!isSubmitting" class="todo-circle far fa-circle fa-fw"/>
+      <i v-if="isSubmitting" class="todo-circle fas fa-spinner fa-spin fa-fw"/>
     </div>
 
     <invisible-input
