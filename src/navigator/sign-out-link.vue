@@ -3,7 +3,6 @@
     href="#"
     v-on:click.prevent="signOut"
     class="sign-out-link px-3 py-2 d-flex align-items-center"
-    style="background-color: #f9f9f9;"
   >
     <i class="menu-item-icon fas fa-sign-out-alt fa-fw mr-3"/>
     <div class="flex-grow-1">
@@ -30,6 +29,7 @@ export default {
   border-top: 1px solid #f2f2f2;
   transition: all 0.1s ease-in-out;
   height: 62px;
+  background-color: #f9f9f9;
 }
 
 .sign-out-link:hover {

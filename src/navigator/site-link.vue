@@ -1,6 +1,6 @@
 <template>
   <div class="site-link d-flex align-items-center no-select p-4">
-    <i class="menu-item-icon fas fa-sun fa-fw mr-3" style="font-size: 25px;"/>
+    <i class="site-item-icon fas fa-sun fa-fw mr-3"/>
     <div class="flex-grow-1">
       <h5 class="font-weight-bold mb-1">Shine</h5>
       <h6 class="font-weight-light mb-0">
@@ -16,6 +16,10 @@
 <style>
 .site-link {
   background-color: #f9f9f9;
+}
+
+.site-item-icon {
+  font-size: 25px;
 }
 
 @media (min-width: 769px) {

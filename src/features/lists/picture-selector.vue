@@ -3,7 +3,7 @@
     <h6 slot="header" class="mb-0">Change list background</h6>
     <div slot="body" class="p-3">
       <loading-container :is-loading="isSubmitting" message-suffix="photo">
-        <p class>Upload your own photo</p>
+        <p>Upload your own photo</p>
         <error-renderer v-if="statusCode !== 0" :errorMessage="errorMessage"/>
         <div class="input-group mb-3">
           <div class="custom-file">
@@ -16,7 +16,7 @@
           </div>
         </div>
         <hr>
-        <p class>Or select one of ours</p>
+        <p>Or select one of ours</p>
         <div
           class="selectable-picture"
           style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg');"

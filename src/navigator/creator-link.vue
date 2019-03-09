@@ -5,7 +5,7 @@
 			<p class="mb-0">Contribute on Github</p>
 			<p href="#" class="font-weight-light mb-0">
 				<span class="mr-2">Shine is open source</span>
-				<i class="fas fa-chevron-right fa-fw text-muted" style="font-size: 11px;"/>
+				<i class="sidebar-chevron fas fa-chevron-right fa-fw text-muted"/>
 			</p>
 		</div>
 	</a>
