@@ -30,6 +30,9 @@
             </div>
           </div>
           <div slot="footer">
+            <button class="btn btn-secondary mr-2 float-left" v-on:click.prevent="deleteAccount">
+              <i class="fas fa-exclamation-triangle fa-fw mr-2"/>Delete Account
+            </button>
             <loading-button :isLoading="isSubmitting" text="Save" icon="fas fa-check" class="mr-2"></loading-button>
             <button
               class="btn btn-secondary"
@@ -93,6 +96,14 @@ export default {
         this.isSubmitting = false;
         this.$refs.profileDetailsModal.hide();
       }
+    },
+    deleteAccount() {
+      this.isSubmitting = true;
+      this.$http.post("/userprofiles/me/delete").then(() => {
+        window.sessionStorage.clear();
+        this.$store.commit("clearStore");
+        this.$router.push({ name: "features" });
+      });
     }
   }
 };
