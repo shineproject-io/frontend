@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isLoading" class="text-center p-4">
-      <i class="fas fa-spinner fa-spin fa-fw mb-2"></i>
+      <i class="fas fa-spinner fa-spin fa-fw mb-2"/>
       <p
         v-if="messageSuffix !== ''"
         class="text-muted"

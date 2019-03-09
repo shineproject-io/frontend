@@ -34,12 +34,12 @@
         aria-haspopup="true"
         aria-expanded="false"
       >
-        <i class="fas fa-ellipsis-h fa-fw"></i>
+        <i class="fas fa-ellipsis-h fa-fw"/>
       </button>
       <div class="dropdown-menu" x-placement="left-start">
         <div class="dropdown-header">Edit to-do</div>
         <a href="#" class="dropdown-item" v-on:click.prevent="deleteTodoItem">
-          <i class="fas fa-trash fa-fw mr-1"></i>
+          <i class="fas fa-trash fa-fw mr-1"/>
           <span>Delete</span>
         </a>
       </div>

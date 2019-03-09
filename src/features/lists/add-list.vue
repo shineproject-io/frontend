@@ -6,8 +6,8 @@
     v-on:click.prevent="newList"
     title="Create new list"
   >
-    <i v-if="!isSubmitting" class="fa fa-plus fa-fw"></i>
-    <i v-if="isSubmitting" class="fa fa-spinner fa-spin fa-fw"></i>
+    <i v-if="!isSubmitting" class="fa fa-plus fa-fw"/>
+    <i v-if="isSubmitting" class="fa fa-spinner fa-spin fa-fw"/>
   </a>
 </template>
 

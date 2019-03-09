@@ -5,7 +5,7 @@
     class="list-link d-block text-truncate"
     exact
   >
-    <i class="fas fa-list fa-fw mr-2 px-3 py-1" style="font-size: 14px;"></i>
+    <i class="fas fa-list fa-fw mr-2 px-3 py-1" style="font-size: 14px;"/>
     <span>{{name}}</span>
   </router-link>
 </template>

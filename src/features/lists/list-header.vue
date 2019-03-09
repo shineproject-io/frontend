@@ -18,7 +18,7 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          <i class="fas fa-ellipsis-h fa-fw"></i>
+          <i class="fas fa-ellipsis-h fa-fw"/>
         </button>
         <div
           class="dropdown-menu"
@@ -27,23 +27,23 @@
         >
           <div class="dropdown-header">Edit list</div>
           <a href="#" class="dropdown-item" v-on:click.prevent="pinList()">
-            <i class="fas fa-thumbtack fa-fw mr-2"></i>
+            <i class="fas fa-thumbtack fa-fw mr-2"/>
             <span>Pin this list</span>
           </a>
           <a href="#" class="dropdown-item" v-on:click.prevent="$emit('show-picture-selector')">
-            <i class="fas fa-image fa-fw mr-2"></i>
+            <i class="fas fa-image fa-fw mr-2"/>
             <span>Change picture</span>
           </a>
           <a href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
-            <i class="fas fa-plane fa-fw mr-2"></i>
+            <i class="fas fa-plane fa-fw mr-2"/>
             <span>Move active to-dos</span>
           </a>
           <a href="#" class="dropdown-item" v-on:click.prevent="changeListState('Completed')">
-            <i class="fas fa-check fa-fw mr-2"></i>
+            <i class="fas fa-check fa-fw mr-2"/>
             <span>Mark as completed</span>
           </a>
           <a href="#" class="dropdown-item" v-on:click.prevent="deleteList">
-            <i class="fas fa-trash-alt fa-fw mr-2"></i>
+            <i class="fas fa-trash-alt fa-fw mr-2"/>
             <span>Delete list</span>
           </a>
         </div>

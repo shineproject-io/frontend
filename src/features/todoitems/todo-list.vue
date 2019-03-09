@@ -1,5 +1,5 @@
 <template>
-  <loading-container class="todo-list" :isLoading="isLoading && todoItems.length === 0">
+  <loading-container class="lined-background" :isLoading="isLoading && todoItems.length === 0">
     <completed-wrapper
       v-if="completedTodoItems.length > 0"
       v-on:todo-item-removed="todoRemoved"
@@ -152,10 +152,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.todo-list {
-  background-image: url("https://shinestorage.azureedge.net/productimages/lined-background.png");
-  min-height: calc(100vh - 316px);
-}
-</style>

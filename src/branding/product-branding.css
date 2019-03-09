@@ -105,3 +105,8 @@ a:hover {
 	text-decoration: none;
 	color: black;
 }
+
+.lined-background {
+	background-image: url("https://shinestorage.azureedge.net/productimages/lined-background.png");
+	min-height: calc(100vh - 316px);
+  }

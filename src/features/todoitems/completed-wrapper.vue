@@ -5,7 +5,7 @@
       v-on:click.prevent="toggleExpansion()"
     >
       <div class="todo-circle px-3 py-1">
-        <i class="far fa-check-square fa-fw"></i>
+        <i class="far fa-check-square fa-fw"/>
       </div>
 
       <p class="todo-title flex-grow-1 mb-0">

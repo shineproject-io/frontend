@@ -1,18 +1,13 @@
 <template>
-  <div v-if="isLoaded">
-    <search-header v-on:search="search"></search-header>
-    <section class="content bd-highlight">
-      <loading-container :is-loading="isSearching" message-suffix="search">
-        <div v-for="result in searchResults" v-bind:key="result.resultId">
-          <component
-            v-bind:is="result.resultType.toLowerCase() + '-search-result'"
-            :result="result"
-          ></component>
-        </div>
-        <no-search v-if="!hasSearch"></no-search>
-        <no-results v-if="searchResults.length === 0 && hasSearch"></no-results>
-      </loading-container>
-    </section>
+  <div>
+    <search-header v-on:search="search"/>
+    <loading-container class="lined-background" :is-loading="isSearching" message-suffix="search">
+      <div v-for="result in searchResults" v-bind:key="result.resultId">
+        <component v-bind:is="result.resultType.toLowerCase() + '-search-result'" :result="result"/>
+      </div>
+      <no-search v-if="!hasSearch"/>
+      <no-results v-if="searchResults.length === 0 && hasSearch"/>
+    </loading-container>
   </div>
 </template>
 
@@ -35,12 +30,8 @@ export default {
     return {
       searchResults: [],
       hasSearch: false,
-      isLoaded: false,
       isSearching: false
     };
-  },
-  mounted() {
-    this.isLoaded = true;
   },
   methods: {
     search(searchQuery) {
@@ -63,7 +54,6 @@ export default {
 
 <style>
 .search-result {
-  padding-top: 11px;
-  padding-bottom: 11px;
+  height: 62px;
 }
 </style>
