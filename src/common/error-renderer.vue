@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <div class="alert alert-danger">{{errorMessage}}</div>
-  </div>
+  <div class="alert alert-danger">{{errorMessage}}</div>
 </template>
 
 <script>

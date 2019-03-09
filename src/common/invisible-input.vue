@@ -2,14 +2,14 @@
   <form v-on:submit.prevent="evaluateValue">
     <div
       ref="editableField"
+      class="invisible-input"
       contenteditable="true"
       v-on:keydown.enter.stop="$refs.editableField.blur()"
       v-on:blur="extractContent"
-      class="invisible-input"
-      :placeholder="placeholder"
       v-html="currentText"
       v-focus="isFocused"
       v-bind:class="classList"
+      :placeholder="placeholder"
     ></div>
   </form>
 </template>

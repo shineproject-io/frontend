@@ -5,10 +5,7 @@
       :title="list.name"
       class="list-highlight list-group-item list-group-item-action rounded cursor-pointer d-flex align-items-center margin-auto p-4"
     >
-      <div class>
-        <i class="fas fa-list-alt fa-fw" style="font-size: 35px;margin-right: 10px;"/>
-      </div>
-      <div class="flex-grow-1 border-left px-4">
+      <div class="flex-grow-1 px-4">
         <h5>{{list.name}}</h5>
         <p class="mb-0">{{list.description}}</p>
       </div>

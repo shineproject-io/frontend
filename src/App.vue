@@ -1,5 +1,5 @@
 <template>
-  <loading-container id="app" :is-loading="isLoading">
+  <loading-container :is-loading="isLoading">
     <sidebar v-if="!isProductPage" :is-anonymous="!token"/>
     <router-view id="route-page" v-bind:class="{'full-width': isProductPage}"/>
     <add-list v-if="token"/>

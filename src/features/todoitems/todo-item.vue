@@ -24,7 +24,7 @@
 
     <i
       v-if="todoItem.state !== 'Completed' && allowDrag"
-      class="todo-button-secondary todo-drag fas fa-arrows-alt p-4"
+      class="todo-button-secondary todo-drag fas fa-arrows-alt"
     />
     <div class="btn-group dropleft mr-2">
       <button
