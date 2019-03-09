@@ -1,18 +1,18 @@
 <template>
   <div class="todo-item d-flex align-items-center">
-    <loading-circle v-if="isSubmitting"/>
-
-    <active-circle
-      v-if="!isSubmitting && todoItem.state === 'Open'"
-      :todo-item-id="todoItem.id"
-      v-on:complete-todo-item="completeTodoItem"
-    />
-
-    <completed-circle
-      v-if="!isSubmitting && todoItem.state === 'Completed'"
-      :todo-item-id="todoItem.id"
-      v-on:open-todo-item="openTodoItem"
-    />
+    <div class="px-3 py-1">
+      <loading-circle v-if="isSubmitting"/>
+      <active-circle
+        v-if="!isSubmitting && todoItem.state === 'Open'"
+        :todo-item-id="todoItem.id"
+        v-on:complete-todo-item="completeTodoItem"
+      />
+      <completed-circle
+        v-if="!isSubmitting && todoItem.state === 'Completed'"
+        :todo-item-id="todoItem.id"
+        v-on:open-todo-item="openTodoItem"
+      />
+    </div>
 
     <invisible-input
       class="flex-grow-1 border-0"
@@ -67,7 +67,7 @@ export default {
       type: Object,
       required: true
     },
-    allowDrag:{
+    allowDrag: {
       type: Boolean,
       default: true
     }
@@ -134,6 +134,9 @@ export default {
 <style>
 .todo-item {
   height: 62px;
+}
+
+.todo-drag{
   cursor: move;
 }
 

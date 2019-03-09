@@ -15,14 +15,14 @@
       ></list-header>
     </transition>
     <transition name="fade">
-      <list-content v-bind="list"></list-content>
+      <todo-list v-bind="list" />
     </transition>
   </div>
 </template>
 
 <script>
 import listHeader from "@/features/lists/list-header.vue";
-import listContent from "@/features/lists/list-content.vue";
+import todoList from "@/features/todoitems/todo-list.vue";
 import pictureSelector from "@/features/lists/picture-selector.vue";
 import listMigrator from "@/features/lists/list-migrator.vue";
 
@@ -30,7 +30,7 @@ export default {
   name: "list-page",
   components: {
     listHeader,
-    listContent,
+    todoList,
     pictureSelector,
     listMigrator
   },

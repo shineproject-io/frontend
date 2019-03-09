@@ -1,7 +1,8 @@
 <template>
-  <div class="todo-circle px-3 py-1" v-on:click.prevent="$emit('complete-todo-item', todoItemId)">
-    <i class="far fa-circle fa-fw"/>
-  </div>
+  <i
+    class="todo-circle far fa-circle fa-fw"
+    v-on:click.prevent="$emit('complete-todo-item', todoItemId)"
+  />
 </template>
 
 <script>

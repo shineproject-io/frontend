@@ -1,9 +1,10 @@
 <template>
   <div class="todo-item d-flex align-items-center cursor-pointer text-muted">
-    <div class="new-todo-item-circle px-3 py-1">
-      <i v-if="!isSubmitting" class="far fa-circle fa-fw"></i>
-      <i v-if="isSubmitting" class="fas fa-spinner fa-spin fa-fw"></i>
+    <div class="px-3 py-1">
+      <i v-if="!isSubmitting" class="todo-circle far fa-circle fa-fw"></i>
+      <i v-if="isSubmitting" class="todo-circle fas fa-spinner fa-spin fa-fw"></i>
     </div>
+
     <invisible-input
       v-if="!isSubmitting"
       class="flex-grow-1"
@@ -53,20 +54,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.todo-item {
-  height: 62px;
-  cursor: default;
-}
-
-.todo-item-title {
-  padding-top: 20px !important;
-  padding-bottom: 20px !important;
-}
-
-.new-todo-item-circle {
-  font-size: 20px;
-  color: #cecece;
-}
-</style>

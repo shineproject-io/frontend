@@ -1,37 +1,38 @@
 <template>
-  <section class="content flex-grow-1 bd-highlight">
-    <loading-container :isLoading="isLoading && todoItems.length === 0">
-      <completed-wrapper
-        v-if="completedTodoItems.length > 0"
-        :todo-items="completedTodoItems"
-        :list-id="id"
-        v-on:todo-item-removed="todoRemoved"
+  <loading-container class="todo-list" :isLoading="isLoading && todoItems.length === 0">
+    <completed-wrapper
+      v-if="completedTodoItems.length > 0"
+      v-on:todo-item-removed="todoRemoved"
+      v-on:todo-item-opened="todoOpened"
+      :todo-items="completedTodoItems"
+      :list-id="id"
+    />
+
+    <draggable
+      v-model="todoItems"
+      :pull="false"
+      handle=".todo-drag"
+      @start="drag=true"
+      @end="drag=false"
+    >
+      <todo-item
+        v-for="todoItem in todoItems"
+        v-bind:key="todoItem.id"
+        v-on:todo-item-deleted="todoRemoved"
+        v-on:todo-item-completed="todoCompleted"
         v-on:todo-item-opened="todoOpened"
+        :todo-item="todoItem"
+        :listId="id"
       />
-      <draggable
-        v-model="todoItems"
-        :pull="false"
-        @start="drag=true"
-        @end="drag=false"
-      >
-        <todo-item
-          v-for="todoItem in todoItems"
-          v-bind:key="todoItem.id"
-          v-on:todo-item-deleted="todoRemoved"
-          v-on:todo-item-completed="todoCompleted"
-          v-on:todo-item-opened="todoOpened"
-          :todo-item="todoItem"
-          :listId="id"
-        />
-      </draggable>
-      <new-todo-item
-        v-if="isListActive"
-        :list-id="id"
-        v-on:todo-item-added="newTodoItemAdded"
-        :is-focused="focusNewTodoItemField"
-      />
-    </loading-container>
-  </section>
+    </draggable>
+
+    <new-todo-item
+      v-if="isListActive"
+      v-on:todo-item-added="newTodoItemAdded"
+      :list-id="id"
+      :is-focused="focusNewTodoItemField"
+    />
+  </loading-container>
 </template>
 
 <script>
@@ -41,7 +42,6 @@ import newTodoItem from "@/features/todoitems/new-todo-item.vue";
 import draggable from "vuedraggable";
 
 export default {
-  name: "list-content",
   components: {
     completedWrapper,
     todoItem,
@@ -154,12 +154,8 @@ export default {
 </script>
 
 <style>
-section.content {
+.todo-list {
   background-image: url("https://shinestorage.azureedge.net/productimages/lined-background.png");
-  min-height: calc(100vh - 316px);
-}
-section.standard {
-  background-color: white;
   min-height: calc(100vh - 316px);
 }
 </style>
