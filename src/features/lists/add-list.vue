@@ -12,8 +12,9 @@
 </template>
 
 <script>
+import listService from '@/features/lists/lists.service.js';
+
 export default {
-  name: "new-list-link",
   data() {
     return {
       isSubmitting: false
@@ -23,18 +24,13 @@ export default {
     newList() {
       if (!this.isSubmitting) {
         this.isSubmitting = true;
-        this.$http
-          .post(`/lists`, {
-            name: `New list`,
-            description: "My new list",
-            imageSource:
-              "https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg"
-          })
-          .then(response => {
-            this.$root.$emit("refresh-lists");
+
+        listService.addList()
+          .then(listId => {
+            this.$store.dispatch('getLists');
             this.$router.push({
               path: "list",
-              query: { listId: response.data }
+              query: { listId: listId }
             });
             this.isSubmitting = false;
           });

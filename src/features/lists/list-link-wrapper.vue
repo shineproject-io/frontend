@@ -4,6 +4,7 @@
       <draggable v-model="localLists" :pull="false" @start="drag=true" @end="drag=false">
         <list-link v-for="list in localLists" v-bind:key="list.id" v-bind="list"/>
       </draggable>
+      
       <div v-if="localLists.length == 0" class="text-center px-4 py-5 text-muted">
         <i class="fas fa-chalkboard fa-fw mb-3" style="font-size: 20px;"/>
         <p class="mb-1">You don't have any active lists!</p>
@@ -33,20 +34,8 @@ export default {
       return this.$store.getters.getLists;
     }
   },
-  mounted() {
+  created() {
     this.loadLists();
-
-    this.$root.$on("refresh-lists", () => {
-      this.loadLists();
-    });
-
-    this.$root.$on("load-default-list", () => {
-      this.loadDefaultList();
-    });
-  },
-  beforeDestroy() {
-    this.$root.$off("refresh-lists");
-    this.$root.$off("load-default-list");
   },
   watch: {
     storedLists() {
@@ -66,25 +55,6 @@ export default {
       this.$store.dispatch("getLists").then(() => {
         this.isLoadingLists = false;
       });
-    },
-    loadDefaultList() {
-      if (this.localLists.length <= 1) {
-        this.$router.push({ name: "profile" });
-      } else {
-        var currentListId = this.$route.query.listId;
-
-        var listsInDescendingOrder = this._.orderBy(
-          this.localLists,
-          ["position", "id"],
-          ["desc", "desc"]
-        );
-
-        var defaultList = this._.find(listsInDescendingOrder, function(lst) {
-          return lst.id !== currentListId;
-        });
-
-        this.$router.push({ path: "list", query: { listId: defaultList.id } });
-      }
     }
   }
 };

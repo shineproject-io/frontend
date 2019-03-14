@@ -1,4 +1,5 @@
 import listsService from '@/features/lists/lists.service.js';
+import lodash from 'lodash';
 
 const state = {
     lists: null,
@@ -20,12 +21,34 @@ const actions = {
                 commit('setLists', data);
             });
     },
-    updateListOrder: ({commit}, lists) => {
+    updateListOrder: ({
+        commit
+    }, lists) => {
         commit('setLists', lists);
-
         listsService.updateListOrder(lists);
+    },
+    getDefaultList({
+        state
+    }, currentListId) {
+        return new Promise((resolve, reject) => {
+            if (state.lists.length <= 1) {
+                reject(Error("There is no default list"));
+            } else {
+                var listsInDescendingOrder = lodash.orderBy(
+                    state.lists,
+                    ["position", "id"],
+                    ["desc", "desc"]
+                );
 
-        window.console.log("Updated List Order");
+                var defaultList = lodash.find(listsInDescendingOrder, function (lst) {
+                    return lst.id !== currentListId;
+                });
+
+                resolve({
+                    listId: defaultList.id
+                });
+            }
+        })
     }
 }
 

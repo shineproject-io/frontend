@@ -12,9 +12,17 @@ export default {
       return lists
     });
   },
-  updateListOrder(lists){
+  updateListOrder(lists) {
     return axios.post('/lists/order', {
       listIds: lodash.map(lists, "id")
     });
+  },
+  addList() {
+    return axios.post('/lists', {
+        name: `New list`,
+        description: "My new list",
+        imageSource: "https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg"
+      })
+      .then(response => response.data);
   }
 }

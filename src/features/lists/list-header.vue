@@ -146,20 +146,18 @@ export default {
     }
   },
   methods: {
-    pinList(){
-      this.$http
-        .put(`/userprofiles/me/lists/${this.id}/pin`)
-        .then(() => {
-          this.$router.push({ name: "profile" });
-        });
+    pinList() {
+      this.$http.put(`/userprofiles/me/lists/${this.id}/pin`).then(() => {
+        this.$router.push({ name: "profile" });
+      });
     },
     deleteList() {
       Promise.all([
         this.$http.delete(`/lists/${this.id}`),
         this.$http.delete(`/lists/${this.id}/todoItems`)
       ]).then(() => {
-        this.$root.$emit("refresh-lists");
-        this.$root.$emit("load-default-list");
+        this.$store.dispatch("getLists");
+        this.loadDefaultList();
       });
     },
     changeListState(state) {
@@ -170,10 +168,10 @@ export default {
           state: state
         })
         .then(() => {
-          this.$root.$emit("refresh-lists");
+          this.$store.dispatch("getLists");
 
           if (state === "Completed") {
-            this.$root.$emit("load-default-list");
+            this.loadDefaultList();
           }
         });
     },
@@ -183,13 +181,23 @@ export default {
           name: newValue
         })
         .then(() => {
-          this.$root.$emit("refresh-lists");
+          this.$store.dispatch("getLists");
         });
     },
     saveDescription(newValue) {
       this.$http.put(`/lists/${this.id}/description`, {
         description: newValue
       });
+    },
+    loadDefaultList() {
+      this.$store
+        .dispatch("getDefaultList", this.$route.query.listId)
+        .then(data => {
+          this.$router.push({ path: "list", query: { listId: data.listId } });
+        })
+        .catch(() => {
+          this.$router.push({ name: "profile" });
+        });
     }
   }
 };

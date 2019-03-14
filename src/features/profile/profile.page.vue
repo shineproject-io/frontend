@@ -146,7 +146,7 @@ export default {
           imageSource: image
         })
         .then(response => {
-          this.$root.$emit("refresh-lists");
+          this.$store.dispatch('getLists');
           this.$router.push({
             path: "list",
             query: { listId: response.data }
@@ -162,7 +162,7 @@ export default {
 
       this.$http.post("/lists/welcome").then(listResponse => {
         this.$http.post(`/lists/${listResponse.data}/welcome`).then(() => {
-          this.$root.$emit("refresh-lists");
+          this.$store.dispatch('getLists');
           this.$router.push({
             path: "list",
             query: { listId: listResponse.data }
