@@ -16,6 +16,7 @@
 <script>
 import listLink from "@/features/lists/list-link.vue";
 import draggable from "vuedraggable";
+import { mapState} from 'vuex';
 
 export default {
   components: {
@@ -30,20 +31,18 @@ export default {
     };
   },
   computed: {
-    storedLists() {
-      return this.$store.getters.getLists;
-    }
+    ...mapState('listsModule', ['lists'])
   },
   created() {
     this.loadLists();
   },
   watch: {
-    storedLists() {
-      this.localLists = this.storedLists;
+    lists() {
+      this.localLists = this.lists;
     },
     localLists() {
       if (!this.skipLoad && this.localLists.length > 0) {
-        this.$store.dispatch("updateListOrder", this.localLists);
+        this.$store.dispatch('listsModule/updateListOrder', this.localLists);
       } else {
         this.skipLoad = false;
       }
@@ -52,7 +51,7 @@ export default {
   methods: {
     loadLists() {
       this.isLoadingLists = true;
-      this.$store.dispatch("getLists").then(() => {
+      this.$store.dispatch('listsModule/getLists').then(() => {
         this.isLoadingLists = false;
       });
     }

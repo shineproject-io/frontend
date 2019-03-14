@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapState} from 'vuex';
+
 export default {
   props: {
     listId: {
@@ -42,8 +44,9 @@ export default {
     };
   },
   computed: {
+    ...mapState('listsModule', ['lists']),
     otherLists() {
-      var lists = this.$store.getters.getLists;
+      var lists = this.lists;
 
       return this._.filter(lists, lst => {
         return lst.id !== this.listId;

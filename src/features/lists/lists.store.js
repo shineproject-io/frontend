@@ -3,9 +3,6 @@ import lodash from 'lodash';
 
 const state = {
     lists: null,
-};
-const getters = {
-    getLists: state => state.lists,
 }
 const mutations = {
     setLists: (state, lists) => {
@@ -53,8 +50,8 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
-    getters,
     mutations,
     actions
 }

@@ -27,7 +27,7 @@ export default {
 
         listService.addList()
           .then(listId => {
-            this.$store.dispatch('getLists');
+            this.$store.dispatch('listsModule/getLists');
             this.$router.push({
               path: "list",
               query: { listId: listId }

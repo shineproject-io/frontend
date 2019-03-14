@@ -116,7 +116,7 @@ export default {
     },
     deleteList() {
       listService.deleteList(this.id).then(() => {
-        this.$store.dispatch("getLists");
+        this.$store.dispatch('listsModule/getLists');
         this.loadDefaultList();
       });
     },
@@ -128,7 +128,7 @@ export default {
           state: state
         })
         .then(() => {
-          this.$store.dispatch("getLists");
+          this.$store.dispatch('listsModule/getLists');
 
           if (state === "Completed") {
             this.loadDefaultList();
@@ -141,7 +141,7 @@ export default {
           name: newValue
         })
         .then(() => {
-          this.$store.dispatch("getLists");
+          this.$store.dispatch('listsModule/getLists');
         });
     },
     saveDescription(newValue) {
@@ -151,7 +151,7 @@ export default {
     },
     loadDefaultList() {
       this.$store
-        .dispatch("getDefaultList", this.$route.query.listId)
+        .dispatch('listsModule/getDefaultList', this.$route.query.listId)
         .then(data => {
           this.$router.push({ path: "list", query: { listId: data.listId } });
         })
