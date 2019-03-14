@@ -88,7 +88,7 @@ export default {
               .then(function() {
                 this.isSubmitting = false;
                 this.$refs.profileDetailsModal.hide();
-                this.$store.dispatch('loadUserProfile', true);
+                this.$store.dispatch('profileModule/loadUserProfile', true);
               });
           });
       } else {

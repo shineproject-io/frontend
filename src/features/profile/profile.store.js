@@ -3,9 +3,6 @@ import profileService from '@/features/profile/profile.service.js';
 const state = {
     userProfile: null,
 };
-const getters = {
-    userProfile: state => state.userProfile,
-}
 const mutations = {
     setUserProfile: (state, userProfile) => {
         state.userProfile = userProfile;
@@ -32,8 +29,8 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
-    getters,
     mutations,
     actions
 }

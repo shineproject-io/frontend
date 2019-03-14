@@ -101,7 +101,7 @@ export default {
           this.imageFileName = "Choose a picture...";
           this.isSubmitting = false;
           this.$refs.uploadPictureModal.hide();
-          this.$store.dispatch('loadUserProfile', true);
+          this.$store.dispatch('profileModule/loadUserProfile', true);
         })
         .catch(error => {
           this.statusCode = error.response.status;

@@ -36,6 +36,7 @@
 <script>
 import profilePictureUploader from "@/features/profile/profile-picture-uploader.vue";
 import profilePictureSpinner from "@/features/profile/profile-picture-spinner.vue";
+import { mapState} from 'vuex'
 
 export default {
   components: {
@@ -43,12 +44,10 @@ export default {
     profilePictureSpinner
   },
   mounted() {
-    this.$store.dispatch('loadUserProfile');
+    this.$store.dispatch('profileModule/loadUserProfile');
   },
   computed: {
-    userProfile() {
-      return this.$store.getters.userProfile;
-    }
+    ...mapState('profileModule', ['userProfile'])
   }
 };
 </script>

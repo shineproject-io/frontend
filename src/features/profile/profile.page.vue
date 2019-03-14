@@ -72,6 +72,7 @@ import profilePictureSpinner from "@/features/profile/profile-picture-spinner.vu
 import profileEditor from "@/features/profile/profile-editor.vue";
 import profileCover from "@/features/profile/profile-cover.vue";
 import pinnedList from "@/features/lists/pinned-list.vue";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -92,14 +93,12 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch("loadUserProfile");
+    this.$store.dispatch("profileModule/loadUserProfile");
     this.loadContentPanel();
     this.createWelcomeExperience();
   },
   computed: {
-    userProfile() {
-      return this.$store.getters.userProfile;
-    },
+    ...mapState("profileModule", ["userProfile"]),
     welcomeMessage() {
       if (!this.userProfile) {
         return "Loading your Profile...";
@@ -146,7 +145,7 @@ export default {
           imageSource: image
         })
         .then(response => {
-          this.$store.dispatch('getLists');
+          this.$store.dispatch("getLists");
           this.$router.push({
             path: "list",
             query: { listId: response.data }
@@ -162,7 +161,7 @@ export default {
 
       this.$http.post("/lists/welcome").then(listResponse => {
         this.$http.post(`/lists/${listResponse.data}/welcome`).then(() => {
-          this.$store.dispatch('getLists');
+          this.$store.dispatch("getLists");
           this.$router.push({
             path: "list",
             query: { listId: listResponse.data }
