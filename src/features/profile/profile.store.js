@@ -20,7 +20,7 @@ const actions = {
         commit, state
     }) => {
         if (state.userProfile === null){
-            profileService.loadUserProfile()
+            profileService.getUserProfile()
             .then(data => {
                 commit('setUserProfile', data);
             });

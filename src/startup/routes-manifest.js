@@ -21,12 +21,12 @@ const router = new VueRouter({
 		{
 			name: 'sign-in',
 			path: '/welcome/signin',
-			component: loadPage('signin/sign-in.page.vue'),
+			component: loadPage('authentication/sign-in.page.vue'),
 		},
 		{
 			name: 'register',
 			path: '/welcome/register',
-			component: loadPage('register/register.page.vue'),
+			component: loadPage('authentication/register.page.vue'),
 		},
 		{
 			name: 'change-password',
