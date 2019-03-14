@@ -1,16 +1,10 @@
 <template>
-  <div v-if="lists" id="list-link-wrapper">
+  <div id="list-link-wrapper">
     <loading-container :is-loading="isLoadingLists" message-suffix="lists">
-      <draggable
-        v-model="lists"
-        :pull="false"
-        @start="drag=true"
-        @end="drag=false"
-      >
-        <list-link v-for="list in lists" v-bind:key="list.id" v-bind="list"/>
+      <draggable v-model="localLists" :pull="false" @start="drag=true" @end="drag=false">
+        <list-link v-for="list in localLists" v-bind:key="list.id" v-bind="list"/>
       </draggable>
-
-      <div v-if="lists.length == 0" class="text-center px-4 py-5 text-muted">
+      <div v-if="localLists.length == 0" class="text-center px-4 py-5 text-muted">
         <i class="fas fa-chalkboard fa-fw mb-3" style="font-size: 20px;"/>
         <p class="mb-1">You don't have any active lists!</p>
       </div>
@@ -29,10 +23,15 @@ export default {
   },
   data() {
     return {
-      lists: [],
+      localLists: [],
       isLoadingLists: true,
       skipLoad: true
     };
+  },
+  computed: {
+    storedLists() {
+      return this.$store.getters.getLists;
+    }
   },
   mounted() {
     this.loadLists();
@@ -50,11 +49,12 @@ export default {
     this.$root.$off("load-default-list");
   },
   watch: {
-    lists() {
-      if (!this.skipLoad && this.lists.length > 0) {
-        this.$http.post(`/lists/order`, {
-          listIds: this._.map(this.lists, "id")
-        });
+    storedLists() {
+      this.localLists = this.storedLists;
+    },
+    localLists() {
+      if (!this.skipLoad && this.localLists.length > 0) {
+        this.$store.dispatch("updateListOrder", this.localLists);
       } else {
         this.skipLoad = false;
       }
@@ -62,28 +62,19 @@ export default {
   },
   methods: {
     loadLists() {
-      if (this.lists.length === 0) {
-        this.isLoadingLists = true;
-      }
-
-      this.$http.get(`/lists`).then(response => {
-        this.lists = this._.orderBy(
-          response.data,
-          ["position", "id"],
-          ["asc", "asc"]
-        );
-
+      this.isLoadingLists = true;
+      this.$store.dispatch("getLists").then(() => {
         this.isLoadingLists = false;
       });
     },
     loadDefaultList() {
-      if (this.lists.length <= 1) {
+      if (this.localLists.length <= 1) {
         this.$router.push({ name: "profile" });
       } else {
         var currentListId = this.$route.query.listId;
 
         var listsInDescendingOrder = this._.orderBy(
-          this.lists,
+          this.localLists,
           ["position", "id"],
           ["desc", "desc"]
         );
