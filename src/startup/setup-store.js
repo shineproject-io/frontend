@@ -2,6 +2,8 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import VuexPersist from 'vuex-persist';
 
+import profileModule from '@/features/profile/profile.store.js';
+
 Vue.use(Vuex);
 
 const vuexPersist = new VuexPersist({
@@ -11,20 +13,9 @@ const vuexPersist = new VuexPersist({
 
 const store = new Vuex.Store({
 	plugins: [vuexPersist.plugin],
-	state: {
-		userProfile: null,
-	},
-	getters: {
-		userProfile: state => state.userProfile,
-	},
-	mutations: {
-		setUserProfile: (state, userProfile) => {
-			state.userProfile = userProfile;
-		},
-		clearStore: state => {
-			state.userProfile = null;
-		},
-	},
+	modules: {
+		profileModule
+	}
 });
 
 export default store;

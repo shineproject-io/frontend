@@ -43,29 +43,11 @@ export default {
     profilePictureSpinner
   },
   mounted() {
-    this.loadProfile();
-
-    this.$root.$on("user-profile-updated", () => {
-      this.loadProfile();
-    });
-  },
-  beforeDestroy() {
-    this.$root.$off("user-profile-updated");
+    this.$store.dispatch('loadUserProfile');
   },
   computed: {
     userProfile() {
       return this.$store.getters.userProfile;
-    }
-  },
-  methods: {
-    loadProfile() {
-      let userProfile = this.$store.getters.userProfile;
-
-      if (userProfile == null) {
-        this.$http.get(`/userprofiles/me`).then(response => {
-          this.$store.commit("setUserProfile", response.data);
-        });
-      }
     }
   }
 };

@@ -92,16 +92,9 @@ export default {
     };
   },
   mounted() {
-    this.loadProfile();
+    this.$store.dispatch("loadUserProfile");
     this.loadContentPanel();
     this.createWelcomeExperience();
-
-    this.$root.$on("user-profile-updated", () => {
-      this.loadProfile();
-    });
-  },
-  beforeDestroy() {
-    this.$root.$off("user-profile-updated");
   },
   computed: {
     userProfile() {
@@ -159,15 +152,6 @@ export default {
             query: { listId: response.data }
           });
         });
-    },
-    loadProfile() {
-      let userProfile = this.$store.getters.userProfile;
-
-      if (userProfile === null) {
-        this.$http.get(`/userprofiles/me`).then(response => {
-          this.$store.commit("setUserProfile", response.data);
-        });
-      }
     },
     createWelcomeExperience() {
       var isWelcome = this.$route.query.welcome;
