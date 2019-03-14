@@ -11,7 +11,7 @@ Axios.interceptors.request.use(function(config) {
 		return config;
 	}
 
-	const token = window.sessionStorage.getItem('token');
+	const token = store.getters.getAuthenticationToken;
 
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
@@ -26,8 +26,8 @@ Axios.interceptors.response.use(
 	},
 	function(error) {
 		if (error.response && error.response.status === 401) {
-			window.sessionStorage.clear();
-			store.commit('clearStore');
+			store.dispatch("signOut");
+			store.dispatch("clearStore");
 			router.push({ name: 'sign-in' });
 			return;
 		}

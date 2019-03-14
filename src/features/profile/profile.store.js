@@ -25,6 +25,9 @@ const actions = {
                 commit('setUserProfile', data);
             });
         }
+    },
+    clearStore: ({commit}) =>{
+        commit('clearStore');
     }
 }
 

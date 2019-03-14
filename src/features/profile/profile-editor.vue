@@ -100,8 +100,8 @@ export default {
     deleteAccount() {
       this.isSubmitting = true;
       this.$http.post("/userprofiles/me/delete").then(() => {
-        window.sessionStorage.clear();
-        this.$store.commit("clearStore");
+        this.$store.dispatch("signOut");
+        this.$store.dispatch("clearStore");
         this.$router.push({ name: "features" });
       });
     }

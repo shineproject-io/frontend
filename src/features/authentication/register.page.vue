@@ -93,27 +93,25 @@ export default {
       this.isSubmitting = true;
       this.status = 0;
 
-      this.$http
-        .post(`/userprofiles`, {
-          emailAddress: this.emailAddress,
-          password: this.password,
-          givenName: this.givenName,
-          familyName: this.familyName,
-          profilePicturePath: `${
-            process.env.VUE_APP_STORAGE_BASE_URL
-          }/productimages/medium-avatar.png`
-        })
+      authenticationService
+        .register(
+          this.givenName,
+          this.familyName,
+          this.emailAddress,
+          this.password
+        )
         .then(() => {
-          authenticationService
-            .signIn(this.emailAddress, this.password)
-            .then(response => {
-              window.sessionStorage.token = response.token;
-              window.sessionStorage.expiration = response.expiration;
-              this.$router.push({
-                path: "/secure/profile",
-                query: { welcome: true }
-              });
+          var signInFields = {
+            emailAddress: this.emailAddress,
+            password: this.password
+          };
+
+          this.$store.dispatch("signIn", signInFields).then(() => {
+            this.$router.push({
+              path: "/secure/profile",
+              query: { welcome: true }
             });
+          });
         })
         .catch(() => {
           this.isSubmitting = false;
@@ -122,7 +120,6 @@ export default {
   }
 };
 </script>
-
 
 <style scoped>
 .sign-in-wrapper {

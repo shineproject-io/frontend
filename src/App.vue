@@ -1,8 +1,8 @@
 <template>
   <loading-container :is-loading="isLoading">
-    <sidebar v-if="!isProductPage" :is-anonymous="!token"/>
+    <sidebar v-if="!isProductPage" :is-anonymous="!authenticationToken"/>
     <router-view id="route-page" v-bind:class="{'full-width': isProductPage}"/>
-    <add-list v-if="token"/>
+    <add-list v-if="authenticationToken"/>
   </loading-container>
 </template>
 
@@ -21,8 +21,12 @@ export default {
     return {
       isLoading: true,
       isProductPage: false,
-      token: null
     };
+  },
+  computed: {
+    authenticationToken() {
+      return this.$store.getters.getAuthenticationToken;
+    }
   },
   watch: {
     "$route.name"() {
@@ -40,10 +44,8 @@ export default {
       this.isProductPage = this.$route.name === "features";
     },
     initialiseAuthentication() {
-      this.token = window.sessionStorage.token;
-
       if (
-        !this.token &&
+        !this.authenticationToken &&
         this.$route.path !== "/" &&
         !this.$route.path.includes("welcome")
       ) {

@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import authenticationService from '@/features/authentication/authentication.service.js';
-
 export default {
   data() {
     return {
@@ -66,11 +64,17 @@ export default {
       this.isSubmitting = true;
       this.status = 0;
 
-      authenticationService.signIn(this.emailAddress, this.password)
-        .then(response => {
-          window.sessionStorage.token = response.token;
-          window.sessionStorage.expiration = response.expiration;
-          this.$router.push({ name: "profile" });
+      var signInFields = {
+        emailAddress: this.emailAddress,
+        password: this.password
+      };
+
+      this.$store
+        .dispatch("signIn", signInFields)
+        .then(() => {
+          this.$router.push({
+            name: "profile"
+          });
         })
         .catch(error => {
           this.status = error.response.status;
