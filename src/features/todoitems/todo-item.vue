@@ -88,7 +88,7 @@ export default {
       this.$http
         .delete(`/lists/${this.listId}/todoItems/${this.todoItem.id}`)
         .then(() => {
-          this.$emit("todo-item-deleted", this.todoItem.id);
+          this.$store.dispatch('todoModule/getTodoItems');
           this.isSubmitting = false;
         });
     },
@@ -101,7 +101,7 @@ export default {
         })
         .then(() => {
           this.isSubmitting = false;
-          this.$store.dispatch('getTodoItems');
+          this.$store.dispatch('todoModule/getTodoItems');
         });
     },
     completeTodoItem(todoItemId) {
@@ -113,7 +113,7 @@ export default {
         })
         .then(() => {
           this.isSubmitting = false;
-          this.$store.dispatch('getTodoItems');
+          this.$store.dispatch('todoModule/getTodoItems');
         });
     },
     openTodoItem(todoItemId) {
@@ -124,7 +124,7 @@ export default {
         })
         .then(() => {
           this.isSubmitting = false;
-          this.$store.dispatch('getTodoItems');
+          this.$store.dispatch('todoModule/getTodoItems');
         });
     }
   }

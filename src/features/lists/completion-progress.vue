@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { mapState} from 'vuex';
+
 export default {
   props: {
     isListActive: {
@@ -35,9 +37,10 @@ export default {
     }
   },
   computed: {
+    ...mapState('todoModule', ['todoItems', 'completedItems']),
     completionProgress() {
-      var completedCount = this.$store.getters.getCompletedItems.length;
-      var openCount = this.$store.getters.getTodoItems.length;
+      var completedCount = this.completedItems.length;
+      var openCount = this.todoItems.length;
 
       var totalCount = completedCount + openCount;
       if (totalCount === 0) return 0;

@@ -68,7 +68,7 @@ export default {
         .post(`/lists/${this.listId}/migrate`, { NewListId: newListId })
         .then(() => {
           this.$refs.listMigratorModal.hide();
-          this.$store.dispatch("getTodoItems", this.listId)
+          this.$store.dispatch("todoModule/getTodoItems", this.listId)
         });
     }
   }

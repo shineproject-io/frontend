@@ -25,6 +25,7 @@ import listHeader from "@/features/lists/list-header.vue";
 import todoList from "@/features/todoitems/todo-list.vue";
 import pictureSelector from "@/features/lists/picture-selector.vue";
 import listMigrator from "@/features/lists/list-migrator.vue";
+import { mapState } from 'vuex';
 
 export default {
   name: "list-page",
@@ -41,26 +42,24 @@ export default {
     };
   },
   computed: {
-    listId() {
-      return this.$store.getters.getCurrentListId;
-    }
+    ...mapState('todoModule', ['currentListId'])
   },
   watch: {
     "$route.query.listId"() {
       window.$(".complete-popover").popover("hide");
       this.list = null;
-      this.$store.dispatch("setCurrentListId", this.$route.query.listId);
+      this.$store.dispatch('todoModule/setCurrentListId', this.$route.query.listId);
       this.loadList();
     }
   },
   created() {
-    this.$store.dispatch("setCurrentListId", this.$route.query.listId);
+    this.$store.dispatch('todoModule/setCurrentListId', this.$route.query.listId);
     this.loadList();
   },
   methods: {
     loadList() {
       this.isLoading = true;
-      this.$http.get(`/lists/${this.listId}`).then(response => {
+      this.$http.get(`/lists/${this.currentListId}`).then(response => {
         this.list = response.data;
         this.isLoading = false;
       });

@@ -1,8 +1,8 @@
 <template>
   <loading-container class="lined-background" :isLoading="isLoading && todoItems.length === 0">
     <completed-wrapper
-      v-if="completedTodoItems.length > 0"
-      :todo-items="completedTodoItems"
+      v-if="completedItems.length > 0"
+      :todo-items="completedItems"
       :list-id="id"
     />
 
@@ -35,6 +35,7 @@ import completedWrapper from "@/features/todoitems/completed-wrapper";
 import todoItem from "@/features/todoitems/todo-item.vue";
 import newTodoItem from "@/features/todoitems/new-todo-item.vue";
 import draggable from "vuedraggable";
+import { mapState} from 'vuex';
 
 export default {
   components: {
@@ -61,21 +62,13 @@ export default {
     };
   },
   computed: {
-    todoItems() {
-      return this.$store.getters.getTodoItems;
-    },
-    completedTodoItems() {
-      return this.$store.getters.getCompletedItems;
-    },
+    ...mapState('todoModule', ['todoItems', 'completedItems', 'currentListId']),
     isListActive() {
       return this.state === 1;
-    },
-    listId(){
-      return this.$store.getters.getCurrentListId;
     }
   },
   watch: {
-    listId(){
+    currentListId(){
       this.loadTodoItems();
     },
     todoItems() {
@@ -101,10 +94,10 @@ export default {
     loadTodoItems() {
       this.isLoading = true;
 
-      this.$store.dispatch("getTodoItems").then(() => {
+      this.$store.dispatch("todoModule/getTodoItems").then(() => {
         if (
           this.todoItems.length === 0 &&
-          this.completedTodoItems.length === 0
+          this.completedItems.length === 0
         ) {
           this.focusNewTodoItemField = true;
         }

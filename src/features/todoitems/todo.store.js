@@ -5,11 +5,6 @@ const state = {
     todoItems: [],
     completedItems: [],
     currentListId: null
-};
-const getters = {
-    getTodoItems: state => state.todoItems,
-    getCompletedItems: state => state.completedItems,
-    getCurrentListId: state => state.currentListId
 }
 const mutations = {
     setTodoItems: (state, todoItems) => {
@@ -51,8 +46,8 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
-    getters,
     mutations,
     actions
 }
