@@ -2,25 +2,20 @@
   <loading-container class="lined-background" :isLoading="isLoading && todoItems.length === 0">
     <completed-wrapper
       v-if="completedTodoItems.length > 0"
-      v-on:todo-item-removed="todoRemoved"
-      v-on:todo-item-opened="todoOpened"
       :todo-items="completedTodoItems"
       :list-id="id"
     />
 
     <draggable
-      v-model="todoItems"
+      v-model="localTodoItems"
       :pull="false"
       handle=".todo-drag"
       @start="drag=true"
       @end="drag=false"
     >
       <todo-item
-        v-for="todoItem in todoItems"
+        v-for="todoItem in localTodoItems"
         v-bind:key="todoItem.id"
-        v-on:todo-item-deleted="todoRemoved"
-        v-on:todo-item-completed="todoCompleted"
-        v-on:todo-item-opened="todoOpened"
         :todo-item="todoItem"
         :listId="id"
       />
@@ -61,93 +56,64 @@ export default {
   data() {
     return {
       isLoading: true,
-      completedTodoItems: [],
-      todoItems: [],
-      skipLoad: true,
-      focusNewTodoItemField: false
+      focusNewTodoItemField: false,
+      localTodoItems: []
     };
   },
-  watch: {
+  computed: {
     todoItems() {
-      if (!this.skipLoad && this.todoItems.length > 0) {
-        this.$http.post(`/lists/${this.id}/todoItems/order`, {
-          todoItemIds: this._.map(this.todoItems, "id")
-        });
+      return this.$store.getters.getTodoItems;
+    },
+    completedTodoItems() {
+      return this.$store.getters.getCompletedItems;
+    },
+    isListActive() {
+      return this.state === 1;
+    },
+    listId(){
+      return this.$store.getters.getCurrentListId;
+    }
+  },
+  watch: {
+    listId(){
+      this.loadTodoItems();
+    },
+    todoItems() {
+      this.localTodoItems = this.todoItems;
+    },
+    localTodoItems() {
+      if (
+        this.localTodoItems === this.todoItems ||
+        this.todoItems.length === 0
+      ) {
+        return;
       }
-      if (this.skipLoad) {
-        this.skipLoad = false;
-      }
+
+      this.$http.post(`/lists/${this.id}/todoItems/order`, {
+        todoItemIds: this._.map(this.localTodoItems, "id")
+      });
     }
   },
   mounted() {
     this.loadTodoItems();
-
-    this.$root.$on("refresh-todo-list", () => {
-      this.todoItems = [];
-      this.loadTodoItems();
-    });
-  },
-  beforeDestroy() {
-    this.$root.$off("refresh-todo-list");
-  },
-  computed: {
-    isListActive() {
-      return this.state === 1;
-    }
   },
   methods: {
-    newTodoItemAdded() {
-      this.focusNewTodoItemField = true;
-      this.loadTodoItems();
-    },
     loadTodoItems() {
-      this.skipLoad = true;
       this.isLoading = true;
 
-      this.$http.get(`/lists/${this.id}/todoItems`).then(response => {
-        let openTodoItems = this._.filter(response.data, function(tdo) {
-          return tdo.state === "Open";
-        });
-
-        this.todoItems = this._.orderBy(
-          openTodoItems,
-          ["position", "dateCreated"],
-          ["asc", "asc"]
-        );
-
-        this.completedTodoItems = this._.filter(response.data, function(tdo) {
-          return tdo.state === "Completed";
-        });
-
+      this.$store.dispatch("getTodoItems").then(() => {
         if (
           this.todoItems.length === 0 &&
           this.completedTodoItems.length === 0
         ) {
           this.focusNewTodoItemField = true;
         }
-
-        this.communicateProgress();
         this.isLoading = false;
       });
     },
-    todoRemoved() {
+    newTodoItemAdded() {
+      this.focusNewTodoItemField = true;
       this.loadTodoItems();
-    },
-    todoCompleted() {
-      this.loadTodoItems();
-    },
-    todoOpened() {
-      this.loadTodoItems();
-    },
-    communicateProgress() {
-      var completedCount = this.completedTodoItems.length;
-      var openCount = this.todoItems.length;
-      var totalCount = completedCount + openCount;
-
-      this.$root.$emit(
-        "list-count-refresh",
-        (completedCount / totalCount) * 100
-      );
     }
   }
 };

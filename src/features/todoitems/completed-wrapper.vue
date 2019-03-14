@@ -25,8 +25,6 @@
       <todo-item
         v-for="todoItem in todoItems"
         v-bind:key="todoItem.id"
-        v-on:todo-item-deleted="$emit('todo-item-removed', todoItemId);"
-        v-on:todo-item-opened="$emit('todo-item-opened', todoItemId);"
         :todo-item="todoItem"
         :listId="listId"
         class="animated fadeInDown animate-fast"

@@ -5,6 +5,7 @@ import VuexPersist from 'vuex-persist';
 import profileModule from '@/features/profile/profile.store.js';
 import authenticationModule from '@/features/authentication/authentication.store.js';
 import listsModule from '@/features/lists/lists.store.js';
+import todoModule from '@/features/todoitems/todo.store.js';
 
 Vue.use(Vuex);
 
@@ -18,7 +19,8 @@ const store = new Vuex.Store({
 	modules: {
 		profileModule,
 		authenticationModule,
-		listsModule
+		listsModule,
+		todoModule
 	}
 });
 

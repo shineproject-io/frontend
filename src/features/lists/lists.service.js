@@ -24,5 +24,11 @@ export default {
         imageSource: "https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg"
       })
       .then(response => response.data);
+  },
+  deleteList(listId){
+    return Promise.all([
+      axios.delete(`/lists/${listId}`),
+      axios.delete(`/lists/${listId}/todoItems`)
+    ]);
   }
 }

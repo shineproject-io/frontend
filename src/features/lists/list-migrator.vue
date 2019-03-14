@@ -2,10 +2,8 @@
   <modal ref="listMigratorModal">
     <h6 slot="header" class="mb-0">Move open to-dos</h6>
     <div slot="body" class="p-3">
-      <loading-container :is-loading="isLoading || isSubmitting">
-        <p
-          class
-        >We can help you to move all active to-dos in this list into another, simply select the list you want to move them too.</p>
+      <loading-container :is-loading="isSubmitting">
+        <p>We can help you to move all active to-dos in this list into another, simply select the list you want to move them too.</p>
 
         <div class="card">
           <ul class="list-group list-group-flush">
@@ -40,31 +38,21 @@ export default {
   },
   data() {
     return {
-      otherLists: [],
-      isLoading: true,
       isSubmitting: false
     };
+  },
+  computed: {
+    otherLists() {
+      var lists = this.$store.getters.getLists;
+
+      return this._.filter(lists, lst => {
+        return lst.id !== this.listId;
+      });
+    }
   },
   methods: {
     show() {
       this.$refs.listMigratorModal.show();
-
-      this.isLoading = true;
-      this.isSubmitting = false;
-
-      this.$http.get(`/lists`).then(response => {
-        var otherListsTemporary = this._.orderBy(
-          response.data,
-          ["position", "name"],
-          ["asc", "desc"]
-        );
-
-        this.otherLists = this._.filter(otherListsTemporary, lst => {
-          return lst.id !== this.listId;
-        });
-
-        this.isLoading = false;
-      });
     },
     submit(newListId) {
       if (this.isSubmitting) {
@@ -77,7 +65,7 @@ export default {
         .post(`/lists/${this.listId}/migrate`, { NewListId: newListId })
         .then(() => {
           this.$refs.listMigratorModal.hide();
-          this.$root.$emit("refresh-todo-list");
+          this.$store.dispatch("getTodoItems", this.listId)
         });
     }
   }

@@ -61,36 +61,18 @@
       <i class="fas fa-check fa-fw mr-2"/>List completed
     </span>
 
-    <div class="list-progress progress">
-      <div
-        class="progress-bar progress-bar-striped complete-popover"
-        role="progressbar"
-        style="width: 100%"
-        aria-valuenow="25"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        v-bind:style="'width: ' + progressValue + '%;'"
-        data-toggle="popover"
-        data-placement="bottom"
-      ></div>
-      <div style="display: none">
-        <div id="complete-popover-content">
-          <button class="btn btn-primary mr-2" v-on:click.prevent="changeListState('Completed')">
-            <i class="fas fa-check fa-fw mr-2"/>
-            <span>Complete</span>
-          </button>
-          <button class="btn btn-secondary" onclick="window.$('.complete-popover').popover('hide')">
-            <i class="fas fa-times fa-fw mr-2"/>
-            <span>Cancel</span>
-          </button>
-        </div>
-      </div>
-    </div>
+    <completion-progress v-on:complete-list="changeListState('Completed')" :is-list-active="isListActive"/>
   </page-header>
 </template>
 
 <script>
+import completionProgress from "@/features/lists/completion-progress.vue";
+import listService from "@/features/lists/lists.service.js";
+
 export default {
+  components: {
+    completionProgress
+  },
   props: {
     id: {
       type: Number,
@@ -118,25 +100,6 @@ export default {
       progressValue: 0
     };
   },
-  mounted() {
-    this.$root.$on("list-count-refresh", progressValue => {
-      this.progressValue = progressValue;
-      window.$(".complete-popover").popover("hide");
-
-      if (progressValue === 100 && this.isListActive) {
-        window.$(".complete-popover").popover({
-          html: true,
-          content: window.$("#complete-popover-content")
-        });
-        setTimeout(function() {
-          window.$(".complete-popover").popover("show");
-        }, 1000);
-      }
-    });
-  },
-  beforeDestroy() {
-    this.$root.$off("list-count-refresh");
-  },
   computed: {
     isListActive() {
       return this.state === 1;
@@ -152,10 +115,7 @@ export default {
       });
     },
     deleteList() {
-      Promise.all([
-        this.$http.delete(`/lists/${this.id}`),
-        this.$http.delete(`/lists/${this.id}/todoItems`)
-      ]).then(() => {
+      listService.deleteList(this.id).then(() => {
         this.$store.dispatch("getLists");
         this.loadDefaultList();
       });

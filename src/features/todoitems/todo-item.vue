@@ -101,6 +101,7 @@ export default {
         })
         .then(() => {
           this.isSubmitting = false;
+          this.$store.dispatch('getTodoItems');
         });
     },
     completeTodoItem(todoItemId) {
@@ -112,19 +113,18 @@ export default {
         })
         .then(() => {
           this.isSubmitting = false;
-          this.$emit("todo-item-completed", todoItemId);
+          this.$store.dispatch('getTodoItems');
         });
     },
     openTodoItem(todoItemId) {
       this.isSubmitting = true;
-
       this.$http
         .put(`/lists/${this.listId}/todoItems/${todoItemId}/state`, {
           state: "Open"
         })
         .then(() => {
           this.isSubmitting = false;
-          this.$emit("todo-item-opened", todoItemId);
+          this.$store.dispatch('getTodoItems');
         });
     }
   }

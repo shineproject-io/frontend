@@ -15,7 +15,7 @@
       ></list-header>
     </transition>
     <transition name="fade">
-      <todo-list v-bind="list" />
+      <todo-list v-bind="list"/>
     </transition>
   </div>
 </template>
@@ -34,24 +34,27 @@ export default {
     pictureSelector,
     listMigrator
   },
+  data() {
+    return {
+      isLoading: true,
+      list: null
+    };
+  },
+  computed: {
+    listId() {
+      return this.$store.getters.getCurrentListId;
+    }
+  },
   watch: {
     "$route.query.listId"() {
       window.$(".complete-popover").popover("hide");
       this.list = null;
-      this.listId = this.$route.query.listId;
+      this.$store.dispatch("setCurrentListId", this.$route.query.listId);
       this.loadList();
     }
   },
-  data() {
-    return {
-      isLoading: true,
-      listId: 0,
-      list: null
-    };
-  },
   created() {
-    this.listId = this.$route.query.listId;
-
+    this.$store.dispatch("setCurrentListId", this.$route.query.listId);
     this.loadList();
   },
   methods: {

@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import todoService from '@/features/todoitems/todo.service.js';
+
 export default {
   props: {
     listId: {
@@ -42,14 +44,10 @@ export default {
       this.todoItemName = todoItemName;
       this.isSubmitting = true;
 
-      this.$http
-        .post(`/lists/${this.listId}/todoItems`, {
-          title: todoItemName
-        })
-        .then(() => {
+      todoService.addTodo(this.listId, todoItemName).then(() => {
           this.$emit("todo-item-added");
           this.isSubmitting = false;
-        });
+      })
     }
   }
 };
