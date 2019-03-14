@@ -1,50 +1,48 @@
 <template>
-  <div>
-    <page-cover class="container-fluid p-4">
-      <div class="sign-in-wrapper">
-        <h1 class="display-2">Sign in</h1>
-        <p class="mb-5">
-          <span>Welcome back, please sign in below or&nbsp;</span>
-          <router-link to="/welcome/register">create a free account</router-link>
-        </p>
-        <form v-on:submit.prevent="signIn" class="sign-in-form animated fadeInDown animate-fast">
-          <div
-            class="alert alert-danger text-left"
-            v-if="status > 399"
-          >Sorry those credentials don't match, do you want to
-            <router-link to="/welcome/forgottenpassword">reset your password?</router-link>
-          </div>
-          <div class="search-input-wrapper bg-glass d-flex">
-            <i class="fas fa-envelope fa-fw"/>
-            <input
-              type="email"
-              v-model="emailAddress"
-              class="flex-grow-1"
-              id="exampleInputEmail1"
-              placeholder="Email address"
-              required
-            >
-          </div>
-          <div class="search-input-wrapper bg-glass d-flex">
-            <i class="fas fa-key fa-fw"/>
-            <input
-              type="password"
-              v-model="password"
-              class="bg-glass"
-              placeholder="Password"
-              required
-            >
-          </div>
-          <loading-button
-            :is-loading="isSubmitting"
-            text="Sign in"
-            :is-large="true"
-            icon="fa-sign-in-alt"
-          ></loading-button>
-        </form>
-      </div>
-    </page-cover>
-  </div>
+  <page-cover class="container-fluid p-4">
+    <div class="sign-in-wrapper">
+      <h1 class="display-2">Sign in</h1>
+      <p class="mb-5">
+        <span>Welcome back, please sign in below or&nbsp;</span>
+        <router-link to="/welcome/register">create a free account</router-link>
+      </p>
+      <form v-on:submit.prevent="signIn" class="sign-in-form animated fadeInDown animate-fast">
+        <div
+          class="alert alert-danger text-left"
+          v-if="status > 399"
+        >Sorry those credentials don't match, do you want to
+          <router-link to="/welcome/forgottenpassword">reset your password?</router-link>
+        </div>
+        <div class="search-input-wrapper bg-glass d-flex">
+          <i class="fas fa-envelope fa-fw"/>
+          <input
+            type="email"
+            v-model="emailAddress"
+            class="flex-grow-1"
+            id="exampleInputEmail1"
+            placeholder="Email address"
+            required
+          >
+        </div>
+        <div class="search-input-wrapper bg-glass d-flex">
+          <i class="fas fa-key fa-fw"/>
+          <input
+            type="password"
+            v-model="password"
+            class="bg-glass"
+            placeholder="Password"
+            required
+          >
+        </div>
+        <loading-button
+          :is-loading="isSubmitting"
+          text="Sign in"
+          :is-large="true"
+          icon="fa-sign-in-alt"
+        />
+      </form>
+    </div>
+  </page-cover>
 </template>
 
 <script>

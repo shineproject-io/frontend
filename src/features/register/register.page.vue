@@ -1,5 +1,4 @@
 <template>
-  <div>
     <page-cover
       class="container-fluid p-4"
       background-image="https://shinestorage.azureedge.net/productlistbackgrounds/2.jpg"
@@ -69,7 +68,6 @@
         </form>
       </div>
     </page-cover>
-  </div>
 </template>
 
 <script>

@@ -1,5 +1,4 @@
 <template>
-  <div>
     <page-cover
       class="container-fluid p-4"
       background-image="https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg"
@@ -28,8 +27,7 @@
             :is-loading="isSubmitting"
             text="Reset Password"
             :is-large="true"
-            icon="fa-envelope"
-          ></loading-button>
+            icon="fa-envelope"/>
         </form>
       </div>
       <div class="forgotten-password-wrapper" v-if="isCompleted">
@@ -37,7 +35,6 @@
         <p class="lead">Please check your email for a link which will help you reset your password.</p>
       </div>
     </page-cover>
-  </div>
 </template>
 
 <script>
