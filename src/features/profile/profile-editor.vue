@@ -99,7 +99,7 @@ export default {
     deleteAccount() {
       this.isSubmitting = true;
       this.$http.post("/userprofiles/me/delete").then(() => {
-        this.$store.dispatch("signOut");
+        this.$store.dispatch('authenticationModule/signOut');
         this.$store.dispatch("clearStore");
         this.$router.push({ name: "features" });
       });

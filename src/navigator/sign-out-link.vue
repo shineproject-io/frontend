@@ -16,7 +16,7 @@ export default {
   name: "site-link",
   methods: {
     signOut() {
-      this.$store.dispatch("signOut");
+      this.$store.dispatch('authenticationModule/signOut');
       this.$store.dispatch("clearStore");
       this.$router.push({ name: "features" });
     }

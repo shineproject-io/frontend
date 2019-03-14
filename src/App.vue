@@ -10,6 +10,7 @@
 import "@/branding/product-branding.css";
 import sidebar from "@/navigator/sidebar.vue";
 import addList from "@/features/lists/add-list";
+import { mapState } from 'vuex';
 
 export default {
   name: "app",
@@ -24,9 +25,7 @@ export default {
     };
   },
   computed: {
-    authenticationToken() {
-      return this.$store.getters.getAuthenticationToken;
-    }
+    ...mapState('authenticationModule', ['authenticationToken'])
   },
   watch: {
     "$route.name"() {

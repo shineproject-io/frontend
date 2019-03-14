@@ -106,7 +106,7 @@ export default {
             password: this.password
           };
 
-          this.$store.dispatch("signIn", signInFields).then(() => {
+          this.$store.dispatch('authenticationModule/signIn', signInFields).then(() => {
             this.$router.push({
               path: "/secure/profile",
               query: { welcome: true }

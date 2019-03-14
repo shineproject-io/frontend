@@ -11,7 +11,7 @@ Axios.interceptors.request.use(function(config) {
 		return config;
 	}
 
-	const token = store.getters.getAuthenticationToken;
+	const token = store.state.authenticationModule.authenticationToken;
 
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
@@ -26,8 +26,8 @@ Axios.interceptors.response.use(
 	},
 	function(error) {
 		if (error.response && error.response.status === 401) {
-			store.dispatch("signOut");
-			store.dispatch("clearStore");
+			store.dispatch('authenticationModule/signOut');
+			store.dispatch("profileModule/clearStore");
 			router.push({ name: 'sign-in' });
 			return;
 		}

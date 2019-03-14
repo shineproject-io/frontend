@@ -70,7 +70,7 @@ export default {
       };
 
       this.$store
-        .dispatch("signIn", signInFields)
+        .dispatch('authenticationModule/signIn', signInFields)
         .then(() => {
           this.$router.push({
             name: "profile"

@@ -3,9 +3,6 @@ import authenticationService from '@/features/authentication/authentication.serv
 const state = {
     authenticationToken: null,
 };
-const getters = {
-    getAuthenticationToken: state => state.authenticationToken,
-}
 const mutations = {
     setAuthenticationToken: (state, token) => {
         state.authenticationToken = token;
@@ -28,8 +25,8 @@ const actions = {
 }
 
 export default {
+    namespaced: true,
     state,
-    getters,
     mutations,
     actions
 }
