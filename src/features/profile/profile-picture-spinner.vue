@@ -1,8 +1,6 @@
 <template>
-  <div class="template">
-    <div class="profile-picture-spinner mr-4">
-      <i class="fas fa-spinner fa-spin fa-fw"/>
-    </div>
+  <div class="profile-picture-spinner mr-4">
+    <i class="fas fa-spinner fa-spin fa-fw"/>
   </div>
 </template>
 

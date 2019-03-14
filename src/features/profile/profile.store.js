@@ -18,8 +18,8 @@ const mutations = {
 const actions = {
     loadUserProfile: ({
         commit, state
-    }) => {
-        if (state.userProfile === null){
+    }, shouldOverwrite) => {
+        if (state.userProfile === null || shouldOverwrite){
             profileService.getUserProfile()
             .then(data => {
                 commit('setUserProfile', data);

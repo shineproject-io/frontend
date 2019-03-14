@@ -101,8 +101,7 @@ export default {
           this.imageFileName = "Choose a picture...";
           this.isSubmitting = false;
           this.$refs.uploadPictureModal.hide();
-          this.$store.commit("setUserProfile", null);
-          this.$root.$emit("user-profile-updated");
+          this.$store.dispatch('loadUserProfile', true);
         })
         .catch(error => {
           this.statusCode = error.response.status;

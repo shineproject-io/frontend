@@ -88,8 +88,7 @@ export default {
               .then(function() {
                 this.isSubmitting = false;
                 this.$refs.profileDetailsModal.hide();
-                this.$store.commit("setUserProfile", null);
-                this.$root.$emit("user-profile-updated");
+                this.$store.dispatch('loadUserProfile', true);
               });
           });
       } else {
