@@ -3,7 +3,7 @@
     <div class="d-flex text-white">
       <h1 class="display-2 mb-3">Search</h1>
     </div>
-    <div id="search-wrapper" class="align-content-center d-flex bg-glass">
+    <div id="search-wrapper" class="align-content-center d-flex bg-glass animated pulse">
       <i class="fas fa-search fa-fw"/>
       <input id="search-field" ref="searchField" v-model="searchQuery">
     </div>

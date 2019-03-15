@@ -24,15 +24,9 @@
       </div>
 
       <loading-container :is-loading="isLoading" class="p-2 mb-4">
-        <ul class="profile-switcher nav nav-tabs mb-3">
-          <li class="nav-item nav-link cursor-pointer active">
-            <i class="fas fa-lightbulb fa-fw mr-1"/>
-            <span>List ideas</span>
-          </li>
-        </ul>
-
         <div v-bind:class="{'no-events': isSubmitting}">
           <list-suggestion
+            class="animated fadeInDown"
             v-for="suggestion in suggestions"
             v-bind:key="suggestion.suggestionTitle"
             :title="suggestion.suggestionTitle"

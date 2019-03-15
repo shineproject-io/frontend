@@ -1,7 +1,7 @@
 <template>
   <loading-container :is-loading="isLoading">
     <sidebar v-if="!isProductPage" :is-anonymous="!authenticationToken"/>
-    <router-view id="route-page" v-bind:class="{'full-width': isProductPage}"/>
+    <router-view id="route-page" v-bind:class="{'full-width': isProductPage}" class="animated fadeIn animate-fast"/>
     <add-list v-if="authenticationToken"/>
   </loading-container>
 </template>
