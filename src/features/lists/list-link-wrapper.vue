@@ -1,10 +1,21 @@
 <template>
   <div id="list-link-wrapper">
     <loading-container :is-loading="isLoadingLists" message-suffix="lists">
-      <draggable v-model="localLists" :pull="false" @start="drag=true" @end="drag=false">
-        <list-link v-for="list in localLists" v-bind:key="list.id" v-bind="list"/>
+      <draggable
+        v-model="localLists"
+        :pull="false"
+        @start="drag=true"
+        @end="drag=false"
+        handle=".list-handle"
+      >
+        <list-link
+          v-for="list in localLists"
+          v-bind:class="{ 'list-handle' : allowDraggable}"
+          v-bind:key="list.id"
+          v-bind="list"
+        />
       </draggable>
-      
+
       <div v-if="localLists.length == 0" class="text-center px-4 py-5 text-muted">
         <i class="fas fa-chalkboard fa-fw mb-3" style="font-size: 20px;"/>
         <p class="mb-1">You don't have any active lists!</p>
@@ -16,7 +27,7 @@
 <script>
 import listLink from "@/features/lists/list-link.vue";
 import draggable from "vuedraggable";
-import { mapState} from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -31,7 +42,14 @@ export default {
     };
   },
   computed: {
-    ...mapState('listsModule', ['lists'])
+    ...mapState("listsModule", ["lists"]),
+    allowDraggable() {
+      if (screen.width < 768) {
+        return false;
+      }
+
+      return true;
+    }
   },
   created() {
     this.loadLists();
@@ -42,7 +60,7 @@ export default {
     },
     localLists() {
       if (!this.skipLoad && this.localLists.length > 0) {
-        this.$store.dispatch('listsModule/updateListOrder', this.localLists);
+        this.$store.dispatch("listsModule/updateListOrder", this.localLists);
       } else {
         this.skipLoad = false;
       }
@@ -51,7 +69,7 @@ export default {
   methods: {
     loadLists() {
       this.isLoadingLists = true;
-      this.$store.dispatch('listsModule/getLists').then(() => {
+      this.$store.dispatch("listsModule/getLists").then(() => {
         this.isLoadingLists = false;
       });
     }
