@@ -28,9 +28,20 @@
               </div>
               <input type="email" v-model="updatedEmailAddress" class="form-control" required>
             </div>
+
+            <div v-if="showDeleteWarning" class="card card-body text-danger animated slideInDown">
+              <p>Deleting your account is permanent and immediate, if you delete your account all your data held in our systems will be removed immediately</p>
+              <div class="d-flex">
+                <a href="#" class="btn btn-danger mr-2" v-on:click.prevent="deleteAccount">
+                  <i class="fas fa-exclamation-triangle fa-fw mr-2"/>
+                  <span>Confirm Deletion</span>
+                </a>
+                <a href="#" class="btn btn-secondary" v-on:click.prevent="showDeleteWarning = false;">Cancel</a>
+              </div>
+            </div>
           </div>
           <div slot="footer">
-            <button class="btn btn-secondary mr-2 float-left" v-on:click.prevent="deleteAccount">
+            <button v-if="!showDeleteWarning" class="btn btn-secondary mr-2 float-left" v-on:click.prevent="showDeleteWarning = true;">
               <i class="fas fa-exclamation-triangle fa-fw mr-2"/>Delete Account
             </button>
             <loading-button :isLoading="isSubmitting" text="Save" icon="fas fa-check" class="mr-2"></loading-button>
@@ -56,6 +67,7 @@ export default {
   data() {
     return {
       isSubmitting: false,
+      showDeleteWarning: false,
       updatedGivenName: "",
       updatedFamilyName: "",
       updatedEmailAddress: ""
