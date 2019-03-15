@@ -7,9 +7,6 @@ const mutations = {
     setUserProfile: (state, userProfile) => {
         state.userProfile = userProfile;
     },
-    clearStore: state => {
-        state.userProfile = null;
-    },
 }
 
 const actions = {
@@ -23,8 +20,8 @@ const actions = {
             });
         }
     },
-    clearStore: ({commit}) =>{
-        commit('clearStore');
+    signOut: ({commit}) =>{
+        commit('setUserProfile', null);
     }
 }
 

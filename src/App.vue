@@ -45,18 +45,12 @@ export default {
     initialiseAuthentication() {
       let currentRoute = this.$route.path.toLowerCase();
 
-      if (
-        !this.authenticationToken &&
-        currentRoute !== "/" &&
-        !currentRoute.includes("welcome")
-      ) {
+      if (!currentRoute.includes("welcome") && !this.authenticationToken) {
         this.$router.push({ name: "sign-in" });
+      } else if (currentRoute.includes("welcome") && this.authenticationToken) {
+        this.$router.push({ name: "profile" });
       } else {
         this.isLoading = false;
-      }
-
-      if (currentRoute.includes("welcome") && this.authenticationToken) {
-        this.$router.push({ name: "profile" });
       }
     }
   }

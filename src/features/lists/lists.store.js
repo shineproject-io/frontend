@@ -10,6 +10,11 @@ const mutations = {
     }
 }
 const actions = {
+    signOut: ({
+        commit
+    }) => {
+        commit('setLists', null);
+    },
     getLists: ({
         commit
     }) => {

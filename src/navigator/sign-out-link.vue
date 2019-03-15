@@ -17,7 +17,9 @@ export default {
   methods: {
     signOut() {
       this.$store.dispatch('authenticationModule/signOut');
-      this.$store.dispatch("clearStore");
+      this.$store.dispatch('listsModule/signOut');
+      this.$store.dispatch('todoModule/signOut');
+      this.$store.dispatch('profileModule/signOut');
       this.$router.push({ name: "features" });
     }
   }
