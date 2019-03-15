@@ -31,8 +31,8 @@ const actions = {
         commit
     }, listId) => {
         commit('setCurrentListId', listId);
-        commit('setTodoItems', null);
-        commit('setCompletedItems', null);
+        commit('setTodoItems', []);
+        commit('setCompletedItems', []);
     },
     setTodoItemsOrder: ({
         commit
