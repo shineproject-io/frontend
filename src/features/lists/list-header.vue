@@ -34,10 +34,6 @@
             <i class="fas fa-plane fa-fw mr-2"/>
             <span>Move active to-dos</span>
           </a>
-          <a href="#" class="dropdown-item" v-on:click.prevent="changeListState('Completed')">
-            <i class="fas fa-check fa-fw mr-2"/>
-            <span>Mark as completed</span>
-          </a>
           <a href="#" class="dropdown-item" v-on:click.prevent="deleteList">
             <i class="fas fa-trash-alt fa-fw mr-2"/>
             <span>Delete list</span>
