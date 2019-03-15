@@ -1,6 +1,8 @@
 import axios from 'axios';
 import lodash from 'lodash';
 
+import todoService from '@/features/todoitems/todo.service.js';
+
 const state = {
     todoItems: null,
     completedItems: null,
@@ -29,6 +31,8 @@ const actions = {
         commit
     }, listId) => {
         commit('setCurrentListId', listId);
+        commit('setTodoItems', null);
+        commit('setCompletedItems', null);
     },
     setTodoItemsOrder: ({
         commit
@@ -63,6 +67,19 @@ const actions = {
             commit('setTodoItems', openTodoItems);
             commit('setCompletedItems', completedItems);
         });
+    },
+    changeTodoTitle: ({
+        state
+    }, model) => {
+        todoService
+            .changeTitle(model.listId, model.todoItemId, model.title)
+            .then(() => {
+                var matchedTodoItem = lodash.find(state.todoItems, function (tdo) {
+                    return tdo.id === model.todoItemId;
+                });
+
+                matchedTodoItem.title = model.title;
+            });
     }
 }
 

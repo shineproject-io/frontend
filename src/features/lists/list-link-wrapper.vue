@@ -15,7 +15,7 @@
       />
     </draggable>
 
-    <div v-if="lists.length == 0" class="text-center px-4 py-5 text-muted">
+    <div v-if="lists && lists.length == 0" class="text-center px-4 py-5 text-muted">
       <i class="fas fa-chalkboard fa-fw mb-3" style="font-size: 20px;"/>
       <p class="mb-1">You don't have any active lists!</p>
     </div>

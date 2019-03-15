@@ -88,20 +88,23 @@ export default {
       this.$http
         .delete(`/lists/${this.listId}/todoItems/${this.todoItem.id}`)
         .then(() => {
-          this.$store.dispatch('todoModule/getTodoItems');
+          this.$store.dispatch("todoModule/getTodoItems");
           this.isSubmitting = false;
         });
     },
     saveTitle(newValue) {
       this.isSubmitting = true;
 
-      this.$http
-        .put(`/lists/${this.listId}/todoItems/${this.todoItem.id}/title`, {
-          title: newValue
-        })
+      var changeTodoTitleModel = {
+        listId: this.listId,
+        todoItemId: this.todoItem.id,
+        title: newValue
+      };
+
+      this.$store
+        .dispatch("todoModule/changeTodoTitle", changeTodoTitleModel)
         .then(() => {
           this.isSubmitting = false;
-          this.$store.dispatch('todoModule/getTodoItems');
         });
     },
     completeTodoItem(todoItemId) {
@@ -113,7 +116,7 @@ export default {
         })
         .then(() => {
           this.isSubmitting = false;
-          this.$store.dispatch('todoModule/getTodoItems');
+          this.$store.dispatch("todoModule/getTodoItems");
         });
     },
     openTodoItem(todoItemId) {
@@ -124,7 +127,7 @@ export default {
         })
         .then(() => {
           this.isSubmitting = false;
-          this.$store.dispatch('todoModule/getTodoItems');
+          this.$store.dispatch("todoModule/getTodoItems");
         });
     }
   }
@@ -136,7 +139,7 @@ export default {
   height: 62px;
 }
 
-.todo-drag{
+.todo-drag {
   cursor: move;
 }
 
