@@ -44,6 +44,10 @@ export default {
     id: {
       type: Number,
       required: true
+    },
+    state: {
+      type: Number,
+      required: true
     }
   },
   data() {
