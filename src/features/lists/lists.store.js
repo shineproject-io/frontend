@@ -3,10 +3,17 @@ import lodash from 'lodash';
 
 const state = {
     lists: null,
+    currentList: null
 }
 const mutations = {
     setLists: (state, lists) => {
         state.lists = lists;
+    },
+    setList: (state, list) => {
+        state.currentList = list;
+    },
+    setBackground: (state, imageSource)=>{
+        state.currentList.imageSource = imageSource
     }
 }
 const actions = {
@@ -14,6 +21,16 @@ const actions = {
         commit
     }) => {
         commit('setLists', null);
+    },
+    getList: ({
+        commit
+    }, listId) => {
+        return listsService.getList(listId).then(data => {
+             commit('setList', data);
+        });
+    },
+    setBackground: ({commit}, imageSource) => {
+        commit('setBackground', imageSource);
     },
     getLists: ({
         commit

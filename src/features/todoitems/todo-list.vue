@@ -86,7 +86,8 @@ export default {
   methods: {
     loadTodoItems() {
       this.isLoading = true;
-
+      this.focusNewTodoItemField = false;
+      
       this.$store.dispatch("todoModule/getTodoItems").then(() => {
         if (this.todoItems.length === 0 && this.completedItems.length === 0) {
           this.focusNewTodoItemField = true;

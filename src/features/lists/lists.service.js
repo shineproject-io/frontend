@@ -2,6 +2,9 @@ import axios from 'axios';
 import lodash from 'lodash';
 
 export default {
+  getList(listId) {
+    return axios.get(`/lists/${listId}`).then(response => response.data);
+  },
   getLists() {
     return axios.get('/lists').then(response => {
       let lists = lodash.orderBy(
@@ -25,7 +28,7 @@ export default {
       })
       .then(response => response.data);
   },
-  deleteList(listId){
+  deleteList(listId) {
     return Promise.all([
       axios.delete(`/lists/${listId}`),
       axios.delete(`/lists/${listId}/todoItems`)

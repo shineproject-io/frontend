@@ -1,19 +1,19 @@
 <template>
-    <div v-if="list">
-      <picture-selector
-        :list-id="list.id"
-        v-on:background-updated="updateBackground"
-        v-on:list-background-updated="loadList()"
-        ref="pictureSelector"
-      ></picture-selector>
-      <list-migrator :list-id="list.id" ref="listMigrator"/>
-      <list-header
-        v-bind="list"
-        v-on:show-picture-selector="$refs.pictureSelector.show()"
-        v-on:show-list-migrator="$refs.listMigrator.show()"
-      ></list-header>
-      <todo-list v-bind="list"/>
-    </div>
+  <div v-if="currentList">
+    <picture-selector
+      :list-id="currentList.id"
+      v-on:background-updated="updateBackground"
+      v-on:list-background-updated="loadList()"
+      ref="pictureSelector"
+    ></picture-selector>
+    <list-migrator :list-id="currentList.id" ref="listMigrator"/>
+    <list-header
+      v-bind="currentList"
+      v-on:show-picture-selector="$refs.pictureSelector.show()"
+      v-on:show-list-migrator="$refs.listMigrator.show()"
+    />
+    <todo-list v-bind="currentList"/>
+  </div>
 </template>
 
 <script>
@@ -31,18 +31,13 @@ export default {
     pictureSelector,
     listMigrator
   },
-  data() {
-    return {
-      list: null
-    };
-  },
   computed: {
-    ...mapState("todoModule", ["currentListId"])
+    ...mapState("todoModule", ["currentListId"]),
+    ...mapState("listsModule", ["currentList"])
   },
   watch: {
     "$route.query.listId"() {
       window.$(".complete-popover").popover("hide");
-      this.list = null;
       this.$store.dispatch(
         "todoModule/setCurrentListId",
         this.$route.query.listId
@@ -59,12 +54,10 @@ export default {
   },
   methods: {
     loadList() {
-      this.$http.get(`/lists/${this.currentListId}`).then(response => {
-        this.list = response.data;
-      });
+      this.$store.dispatch("listsModule/getList", this.currentListId);
     },
     updateBackground(imageSource) {
-      this.list.imageSource = imageSource;
+      this.$store.dispatch("listsModule/setBackground", imageSource);
     }
   }
 };
