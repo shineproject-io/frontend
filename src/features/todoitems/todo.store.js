@@ -30,6 +30,17 @@ const actions = {
     }, listId) => {
         commit('setCurrentListId', listId);
     },
+    setTodoItemsOrder: ({
+        commit
+    }, dispatchModel) => {
+        if (dispatchModel.todoItems.length > 0) {
+            axios.post(`/lists/${dispatchModel.listId}/todoItems/order`, {
+                todoItemIds: lodash.map(dispatchModel.todoItems, "id")
+            });
+
+            commit('setTodoItems', dispatchModel.todoItems);
+        }
+    },
     getTodoItems: ({
         commit,
         state

@@ -1,7 +1,6 @@
 <template>
   <div class="profile-cover text-white" :style="'background-image: url(' + backgroundImage + ');'">
     <div class="profile-cover-inner">
-      <menu-activator/>
       <overlay class="d-flex align-items-center"/>
       <div class="position-relative" style="z-index: 2001;">
         <div class="container py-2 py-md-4 py-lg-5">
@@ -13,12 +12,7 @@
 </template>
 
 <script>
-import menuActivator from "@/navigator/menu-activator.vue";
-
 export default {
-  components: {
-    menuActivator
-  },
   props: {
     backgroundImage: {
       type: String,

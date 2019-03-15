@@ -1,13 +1,14 @@
 <template>
   <div v-on:click.prevent="$root.$emit('show-menu')" class="menu-activator">
-    <i class="fas fa-bars fa-fw mr-1"/>
-    <span>Shine</span>
+    <i class="fas fa-bars fa-fw"/>
   </div>
 </template>
 
 <style>
 .menu-activator {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   cursor: pointer;
   color: white;
   z-index: 2000;

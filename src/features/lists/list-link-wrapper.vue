@@ -1,85 +1,65 @@
 <template>
-  <div id="list-link-wrapper">
-    <loading-container :is-loading="isLoadingLists" message-suffix="lists">
-      <draggable
-        v-model="localLists"
-        :pull="false"
-        @start="drag=true"
-        @end="drag=false"
-        handle=".list-handle"
-      >
-        <list-link
-          v-for="list in localLists"
-          v-bind:class="{ 'list-handle' : allowDraggable}"
-          v-bind:key="list.id"
-          v-bind="list"
-        />
-      </draggable>
+  <loading-container id="list-link-wrapper" :is-loading="isLoading" message-suffix="lists">
+    <draggable
+      v-model="lists"
+      :pull="false"
+      @start="drag=true"
+      @end="drag=false"
+      handle=".list-handle"
+    >
+      <list-link
+        v-for="list in lists"
+        v-bind:class="{ 'list-handle' : allowDraggable}"
+        v-bind:key="list.id"
+        v-bind="list"
+      />
+    </draggable>
 
-      <div v-if="localLists.length == 0" class="text-center px-4 py-5 text-muted">
-        <i class="fas fa-chalkboard fa-fw mb-3" style="font-size: 20px;"/>
-        <p class="mb-1">You don't have any active lists!</p>
-      </div>
-    </loading-container>
-  </div>
+    <div v-if="lists.length == 0" class="text-center px-4 py-5 text-muted">
+      <i class="fas fa-chalkboard fa-fw mb-3" style="font-size: 20px;"/>
+      <p class="mb-1">You don't have any active lists!</p>
+    </div>
+  </loading-container>
 </template>
 
 <script>
 import listLink from "@/features/lists/list-link.vue";
 import draggable from "vuedraggable";
-import { mapState } from "vuex";
+import mobileViewportMixin from "@/mixins/mobile-viewport.mixin.js";
 
 export default {
   components: {
     listLink,
     draggable
   },
+  mixins: [mobileViewportMixin],
   data() {
     return {
-      localLists: [],
-      isLoadingLists: true,
-      skipLoad: true
+      isLoading: true
     };
   },
   computed: {
-    ...mapState("listsModule", ["lists"]),
-    allowDraggable() {
-      if (screen.width < 768) {
-        return false;
+    lists: {
+      get() {
+        return this.$store.state.listsModule.lists;
+      },
+      set(value) {
+        this.$store.dispatch("listsModule/updateListOrder", value);
       }
-
-      return true;
     }
   },
   created() {
-    this.loadLists();
-  },
-  watch: {
-    lists() {
-      this.localLists = this.lists;
-    },
-    localLists() {
-      if (!this.skipLoad && this.localLists.length > 0) {
-        this.$store.dispatch("listsModule/updateListOrder", this.localLists);
-      } else {
-        this.skipLoad = false;
-      }
-    }
-  },
-  methods: {
-    loadLists() {
-      this.isLoadingLists = true;
-      this.$store.dispatch("listsModule/getLists").then(() => {
-        this.isLoadingLists = false;
-      });
-    }
+    this.isLoading = true;
+    this.$store.dispatch("listsModule/getLists").then(() => {
+      this.isLoading = false;
+    });
   }
 };
 </script>
 
 <style>
 #list-link-wrapper {
-  max-height: calc(100vh - 320px);
+  max-height: calc(100vh - 302px);
   overflow: auto;
 }
 

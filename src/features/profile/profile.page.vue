@@ -1,5 +1,7 @@
 <template>
   <profile-cover :background-image="backgroundImage">
+    <menu-activator/>
+
     <div class="profile-page-wrapper">
       <div class="d-flex align-items-center mb-3">
         <div class="mr-4">
@@ -45,6 +47,7 @@
 </template>
 
 <script>
+import menuActivator from "@/navigator/menu-activator.vue";
 import profilePictureUploader from "@/features/profile/profile-picture-uploader.vue";
 import profilePictureSpinner from "@/features/profile/profile-picture-spinner.vue";
 import profileEditor from "@/features/profile/profile-editor.vue";
@@ -56,7 +59,8 @@ export default {
     profilePictureUploader,
     profilePictureSpinner,
     profileEditor,
-    profileCover
+    profileCover,
+    menuActivator
   },
   data() {
     return {
@@ -133,6 +137,12 @@ export default {
   width: 800px;
   max-width: 95%;
   margin: 0 auto;
+}
+
+@media (max-width: 769px) {
+  .profile-page-wrapper {
+    padding-top: 50px;
+  }
 }
 
 .profile-switcher .nav-link {
