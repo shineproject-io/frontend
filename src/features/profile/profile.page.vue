@@ -22,36 +22,14 @@
       </div>
 
       <loading-container :is-loading="isLoading" class="p-2 mb-4">
-        <div v-if="pinnedList">
-          <ul class="profile-switcher nav nav-tabs mb-3">
-            <li
-              class="nav-item nav-link cursor-pointer mr-2"
-              v-bind:class="{'active': viewport === 'list'}"
-              v-on:click.prevent="viewport = 'list'"
-            >
-              <i class="fas fa-thumbtack fa-fw mr-1"/>
-              <span>Pinned list</span>
-            </li>
-            <li
-              class="nav-item nav-link cursor-pointer"
-              v-bind:class="{'active': viewport === 'ideas'}"
-              v-on:click.prevent="viewport = 'ideas'"
-            >
-              <i class="fas fa-lightbulb fa-fw mr-1"/>
-              <span>List ideas</span>
-            </li>
-          </ul>
-        </div>
+        <ul class="profile-switcher nav nav-tabs mb-3">
+          <li class="nav-item nav-link cursor-pointer active">
+            <i class="fas fa-lightbulb fa-fw mr-1"/>
+            <span>List ideas</span>
+          </li>
+        </ul>
 
-        <div v-if="pinnedList && viewport === 'list'">
-          <pinned-list
-            :list="pinnedList"
-            :todo-items="pinnedTodoItems"
-            v-on:refresh-todo-items="loadContentPanel"
-          />
-        </div>
-
-        <div v-if="viewport === 'ideas'" v-bind:class="{'no-events': isSubmitting}">
+        <div v-bind:class="{'no-events': isSubmitting}">
           <list-suggestion
             v-for="suggestion in suggestions"
             v-bind:key="suggestion.suggestionTitle"
@@ -71,7 +49,6 @@ import profilePictureUploader from "@/features/profile/profile-picture-uploader.
 import profilePictureSpinner from "@/features/profile/profile-picture-spinner.vue";
 import profileEditor from "@/features/profile/profile-editor.vue";
 import profileCover from "@/features/profile/profile-cover.vue";
-import pinnedList from "@/features/lists/pinned-list.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -79,17 +56,13 @@ export default {
     profilePictureUploader,
     profilePictureSpinner,
     profileEditor,
-    profileCover,
-    pinnedList
+    profileCover
   },
   data() {
     return {
-      viewport: "ideas",
       isSubmitting: false,
       isLoading: true,
-      suggestions: [],
-      pinnedList: null,
-      pinnedTodoItems: []
+      suggestions: []
     };
   },
   mounted() {
@@ -107,32 +80,14 @@ export default {
       }
     },
     backgroundImage() {
-      if (this.pinnedList) {
-        return this.pinnedList.imageSource;
-      }
       return "https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg";
     }
   },
   methods: {
     loadContentPanel() {
-      Promise.all([
-        this.$http.get("/lists/suggestions"),
-        this.$http.get("/userprofiles/me/lists/pinned")
-      ]).then(responses => {
-        this.suggestions = responses[0].data;
-        this.pinnedList = responses[1].data;
-
-        if (this.pinnedList) {
-          this.$http
-            .get(`/lists/${this.pinnedList.id}/todoItems`)
-            .then(response => {
-              this.pinnedTodoItems = response.data;
-              this.viewport = "list";
-              this.isLoading = false;
-            });
-        } else {
-          this.isLoading = false;
-        }
+      this.$http.get("/lists/suggestions").then(response => {
+        this.suggestions = response.data;
+        this.isLoading = false;
       });
     },
     createList(title, description, image) {
@@ -145,7 +100,7 @@ export default {
           imageSource: image
         })
         .then(response => {
-          this.$store.dispatch('listsModule/getLists');
+          this.$store.dispatch("listsModule/getLists");
           this.$router.push({
             path: "list",
             query: { listId: response.data }
@@ -161,7 +116,7 @@ export default {
 
       this.$http.post("/lists/welcome").then(listResponse => {
         this.$http.post(`/lists/${listResponse.data}/welcome`).then(() => {
-          this.$store.dispatch('listsModule/getLists');
+          this.$store.dispatch("listsModule/getLists");
           this.$router.push({
             path: "list",
             query: { listId: listResponse.data }

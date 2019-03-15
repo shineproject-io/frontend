@@ -26,15 +26,11 @@
           style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(-196px, 0px, 0px);"
         >
           <div class="dropdown-header">Edit list</div>
-          <a href="#" class="dropdown-item" v-on:click.prevent="pinList()">
-            <i class="fas fa-thumbtack fa-fw mr-2"/>
-            <span>Pin this list</span>
-          </a>
           <a href="#" class="dropdown-item" v-on:click.prevent="$emit('show-picture-selector')">
             <i class="fas fa-image fa-fw mr-2"/>
             <span>Change picture</span>
           </a>
-          <a href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
+          <a v-if="todoItems.length > 0" href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
             <i class="fas fa-plane fa-fw mr-2"/>
             <span>Move active to-dos</span>
           </a>
@@ -68,6 +64,7 @@
 <script>
 import completionProgress from "@/features/lists/completion-progress.vue";
 import listService from "@/features/lists/lists.service.js";
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -101,6 +98,7 @@ export default {
     };
   },
   computed: {
+    ...mapState('todoModule', ['todoItems']),
     isListActive() {
       return this.state === 1;
     },
@@ -109,11 +107,6 @@ export default {
     }
   },
   methods: {
-    pinList() {
-      this.$http.put(`/userprofiles/me/lists/${this.id}/pin`).then(() => {
-        this.$router.push({ name: "profile" });
-      });
-    },
     deleteList() {
       listService.deleteList(this.id).then(() => {
         this.$store.dispatch('listsModule/getLists');
