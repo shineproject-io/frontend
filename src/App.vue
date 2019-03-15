@@ -10,7 +10,7 @@
 import "@/branding/product-branding.css";
 import sidebar from "@/navigator/sidebar.vue";
 import addList from "@/features/lists/add-list";
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   name: "app",
@@ -21,11 +21,11 @@ export default {
   data() {
     return {
       isLoading: true,
-      isProductPage: false,
+      isProductPage: false
     };
   },
   computed: {
-    ...mapState('authenticationModule', ['authenticationToken'])
+    ...mapState("authenticationModule", ["authenticationToken"])
   },
   watch: {
     "$route.name"() {
@@ -43,14 +43,20 @@ export default {
       this.isProductPage = this.$route.name === "features";
     },
     initialiseAuthentication() {
+      let currentRoute = this.$route.path.toLowerCase();
+
       if (
         !this.authenticationToken &&
-        this.$route.path !== "/" &&
-        !this.$route.path.includes("welcome")
+        currentRoute !== "/" &&
+        !currentRoute.includes("welcome")
       ) {
         this.$router.push({ name: "sign-in" });
       } else {
         this.isLoading = false;
+      }
+
+      if (currentRoute.includes("welcome") && this.authenticationToken) {
+        this.$router.push({ name: "profile" });
       }
     }
   }
