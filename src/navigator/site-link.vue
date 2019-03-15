@@ -16,6 +16,7 @@
 <style>
 .site-link {
   background-color: #f9f9f9;
+  border-bottom: 1px solid #f2f2f2;
 }
 
 .site-item-icon {

@@ -88,7 +88,7 @@ export default {
               .then(function() {
                 this.isSubmitting = false;
                 this.$refs.profileDetailsModal.hide();
-                this.$store.dispatch('profileModule/loadUserProfile', true);
+                this.$store.dispatch("profileModule/loadUserProfile", true);
               });
           });
       } else {
@@ -99,8 +99,10 @@ export default {
     deleteAccount() {
       this.isSubmitting = true;
       this.$http.post("/userprofiles/me/delete").then(() => {
-        this.$store.dispatch('authenticationModule/signOut');
-        this.$store.dispatch("clearStore");
+        this.$store.dispatch("authenticationModule/signOut");
+        this.$store.dispatch("listsModule/signOut");
+        this.$store.dispatch("todoModule/signOut");
+        this.$store.dispatch("profileModule/signOut");
         this.$router.push({ name: "features" });
       });
     }
