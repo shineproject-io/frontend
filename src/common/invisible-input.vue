@@ -54,6 +54,12 @@ export default {
       storedText: ""
     };
   },
+  watch:{
+    text() {
+    this.currentText = this.text;
+    this.storedText = this.text;  
+    }
+  },
   mounted() {
     this.currentText = this.text;
     this.storedText = this.text;

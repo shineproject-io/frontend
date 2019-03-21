@@ -2,8 +2,8 @@ import listsService from '@/features/lists/lists.service.js';
 import lodash from 'lodash';
 
 const state = {
-    lists: null,
-    currentList: null
+    lists: [],
+    currentList: undefined
 }
 const mutations = {
     setLists: (state, lists) => {
@@ -20,7 +20,7 @@ const actions = {
     signOut: ({
         commit
     }) => {
-        commit('setLists', null);
+        commit('setLists', []);
     },
     getList: ({
         commit

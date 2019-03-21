@@ -5,10 +5,9 @@
       v-on:background-updated="updateBackground"
       v-on:list-background-updated="loadList()"
       ref="pictureSelector"
-    ></picture-selector>
+    />
     <list-migrator :list-id="currentList.id" ref="listMigrator"/>
     <list-header
-      v-bind="currentList"
       v-on:show-picture-selector="$refs.pictureSelector.show()"
       v-on:show-list-migrator="$refs.listMigrator.show()"
     />
@@ -38,22 +37,20 @@ export default {
   watch: {
     "$route.query.listId"() {
       window.$(".complete-popover").popover("hide");
+
+      this.initialise();
+    }
+  },
+  created() {
+    this.initialise();
+  },
+  methods: {
+    initialise() {
       this.$store.dispatch(
         "todoModule/setCurrentListId",
         this.$route.query.listId
       );
-      this.loadList();
-    }
-  },
-  created() {
-    this.$store.dispatch(
-      "todoModule/setCurrentListId",
-      this.$route.query.listId
-    );
-    this.loadList();
-  },
-  methods: {
-    loadList() {
+
       this.$store.dispatch("listsModule/getList", this.currentListId);
     },
     updateBackground(imageSource) {

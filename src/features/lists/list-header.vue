@@ -1,10 +1,10 @@
 <template>
-  <page-header :background-image="imageSource">
+  <page-header :background-image="currentList.imageSource">
     <div class="d-flex align-items-center">
       <h1 class="w-100">
         <invisible-input
           class="display-2 flex-grow-1 mb-2"
-          :text="name"
+          :text="currentList.name"
           v-on:updated="saveName"
           class-list="text-white"
           placeholder="What is this list for..."
@@ -43,7 +43,7 @@
     </div>
     <invisible-input
       class="d-block lead"
-      :text="description"
+      :text="currentList.description"
       v-on:updated="saveDescription"
       class-list="text-white mb-2"
       placeholder="Describe why this list is important..."
@@ -66,28 +66,6 @@ export default {
   components: {
     completionProgress
   },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    },
-    name: {
-      type: String,
-      required: true
-    },
-    state: {
-      type: Number,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    imageSource: {
-      type: String,
-      default: ""
-    }
-  },
   data() {
     return {
       progressValue: 0
@@ -95,16 +73,17 @@ export default {
   },
   computed: {
     ...mapState('todoModule', ['todoItems']),
+    ...mapState('listsModule', ['currentList']),
     isListActive() {
-      return this.state === 1;
+      return this.currentList.state === 1;
     },
     isListCompleted() {
-      return this.state === 3;
+      return this.currentList.state === 3;
     }
   },
   methods: {
     deleteList() {
-      listService.deleteList(this.id).then(() => {
+      listService.deleteList(this.currentList.id).then(() => {
         this.$store.dispatch('listsModule/getLists');
         this.loadDefaultList();
       });
@@ -113,7 +92,7 @@ export default {
       window.$(".complete-popover").popover("hide");
 
       this.$http
-        .put(`/lists/${this.id}/state`, {
+        .put(`/lists/${this.currentList.id}/state`, {
           state: state
         })
         .then(() => {
@@ -126,7 +105,7 @@ export default {
     },
     saveName(newValue) {
       this.$http
-        .put(`/lists/${this.id}/name`, {
+        .put(`/lists/${this.currentList.id}/name`, {
           name: newValue
         })
         .then(() => {
@@ -134,7 +113,7 @@ export default {
         });
     },
     saveDescription(newValue) {
-      this.$http.put(`/lists/${this.id}/description`, {
+      this.$http.put(`/lists/${this.currentList.id}/description`, {
         description: newValue
       });
     },

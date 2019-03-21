@@ -4,8 +4,8 @@ import lodash from 'lodash';
 import todoService from '@/features/todoitems/todo.service.js';
 
 const state = {
-    todoItems: null,
-    completedItems: null,
+    todoItems: [],
+    completedItems: [],
     currentListId: null
 }
 const mutations = {
@@ -23,9 +23,9 @@ const actions = {
     signOut: ({
         commit
     }) => {
-        commit('setTodoItems', null);
-        commit('setCompletedItems', null);
-        commit('setCurrentListId', null);
+        commit('setTodoItems', []);
+        commit('setCompletedItems', []);
+        commit('setCurrentListId', []);
     },
     setCurrentListId: ({
         commit
