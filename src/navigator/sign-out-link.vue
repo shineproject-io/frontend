@@ -20,6 +20,7 @@ export default {
       this.$store.dispatch('listsModule/signOut');
       this.$store.dispatch('todoModule/signOut');
       this.$store.dispatch('profileModule/signOut');
+      this.$store.dispatch("suggestionsModule/signOut");
       this.$router.push({ name: "features" });
     }
   }

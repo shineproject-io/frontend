@@ -59,8 +59,6 @@ export default {
   data() {
     return {
       isSubmitting: false,
-      isLoading: true,
-      suggestions: []
     };
   },
   mounted() {
@@ -70,6 +68,7 @@ export default {
   },
   computed: {
     ...mapState("profileModule", ["userProfile"]),
+    ...mapState("suggestionsModule", ["suggestions"]),
     welcomeMessage() {
       if (!this.userProfile) {
         return "Loading your Profile...";
@@ -79,12 +78,14 @@ export default {
     },
     backgroundImage() {
       return "https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg";
+    },
+    isLoading() {
+      return (this.suggestions.length === 0);
     }
   },
   methods: {
     loadContentPanel() {
-      this.$http.get("/lists/suggestions").then(response => {
-        this.suggestions = response.data;
+      this.$store.dispatch("suggestionsModule/getSuggestions").then(() => {
         this.isLoading = false;
       });
     },

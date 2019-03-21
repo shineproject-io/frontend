@@ -6,6 +6,7 @@ import profileModule from '@/features/profile/profile.store.js';
 import authenticationModule from '@/features/authentication/authentication.store.js';
 import listsModule from '@/features/lists/lists.store.js';
 import todoModule from '@/features/todoitems/todo.store.js';
+import suggestionsModule from '@/features/suggestions/suggestions.store.js';
 
 Vue.use(Vuex);
 
@@ -20,7 +21,8 @@ const store = new Vuex.Store({
 		profileModule,
 		authenticationModule,
 		listsModule,
-		todoModule
+		todoModule,
+		suggestionsModule
 	}
 });
 

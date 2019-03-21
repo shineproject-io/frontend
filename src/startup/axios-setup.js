@@ -30,6 +30,7 @@ Axios.interceptors.response.use(
 			store.dispatch('listsModule/signOut');
 			store.dispatch('todoModule/signOut');
 			store.dispatch('profileModule/signOut');
+			store.dispatch("suggestionsModule/signOut");
 			router.push({
 				name: 'sign-in'
 			});
