@@ -1,7 +1,12 @@
 <template>
   <loading-container :is-loading="isLoading">
     <sidebar v-if="!isProductPage" :is-anonymous="!authenticationToken"/>
-    <router-view id="route-page" v-bind:class="{'full-width': isProductPage}" class="animated fadeIn animate-fast"/>
+
+    <div id="route-page" v-bind:class="{'full-width': isProductPage}">
+      <menu-activator v-if="!isProductPage"/>
+      <router-view class="animated fadeIn animate-fast"/>
+    </div>
+
     <add-list v-if="authenticationToken"/>
   </loading-container>
 </template>
@@ -9,6 +14,7 @@
 <script>
 import "@/branding/product-branding.css";
 import sidebar from "@/navigator/sidebar.vue";
+import menuActivator from "@/navigator/menu-activator.vue";
 import addList from "@/features/lists/add-list";
 import { mapState } from "vuex";
 
@@ -16,7 +22,8 @@ export default {
   name: "app",
   components: {
     sidebar,
-    addList
+    addList,
+    menuActivator
   },
   data() {
     return {

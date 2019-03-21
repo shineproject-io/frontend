@@ -12,13 +12,8 @@
 </template>
 
 <script>
-import menuActivator from "@/navigator/menu-activator.vue";
-
 export default {
   name: "page-header",
-  components: {
-    menuActivator
-  },
   props: {
     backgroundImage: {
       type: String,
