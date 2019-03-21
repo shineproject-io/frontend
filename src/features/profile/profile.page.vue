@@ -23,19 +23,7 @@
         <profile-editor v-if="userProfile" :user-profile="userProfile"/>
       </div>
 
-      <loading-container :is-loading="isLoading" class="p-2 mb-4">
-        <div v-bind:class="{'no-events': isSubmitting}">
-          <list-suggestion
-            class="animated fadeInDown"
-            v-for="suggestion in suggestions"
-            v-bind:key="suggestion.suggestionTitle"
-            :title="suggestion.suggestionTitle"
-            :description="suggestion.suggestionDescription"
-            :icon="suggestion.suggestionIcon"
-            v-on:perform="createList(suggestion.listTitle, suggestion.listDescription, suggestion.listBackgroundImageUrl)"
-          />
-        </div>
-      </loading-container>
+      <suggestions/>
     </div>
   </profile-cover>
 </template>
@@ -46,6 +34,7 @@ import profilePictureUploader from "@/features/profile/profile-picture-uploader.
 import profilePictureSpinner from "@/features/profile/profile-picture-spinner.vue";
 import profileEditor from "@/features/profile/profile-editor.vue";
 import profileCover from "@/features/profile/profile-cover.vue";
+import suggestions from "@/features/suggestions/suggestions.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -54,21 +43,20 @@ export default {
     profilePictureSpinner,
     profileEditor,
     profileCover,
-    menuActivator
+    menuActivator,
+    suggestions
   },
   data() {
     return {
-      isSubmitting: false,
+      isSubmitting: false
     };
   },
   mounted() {
     this.$store.dispatch("profileModule/loadUserProfile");
-    this.loadContentPanel();
     this.createWelcomeExperience();
   },
   computed: {
     ...mapState("profileModule", ["userProfile"]),
-    ...mapState("suggestionsModule", ["suggestions"]),
     welcomeMessage() {
       if (!this.userProfile) {
         return "Loading your Profile...";
@@ -79,33 +67,8 @@ export default {
     backgroundImage() {
       return "https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg";
     },
-    isLoading() {
-      return (this.suggestions.length === 0);
-    }
   },
   methods: {
-    loadContentPanel() {
-      this.$store.dispatch("suggestionsModule/getSuggestions").then(() => {
-        this.isLoading = false;
-      });
-    },
-    createList(title, description, image) {
-      this.isSubmitting = true;
-
-      this.$http
-        .post(`/lists`, {
-          name: title,
-          description: description,
-          imageSource: image
-        })
-        .then(response => {
-          this.$store.dispatch("listsModule/getLists");
-          this.$router.push({
-            path: "list",
-            query: { listId: response.data }
-          });
-        });
-    },
     createWelcomeExperience() {
       var isWelcome = this.$route.query.welcome;
 
