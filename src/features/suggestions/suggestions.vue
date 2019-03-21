@@ -18,6 +18,11 @@
 import { mapState } from "vuex";
 
 export default {
+  data() {
+    return {
+      isSubmitting: false
+    }
+  },
   computed: {
     ...mapState("suggestionsModule", ["suggestions"]),
     isLoading() {
@@ -25,9 +30,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("suggestionsModule/getSuggestions").then(() => {
-      this.isLoading = false;
-    });
+    this.$store.dispatch("suggestionsModule/getSuggestions")
   },
   methods: {
     createList(title, description, image) {

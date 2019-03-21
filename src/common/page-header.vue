@@ -1,7 +1,6 @@
 <template>
   <transition name="fade">
     <div class="page-header" :style="'background-image: url(' + backgroundImage + ');'">
-      <menu-activator/>
       <overlay class="d-flex align-items-center">
         <div class="inner">
           <slot></slot>

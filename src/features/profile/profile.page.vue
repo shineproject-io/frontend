@@ -42,11 +42,6 @@ export default {
     profileCover,
     suggestions
   },
-  data() {
-    return {
-      isSubmitting: false
-    };
-  },
   mounted() {
     this.$store.dispatch("profileModule/loadUserProfile");
     this.createWelcomeExperience();
