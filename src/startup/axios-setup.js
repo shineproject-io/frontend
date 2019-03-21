@@ -26,10 +26,10 @@ Axios.interceptors.response.use(
 	},
 	function (error) {
 		if (error.response && error.response.status === 401) {
-			this.$store.dispatch('authenticationModule/signOut');
-			this.$store.dispatch('listsModule/signOut');
-			this.$store.dispatch('todoModule/signOut');
-			this.$store.dispatch('profileModule/signOut');
+			store.dispatch('authenticationModule/signOut');
+			store.dispatch('listsModule/signOut');
+			store.dispatch('todoModule/signOut');
+			store.dispatch('profileModule/signOut');
 			router.push({
 				name: 'sign-in'
 			});
