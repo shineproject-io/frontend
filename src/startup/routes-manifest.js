@@ -31,12 +31,12 @@ const router = new VueRouter({
 		{
 			name: 'change-password',
 			path: '/welcome/changepassword',
-			component: loadPage('changepassword/change-password.page.vue'),
+			component: loadPage('authentication/change-password.page.vue'),
 		},
 		{
 			name: 'forgotten-password',
 			path: '/welcome/forgottenpassword',
-			component: loadPage('forgottenpassword/forgotten-password.page.vue'),
+			component: loadPage('authentication/forgotten-password.page.vue'),
 		},
 		{
 			name: 'search',
