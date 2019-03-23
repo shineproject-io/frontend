@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import listsService from '@/features/lists/lists.service.js';
 import { mapState } from "vuex";
 
 export default {
@@ -36,17 +37,12 @@ export default {
     createList(title, description, image) {
       this.isSubmitting = true;
 
-      this.$http
-        .post(`/lists`, {
-          name: title,
-          description: description,
-          imageSource: image
-        })
-        .then(response => {
+      listsService.create(title, description, image)
+        .then(data => {
           this.$store.dispatch("listsModule/getLists");
           this.$router.push({
             path: "list",
-            query: { listId: response.data }
+            query: { listId: data }
           });
         });
     }

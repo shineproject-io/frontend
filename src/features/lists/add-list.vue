@@ -25,7 +25,7 @@ export default {
       if (!this.isSubmitting) {
         this.isSubmitting = true;
 
-        listService.addList()
+        listService.create('New list', 'My new list', 'https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg')
           .then(listId => {
             this.$store.dispatch('listsModule/getLists');
             this.$router.push({

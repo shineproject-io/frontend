@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     deleteList() {
-      listService.deleteList(this.currentList.id).then(() => {
+      listService.delete(this.currentList.id).then(() => {
         this.$store.dispatch('listsModule/getLists');
         this.loadDefaultList();
       });

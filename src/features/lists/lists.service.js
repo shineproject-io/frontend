@@ -20,18 +20,18 @@ export default {
       listIds: lodash.map(lists, "id")
     });
   },
-  addList() {
-    return axios.post('/lists', {
-        name: `New list`,
-        description: "My new list",
-        imageSource: "https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg"
-      })
-      .then(response => response.data);
-  },
-  deleteList(listId) {
+  delete(listId) {
     return Promise.all([
       axios.delete(`/lists/${listId}`),
       axios.delete(`/lists/${listId}/todoItems`)
     ]);
+  },
+  create(title, description, imageSource) {
+    return axios.post(`/lists`, {
+      name: title,
+      description: description,
+      imageSource: imageSource
+    })
+    .then(response => response.data);
   }
 }
