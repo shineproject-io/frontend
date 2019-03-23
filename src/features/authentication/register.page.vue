@@ -5,9 +5,8 @@
   >
     <div class="sign-in-wrapper">
       <h1 class="display-2">Create an account</h1>
-      <p
-        class="mb-0"
-      >We don't need your life story or your money, just a few details to get started.
+      <p class="mb-0">
+        We don't need your life story or your money, just a few details to get started.
         <router-link to="/welcome/signin">Or Sign In</router-link>
       </p>
 
@@ -72,15 +71,12 @@
 
 <script>
 import authenticationService from "@/features/authentication/authentication.service.js";
+import userFields from '@/features/authentication/user-fields.mixin.js';
 
 export default {
+  mixins: [userFields],
   data() {
     return {
-      emailAddress: "",
-      password: "",
-      givenName: "",
-      familyName: "",
-      isSubmitting: false,
       status: 0
     };
   },
@@ -106,12 +102,14 @@ export default {
             password: this.password
           };
 
-          this.$store.dispatch('authenticationModule/signIn', signInFields).then(() => {
-            this.$router.push({
-              path: "/secure/profile",
-              query: { welcome: true }
+          this.$store
+            .dispatch("authenticationModule/signIn", signInFields)
+            .then(() => {
+              this.$router.push({
+                path: "/secure/profile",
+                query: { welcome: true }
+              });
             });
-          });
         })
         .catch(() => {
           this.isSubmitting = false;
