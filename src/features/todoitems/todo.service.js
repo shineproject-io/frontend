@@ -14,5 +14,13 @@ export default {
                 title: newTitle
             })
             .then(response => response.data);
+    },
+    changeState(listId, todoItemId, state) {
+        var requestModel = {
+            state: state
+        };
+
+        return axios.put(`/lists/${listId}/todoItems/${todoItemId}/state`, requestModel)
+            .then(response => response.data);
     }
 }

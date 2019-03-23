@@ -51,6 +51,7 @@
 import activeCircle from "./active-circle.vue";
 import completedCircle from "./completed-circle.vue";
 import loadingCircle from "./loading-circle.vue";
+import todoService from '@/features/todoitems/todo.service.js';
 
 export default {
   components: {
@@ -110,10 +111,8 @@ export default {
     completeTodoItem(todoItemId) {
       this.isSubmitting = true;
 
-      this.$http
-        .put(`/lists/${this.listId}/todoItems/${todoItemId}/state`, {
-          state: "Completed"
-        })
+      todoService
+        .changeState(this.listId, todoItemId, "Completed")
         .then(() => {
           this.isSubmitting = false;
           this.$store.dispatch("todoModule/getTodoItems");
@@ -121,10 +120,9 @@ export default {
     },
     openTodoItem(todoItemId) {
       this.isSubmitting = true;
-      this.$http
-        .put(`/lists/${this.listId}/todoItems/${todoItemId}/state`, {
-          state: "Open"
-        })
+      
+      todoService
+        .changeState(this.listId, todoItemId, "Open")
         .then(() => {
           this.isSubmitting = false;
           this.$store.dispatch("todoModule/getTodoItems");
