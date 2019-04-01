@@ -2,10 +2,14 @@ import authenticationService from '@/features/authentication/authentication.serv
 
 const state = {
     authenticationToken: null,
+    authenticationExpiry: null
 };
 const mutations = {
     setAuthenticationToken: (state, token) => {
         state.authenticationToken = token;
+    },
+    setAuthenticationExpiry: (state, expiry) => {
+        state.authenticationExpiry = expiry;
     }
 }
 const actions = {
@@ -15,12 +19,14 @@ const actions = {
         return authenticationService.signIn(fields.emailAddress, fields.password)
             .then(data => {
                 commit('setAuthenticationToken', data.token);
+                commit('setAuthenticationExpiry', data.expiration);
             });
     },
     signOut: ({
         commit
     }) => {
         commit('setAuthenticationToken', null);
+        commit('setAuthenticationExpiry', null);
     }
 }
 
