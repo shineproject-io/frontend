@@ -19,5 +19,12 @@ export default {
           }/productimages/medium-avatar.png`
       })
       .then(response => response.data)
+  },
+  isAuthorisationExpired(authenticationExpiry){
+    let expirationDateTime = new Date(authenticationExpiry); 
+    let currentDateTime = new Date();
+
+    var isExpired = expirationDateTime < currentDateTime;
+    return isExpired;
   }
 }
