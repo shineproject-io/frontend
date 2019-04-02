@@ -51,6 +51,11 @@ export default {
     },
     initialiseAuthentication() {
       let currentRoute = this.$route.path.toLowerCase();
+      
+      // Vue-Router will automatically re-route
+      if (currentRoute === "/") {
+        return;
+      }
 
       if (!currentRoute.includes("welcome") && !this.authenticationToken) {
         this.$router.push({ name: "sign-in" });
