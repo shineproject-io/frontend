@@ -1,16 +1,18 @@
 <template>
   <div class="todo-item d-flex align-items-center">
     <div class="px-3 py-1">
-      <loading-circle v-if="isSubmitting"/>
-      <active-circle
-        v-if="!isSubmitting && todoItem.state === 'Open'"
-        :todo-item-id="todoItem.id"
-        v-on:complete-todo-item="completeTodoItem"
+      <i v-if="isSubmitting" class="todo-circle fas fa-spinner fa-spin fa-fw"/>
+
+      <i
+        v-if="showActiveCircle"
+        class="todo-circle far fa-circle fa-fw"
+        v-on:click.prevent="completeTodoItem"
       />
-      <completed-circle
-        v-if="!isSubmitting && todoItem.state === 'Completed'"
-        :todo-item-id="todoItem.id"
-        v-on:open-todo-item="openTodoItem"
+
+      <i
+        v-if="showCompletedCircle"
+        class="todo-circle completed-circle fas fa-check-circle fa-fw"
+        v-on:click.prevent="openTodoItem"
       />
     </div>
 
@@ -48,17 +50,9 @@
 </template>
 
 <script>
-import activeCircle from "./active-circle.vue";
-import completedCircle from "./completed-circle.vue";
-import loadingCircle from "./loading-circle.vue";
-import todoService from '@/features/todoitems/todo.service.js';
+import todoService from "@/features/todoitems/todo.service.js";
 
 export default {
-  components: {
-    activeCircle,
-    completedCircle,
-    loadingCircle
-  },
   props: {
     listId: {
       type: Number,
@@ -78,6 +72,14 @@ export default {
       modifiedTodoItem: null,
       isSubmitting: false
     };
+  },
+  computed: {
+    showActiveCircle() {
+      return !this.isSubmitting && this.todoItem.state === "Open";
+    },
+    showCompletedCircle() {
+      return !this.isSubmitting && this.todoItem.state === "Completed";
+    }
   },
   mounted() {
     this.modifiedTodoItem = this.todoItem;
@@ -108,25 +110,21 @@ export default {
           this.isSubmitting = false;
         });
     },
-    completeTodoItem(todoItemId) {
+    completeTodoItem() {
       this.isSubmitting = true;
 
-      todoService
-        .changeState(this.listId, todoItemId, "Completed")
-        .then(() => {
-          this.isSubmitting = false;
-          this.$store.dispatch("todoModule/getTodoItems");
-        });
+      todoService.changeState(this.listId, this.todoItem.id, "Completed").then(() => {
+        this.isSubmitting = false;
+        this.$store.dispatch("todoModule/getTodoItems");
+      });
     },
-    openTodoItem(todoItemId) {
+    openTodoItem() {
       this.isSubmitting = true;
-      
-      todoService
-        .changeState(this.listId, todoItemId, "Open")
-        .then(() => {
-          this.isSubmitting = false;
-          this.$store.dispatch("todoModule/getTodoItems");
-        });
+
+      todoService.changeState(this.listId, this.todoItem.id, "Open").then(() => {
+        this.isSubmitting = false;
+        this.$store.dispatch("todoModule/getTodoItems");
+      });
     }
   }
 };
@@ -144,6 +142,10 @@ export default {
 .todo-circle {
   font-size: 20px;
   cursor: pointer;
+}
+
+.completed-circle {
+  color: #c0ea67;
 }
 
 .todo-circle:hover {
