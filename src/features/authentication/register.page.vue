@@ -4,10 +4,11 @@
     background-image="https://shinestorage.azureedge.net/productlistbackgrounds/2.jpg"
   >
     <div class="sign-in-wrapper">
-      <h1 class="display-2">Create an account</h1>
-      <p class="mb-0">
-        We don't need your life story or your money, just a few details to get started.
-        <router-link to="/welcome/signin">Or Sign In</router-link>
+      <h1 class="display-1">Create an account</h1>
+      <p class="lead mb-0">Welcome to Shine, please enter a few details below to get started.</p>
+      <p class="lead mb-0">
+        If you already have an account
+        <router-link to="/welcome/signin">Sign In</router-link>
       </p>
 
       <form
@@ -71,7 +72,7 @@
 
 <script>
 import authenticationService from "@/features/authentication/authentication.service.js";
-import userFields from '@/features/authentication/user-fields.mixin.js';
+import userFields from "@/features/authentication/user-fields.mixin.js";
 
 export default {
   mixins: [userFields],
@@ -128,7 +129,7 @@ export default {
 }
 
 .sign-in-form {
-  padding-top: 40px;
+  padding-top: 30px;
 }
 
 a {

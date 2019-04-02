@@ -1,8 +1,8 @@
 <template>
   <page-cover class="container-fluid p-4">
     <div class="sign-in-wrapper">
-      <h1 class="display-2">Sign in</h1>
-      <p class="mb-5">
+      <h1 class="display-1">Sign in</h1>
+      <p class="lead mb-4">
         <span>Welcome back, please sign in below or&nbsp;</span>
         <router-link to="/welcome/register">create a free account</router-link>
       </p>

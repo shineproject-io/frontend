@@ -4,10 +4,10 @@
       background-image="https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg"
     >
       <div class="forgotten-password-wrapper" v-if="!isCompleted">
-        <h1 class="display-2">Reset Password</h1>
+        <h1 class="display-1">Reset Password</h1>
         <p
           class="lead"
-        >Lets get you back into Shine, enter your email address below and we will send you some instructions.</p>
+        >Lets get you back into Shine, enter your email address below and we will email you a recovery link.</p>
         <form
           v-on:submit.prevent="requestToken"
           class="forgotten-password-form animated fadeInDown animate-fast"

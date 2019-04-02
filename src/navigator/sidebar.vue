@@ -11,6 +11,12 @@
             route="/welcome/features"
           />
           <sidebar-link
+            title="Create a free account"
+            description="Get started with Shine"
+            icon="fas fa-address-card"
+            route="/welcome/register"
+          />
+          <sidebar-link
             title="Sign in"
             description="Time to get stuff done"
             icon="fas fa-sign-in-alt"
@@ -21,12 +27,6 @@
             description="Lets reset your password"
             icon="fas fa-key"
             route="/welcome/forgottenpassword"
-          />
-          <sidebar-link
-            title="Create a free account"
-            description="Get started with Shine"
-            icon="fas fa-address-card"
-            route="/welcome/register"
           />
           <div class="footer-bar">
             <creator-link/>
