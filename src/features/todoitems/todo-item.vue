@@ -51,13 +51,10 @@
 
 <script>
 import todoService from "@/features/todoitems/todo.service.js";
+import { mapState } from "vuex";
 
 export default {
   props: {
-    listId: {
-      type: Number,
-      required: true
-    },
     todoItem: {
       type: Object,
       required: true
@@ -74,6 +71,7 @@ export default {
     };
   },
   computed: {
+    ...mapState("todoModule", ["currentListId"]),
     showActiveCircle() {
       return !this.isSubmitting && this.todoItem.state === "Open";
     },
@@ -89,7 +87,7 @@ export default {
       this.isSubmitting = true;
 
       this.$http
-        .delete(`/lists/${this.listId}/todoItems/${this.todoItem.id}`)
+        .delete(`/lists/${this.currentListId}/todoItems/${this.todoItem.id}`)
         .then(() => {
           this.$store.dispatch("todoModule/getTodoItems");
           this.isSubmitting = false;
@@ -99,7 +97,7 @@ export default {
       this.isSubmitting = true;
 
       var changeTodoTitleModel = {
-        listId: this.listId,
+        listId: this.currentListId,
         todoItemId: this.todoItem.id,
         title: newValue
       };
@@ -113,18 +111,22 @@ export default {
     completeTodoItem() {
       this.isSubmitting = true;
 
-      todoService.changeState(this.listId, this.todoItem.id, "Completed").then(() => {
-        this.isSubmitting = false;
-        this.$store.dispatch("todoModule/getTodoItems");
-      });
+      todoService
+        .changeState(this.currentListId, this.todoItem.id, "Completed")
+        .then(() => {
+          this.isSubmitting = false;
+          this.$store.dispatch("todoModule/getTodoItems");
+        });
     },
     openTodoItem() {
       this.isSubmitting = true;
 
-      todoService.changeState(this.listId, this.todoItem.id, "Open").then(() => {
-        this.isSubmitting = false;
-        this.$store.dispatch("todoModule/getTodoItems");
-      });
+      todoService
+        .changeState(this.currentListId, this.todoItem.id, "Open")
+        .then(() => {
+          this.isSubmitting = false;
+          this.$store.dispatch("todoModule/getTodoItems");
+        });
     }
   }
 };

@@ -11,7 +11,7 @@
       v-on:show-picture-selector="$refs.pictureSelector.show()"
       v-on:show-list-migrator="$refs.listMigrator.show()"
     />
-    <todo-list v-bind="currentList"/>
+    <todo-list/>
   </div>
 </template>
 

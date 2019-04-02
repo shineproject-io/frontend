@@ -21,13 +21,10 @@
 
 <script>
 import todoService from '@/features/todoitems/todo.service.js';
+import { mapState } from 'vuex';
 
 export default {
   props: {
-    listId: {
-      type: Number,
-      required: true
-    },
     isFocused: {
       type: Boolean,
       default: false
@@ -39,12 +36,15 @@ export default {
       isSubmitting: false
     };
   },
+  computed: {
+    ...mapState("todoModule", ["completedItems", "currentListId"]),
+  },
   methods: {
     addTodoItem(todoItemName) {
       this.todoItemName = todoItemName;
       this.isSubmitting = true;
 
-      todoService.addTodo(this.listId, todoItemName).then(() => {
+      todoService.addTodo(this.currentListId, todoItemName).then(() => {
           this.$emit("todo-item-added");
           this.isSubmitting = false;
       })

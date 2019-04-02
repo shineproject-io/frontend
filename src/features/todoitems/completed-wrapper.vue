@@ -1,9 +1,6 @@
 <template>
   <div>
-    <div
-      class="d-flex align-items-center cursor-pointer"
-      v-on:click.prevent="toggleExpansion()"
-    >
+    <div class="d-flex align-items-center cursor-pointer" v-on:click.prevent="toggleExpansion()">
       <div class="todo-circle px-3 py-1">
         <i class="far fa-check-square fa-fw"/>
       </div>
@@ -26,7 +23,6 @@
         v-for="todoItem in todoItems"
         v-bind:key="todoItem.id"
         :todo-item="todoItem"
-        :listId="listId"
         class="animated fadeInDown animate-fast"
       />
     </div>
@@ -43,10 +39,6 @@ export default {
   props: {
     todoItems: {
       type: Array,
-      required: true
-    },
-    listId: {
-      type: Number,
       required: true
     }
   },
