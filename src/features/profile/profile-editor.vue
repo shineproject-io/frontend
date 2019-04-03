@@ -36,12 +36,20 @@
                   <i class="fas fa-exclamation-triangle fa-fw mr-2"/>
                   <span>Confirm Deletion</span>
                 </a>
-                <a href="#" class="btn btn-secondary" v-on:click.prevent="showDeleteWarning = false;">Cancel</a>
+                <a
+                  href="#"
+                  class="btn btn-secondary"
+                  v-on:click.prevent="showDeleteWarning = false;"
+                >Cancel</a>
               </div>
             </div>
           </div>
           <div slot="footer">
-            <button v-if="!showDeleteWarning" class="btn btn-secondary mr-2 float-left" v-on:click.prevent="showDeleteWarning = true;">
+            <button
+              v-if="!showDeleteWarning"
+              class="btn btn-secondary mr-2 float-left"
+              v-on:click.prevent="showDeleteWarning = true;"
+            >
               <i class="fas fa-exclamation-triangle fa-fw mr-2"/>Delete Account
             </button>
             <loading-button :isLoading="isSubmitting" text="Save" icon="fas fa-check" class="mr-2"></loading-button>
@@ -57,7 +65,7 @@
 </template>
 
 <script>
-import profileService from '@/features/profile/profile.service.js';
+import profileService from "@/features/profile/profile.service.js";
 
 export default {
   props: {
@@ -89,17 +97,12 @@ export default {
         this.updatedFamilyName !== this.userProfile.familyName ||
         this.updatedEmailAddress !== this.userProfile.emailAddress
       ) {
-        this.$http
-          .put("/userprofiles/me/name", {
-            givenName: this.updatedGivenName,
-            familyName: this.updatedFamilyName
-          })
+        profileService
+          .setName(this.updatedGivenName, this.updatedFamilyName)
           .then(() => {
-            this.$http
-              .put("/userprofiles/me/emailaddress", {
-                emailAddress: this.updatedEmailAddress
-              })
-              .then(function() {
+            profileService
+              .setEmailAddress(this.updatedEmailAddress)
+              .then(() => {
                 this.isSubmitting = false;
                 this.$refs.profileDetailsModal.hide();
                 this.$store.dispatch("profileModule/loadUserProfile", true);

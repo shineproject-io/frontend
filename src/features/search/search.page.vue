@@ -38,8 +38,8 @@ export default {
     search(searchQuery) {
       this.isSearching = true;
       if (searchQuery.length > 2) {
-        searchService.search(searchQuery).then(response => {
-          this.searchResults = response.data;
+        searchService.search(searchQuery).then(data => {
+          this.searchResults = data;
           this.hasSearch = true;
           this.isSearching = false;
         });

@@ -30,7 +30,12 @@
             <i class="fas fa-image fa-fw mr-2"/>
             <span>Change picture</span>
           </a>
-          <a v-if="openTodoItems && openTodoItems.length > 0 && otherLists.length > 0" href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
+          <a
+            v-if="openTodoItems && openTodoItems.length > 0 && otherLists.length > 0"
+            href="#"
+            class="dropdown-item"
+            v-on:click.prevent="$emit('show-list-migrator')"
+          >
             <i class="fas fa-plane fa-fw mr-2"/>
             <span>Move active to-dos</span>
           </a>
@@ -53,14 +58,17 @@
       <i class="fas fa-check fa-fw mr-2"/>List completed
     </span>
 
-    <completion-progress v-on:complete-list="changeListState('Completed')" :is-list-active="isListActive"/>
+    <completion-progress
+      v-on:complete-list="changeListState('Completed')"
+      :is-list-active="isListActive"
+    />
   </page-header>
 </template>
 
 <script>
 import completionProgress from "@/features/lists/completion-progress.vue";
 import listService from "@/features/lists/lists.service.js";
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -72,9 +80,9 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('todoModule', ['openTodoItems']),
-    ...mapState('listsModule', ['lists', 'currentList']),
-    ...mapGetters('listsModule', ['otherLists']),
+    ...mapGetters("todoModule", ["openTodoItems"]),
+    ...mapState("listsModule", ["lists", "currentList"]),
+    ...mapGetters("listsModule", ["otherLists"]),
     isListActive() {
       return this.currentList.state === 1;
     },
@@ -85,40 +93,32 @@ export default {
   methods: {
     deleteList() {
       listService.delete(this.currentList.id).then(() => {
-        this.$store.dispatch('listsModule/getLists');
+        this.$store.dispatch("listsModule/getLists");
         this.loadDefaultList();
       });
     },
     changeListState(state) {
       window.$(".complete-popover").popover("hide");
 
-      this.$http
-        .put(`/lists/${this.currentList.id}/state`, {
-          state: state
-        })
-        .then(() => {
-          this.$store.dispatch('listsModule/getLists');
+      listService.changeState(this.currentList.id, state).then(() => {
+        this.$store.dispatch("listsModule/getLists");
 
-          if (state === "Completed") {
-            this.loadDefaultList();
-          }
-        });
+        if (state === "Completed") {
+          this.loadDefaultList();
+        }
+      });
     },
     saveName(newValue) {
-      this.$http
-        .put(`/lists/${this.currentList.id}/name`, {
-          name: newValue
-        })
-        .then(() => {
-          this.$store.dispatch('listsModule/getLists');
-        });
+      listService.changeName(this.currentList.id, newValue).then(() => {
+        this.$store.dispatch("listsModule/getLists");
+      });
     },
     saveDescription(newValue) {
       listService.saveDescription(this.currentList.id, newValue);
     },
     loadDefaultList() {
       this.$store
-        .dispatch('listsModule/getDefaultList', this.$route.query.listId)
+        .dispatch("listsModule/getDefaultList", this.$route.query.listId)
         .then(data => {
           this.$router.push({ path: "list", query: { listId: data.listId } });
         })

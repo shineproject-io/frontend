@@ -11,20 +11,17 @@ export default {
     },
     changeTitle(listId, todoItemId, newTitle) {
         return axios.put(`/lists/${listId}/todoItems/${todoItemId}/title`, {
-                title: newTitle
-            })
-            .then(response => response.data);
+            title: newTitle
+        });
     },
     changeState(listId, todoItemId, state) {
         var requestModel = {
             state: state
         };
 
-        return axios.put(`/lists/${listId}/todoItems/${todoItemId}/state`, requestModel)
-            .then(response => response.data);
+        return axios.put(`/lists/${listId}/todoItems/${todoItemId}/state`, requestModel);
     },
     deleteTodo(listId, todoItemId) {
-        return axios.delete(`/lists/${listId}/todoItems/${todoItemId}`)
-            .then(response => response.data);
+        return axios.delete(`/lists/${listId}/todoItems/${todoItemId}`);
     }
 }

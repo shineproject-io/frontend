@@ -3,7 +3,8 @@ import lodash from 'lodash';
 
 export default {
   getList(listId) {
-    return axios.get(`/lists/${listId}`).then(response => response.data);
+    return axios.get(`/lists/${listId}`)
+      .then(response => response.data);
   },
   getLists() {
     return axios.get('/lists').then(response => {
@@ -36,9 +37,13 @@ export default {
   },
   migrate(currentListId, newListId) {
     return axios.post(`/lists/${currentListId}/migrate`, {
-        NewListId: newListId
-      })
-      .then(response => response.data);
+      NewListId: newListId
+    });
+  },
+  saveName(listId, newValue) {
+    return axios.put(`/lists/${listId}/name`, {
+      name: newValue
+    });
   },
   saveDescription(listId, newValue) {
     return axios.put(`/lists/${listId}/description`, {
@@ -48,6 +53,18 @@ export default {
   setCover(listId, imageSource) {
     return axios.put(`/lists/${listId}/picture`, {
       imageSource: imageSource
+    });
+  },
+  uploadCover(listId, formData) {
+    return axios.put(`/lists/${listId}/picture/upload`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+  },
+  changeState(listId, state) {
+    return axios.put(`/lists/${listId}/state`, {
+      state: state
     });
   }
 }

@@ -1,10 +1,8 @@
-import Vue from 'vue';
 import Axios from 'axios';
 import router from '@/startup/routes-manifest.js';
 import store from '@/startup/setup-store.js';
 import authenticationService from '@/features/authentication/authentication.service.js';
 
-Vue.prototype.$http = Axios;
 Axios.defaults.baseURL = process.env.VUE_APP_AXIOS_BASE_URL;
 
 Axios.interceptors.request.use(function (config) {

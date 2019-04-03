@@ -99,13 +99,8 @@ export default {
 
       let formData = new FormData();
       formData.append("file", this.file);
-
-      this.$http
-        .put(`/lists/${this.listId}/picture/upload`, formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
+      
+      listService.uploadCover(this.listId, formData)
         .then(() => {
           this.imageFileName = "Choose a picture...";
           this.isSubmitting = false;

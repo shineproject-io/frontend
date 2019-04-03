@@ -3,7 +3,7 @@
     <picture-selector
       :list-id="currentList.id"
       v-on:background-updated="updateBackground"
-      v-on:list-background-updated="loadList()"
+      v-on:list-background-updated="initialise()"
       ref="pictureSelector"
     />
     <list-migrator ref="listMigrator"/>

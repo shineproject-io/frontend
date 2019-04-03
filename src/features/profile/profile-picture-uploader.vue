@@ -50,6 +50,8 @@
 </template>
 
 <script>
+import profileService from "@/features/profile/profile.service.js";
+
 export default {
   props: {
     size: {
@@ -91,17 +93,13 @@ export default {
       let formData = new FormData();
       formData.append("file", this.file);
 
-      this.$http
-        .put("/userprofiles/me/profilepicture/", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
+      profileService
+        .uploadAvatar(formData)
         .then(() => {
           this.imageFileName = "Choose a picture...";
           this.isSubmitting = false;
           this.$refs.uploadPictureModal.hide();
-          this.$store.dispatch('profileModule/loadUserProfile', true);
+          this.$store.dispatch("profileModule/loadUserProfile", true);
         })
         .catch(error => {
           this.statusCode = error.response.status;

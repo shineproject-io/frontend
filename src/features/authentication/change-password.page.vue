@@ -65,6 +65,8 @@
 </template>
 
 <script>
+import authenticationService from "@/features/authentication/authentication.service.js";
+
 export default {
   data() {
     return {
@@ -88,12 +90,8 @@ export default {
       this.isSubmitting = true;
       this.status = 0;
 
-      this.$http
-        .post(`/userprofiles/changepassword`, {
-          emailAddress: this.emailAddress,
-          password: this.password,
-          token: this.token
-        })
+      authenticationService
+        .completePasswordRequest(this.emailAddress, this.password, this.token)
         .then(() => {
           this.$router.push({ name: "sign-in" });
         })
