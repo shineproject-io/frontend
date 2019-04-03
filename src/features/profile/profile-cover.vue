@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-cover text-white" :style="'background-image: url(' + backgroundImage + ');'">
+  <div class="profile-cover text-white" :style="'background-image: url(https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg);'">
     <div class="profile-cover-inner">
       <overlay class="d-flex align-items-center"/>
       <div class="position-relative" style="z-index: 2001;">
@@ -10,17 +10,6 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    backgroundImage: {
-      type: String,
-      default: "https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg"
-    }
-  }
-};
-</script>
 
 <style>
 .profile-cover {

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapState} from 'vuex';
+import { mapState, mapGetters } from "vuex";
 
 export default {
   props: {
@@ -37,12 +37,11 @@ export default {
     }
   },
   computed: {
-    ...mapState('todoModule', ['todoItems', 'completedItems']),
+    ...mapState("todoModule", ["todoItems"]),
+    ...mapGetters("todoModule", ["openTodoItems", "completedTodoItems"]),
     completionProgress() {
-      var completedCount = this.completedItems.length;
-      var openCount = this.todoItems.length;
-
-      var totalCount = completedCount + openCount;
+      var completedCount = this.completedTodoItems.length;
+      var totalCount = this.todoItems.length;
       if (totalCount === 0) return 0;
 
       var progressValue = (completedCount / totalCount) * 100;

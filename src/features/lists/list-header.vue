@@ -30,7 +30,7 @@
             <i class="fas fa-image fa-fw mr-2"/>
             <span>Change picture</span>
           </a>
-          <a v-if="todoItems && todoItems.length > 0 && otherLists.length > 0" href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
+          <a v-if="openTodoItems && openTodoItems.length > 0 && otherLists.length > 0" href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
             <i class="fas fa-plane fa-fw mr-2"/>
             <span>Move active to-dos</span>
           </a>
@@ -72,7 +72,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('todoModule', ['todoItems']),
+    ...mapGetters('todoModule', ['openTodoItems']),
     ...mapState('listsModule', ['lists', 'currentList']),
     ...mapGetters('listsModule', ['otherLists']),
     isListActive() {

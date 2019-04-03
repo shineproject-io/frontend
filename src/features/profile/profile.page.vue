@@ -1,5 +1,5 @@
 <template>
-  <profile-cover :background-image="backgroundImage">
+  <profile-cover>
     <div class="profile-page-wrapper">
       <div class="d-flex align-items-center mb-3">
         <div class="mr-4">
@@ -54,10 +54,7 @@ export default {
       } else {
         return `Hi ${this.userProfile.givenName}`;
       }
-    },
-    backgroundImage() {
-      return "https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg";
-    },
+    }
   },
   methods: {
     createWelcomeExperience() {

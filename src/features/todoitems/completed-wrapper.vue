@@ -7,20 +7,21 @@
 
       <p class="todo-title flex-grow-1 mb-0">
         <span v-if="!isExpanded">Show&nbsp;</span>
-        <span v-if="isExpanded">Hide&nbsp;</span>
+        <span v-else>Hide&nbsp;</span>
+
         <span class="mr-2">completed to-do's</span>
-        <span class="badge badge-secondary">{{todoItems.length}}</span>
+        <span class="badge badge-secondary">{{completedTodoItems.length}}</span>
       </p>
 
       <div class="p-3 mr-1">
         <i v-if="!isExpanded" class="fas fa-chevron-down fa-fw"/>
-        <i v-if="isExpanded" class="fas fa-chevron-up fa-fw"/>
+        <i v-else class="fas fa-chevron-up fa-fw"/>
       </div>
     </div>
 
     <div v-if="isExpanded">
       <todo-item
-        v-for="todoItem in todoItems"
+        v-for="todoItem in completedTodoItems"
         v-bind:key="todoItem.id"
         :todo-item="todoItem"
         class="animated fadeInDown animate-fast"
@@ -31,21 +32,19 @@
 
 <script>
 import todoItem from "@/features/todoitems/todo-item.vue";
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
     todoItem
   },
-  props: {
-    todoItems: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
     return {
       isExpanded: false
     };
+  },
+  computed: {
+    ...mapGetters("todoModule", ["completedTodoItems"]),
   },
   methods: {
     toggleExpansion() {

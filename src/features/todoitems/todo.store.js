@@ -5,15 +5,29 @@ import todoService from '@/features/todoitems/todo.service.js';
 
 const state = {
     todoItems: [],
-    completedItems: [],
     currentListId: null
+};
+const getters = {
+    openTodoItems: state => {
+        let openTodoItems = lodash.filter(state.todoItems, function (tdo) {
+            return tdo.state === "Open";
+        });
+
+        return lodash.orderBy(
+            openTodoItems,
+            ["position", "dateCreated"],
+            ["asc", "asc"]
+        );
+    },
+    completedTodoItems: state => {
+        return lodash.filter(state.todoItems, function (tdo) {
+            return tdo.state === "Completed";
+        });
+    }    
 }
 const mutations = {
     setTodoItems: (state, todoItems) => {
         state.todoItems = todoItems;
-    },
-    setCompletedItems: (state, completedItems) => {
-        state.completedItems = completedItems;
     },
     setCurrentListId: (state, currentListId) => {
         state.currentListId = currentListId;
@@ -24,7 +38,6 @@ const actions = {
         commit
     }) => {
         commit('setTodoItems', []);
-        commit('setCompletedItems', []);
         commit('setCurrentListId', []);
     },
     setCurrentListId: ({
@@ -32,7 +45,6 @@ const actions = {
     }, listId) => {
         commit('setCurrentListId', listId);
         commit('setTodoItems', []);
-        commit('setCompletedItems', []);
     },
     setTodoItemsOrder: ({
         commit
@@ -50,22 +62,7 @@ const actions = {
         state
     }) => {
         return axios.get(`/lists/${state.currentListId}/todoItems`).then(response => {
-            let openTodoItems = lodash.filter(response.data, function (tdo) {
-                return tdo.state === "Open";
-            });
-
-            openTodoItems = lodash.orderBy(
-                openTodoItems,
-                ["position", "dateCreated"],
-                ["asc", "asc"]
-            );
-
-            let completedItems = lodash.filter(response.data, function (tdo) {
-                return tdo.state === "Completed";
-            });
-
-            commit('setTodoItems', openTodoItems);
-            commit('setCompletedItems', completedItems);
+            commit('setTodoItems', response.data);
         });
     },
     changeTodoTitle: ({
@@ -86,6 +83,7 @@ const actions = {
 export default {
     namespaced: true,
     state,
+    getters,
     mutations,
     actions
 }
