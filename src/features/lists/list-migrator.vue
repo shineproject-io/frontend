@@ -3,7 +3,7 @@
     <h6 slot="header" class="mb-0">Move open to-dos</h6>
     <div slot="body" class="p-3">
       <loading-container :is-loading="isSubmitting">
-        <p>We can help you to move all active to-dos in this list into another, simply select the list you want to move them too.</p>
+        <p>Which list would you like to move your active to-do's into?</p>
 
         <div class="card">
           <ul class="list-group list-group-flush">
@@ -29,46 +29,31 @@
 </template>
 
 <script>
-import { mapState} from 'vuex';
+import listService from '@/features/lists/lists.service.js';
+import { mapState, mapGetters } from "vuex";
 
 export default {
-  props: {
-    listId: {
-      type: Number,
-      required: true
-    }
-  },
   data() {
     return {
       isSubmitting: false
     };
   },
   computed: {
-    ...mapState('listsModule', ['lists']),
-    otherLists() {
-      var lists = this.lists;
-
-      return this._.filter(lists, lst => {
-        return lst.id !== this.listId;
-      });
-    }
+    ...mapState("listsModule", ["lists", "currentList"]),
+    ...mapGetters("listsModule", ["otherLists"])
   },
   methods: {
     show() {
       this.$refs.listMigratorModal.show();
     },
     submit(newListId) {
-      if (this.isSubmitting) {
-        return;
-      }
-
       this.isSubmitting = true;
 
-      this.$http
-        .post(`/lists/${this.listId}/migrate`, { NewListId: newListId })
+      listService.migrate(this.currentList.id, newListId)
         .then(() => {
           this.$refs.listMigratorModal.hide();
-          this.$store.dispatch("todoModule/getTodoItems", this.listId)
+          this.$store.dispatch("todoModule/getTodoItems", this.currentList.id);
+          this.isSubmitting = false;
         });
     }
   }

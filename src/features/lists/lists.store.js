@@ -5,6 +5,13 @@ const state = {
     lists: [],
     currentList: undefined
 }
+const getters = {
+    otherLists: state => {
+        return lodash.filter(state.lists, lst => {
+            return lst.id !== state.currentList.id;
+        });
+    }
+}
 const mutations = {
     setLists: (state, lists) => {
         state.lists = lists;
@@ -12,7 +19,7 @@ const mutations = {
     setList: (state, list) => {
         state.currentList = list;
     },
-    setBackground: (state, imageSource)=>{
+    setBackground: (state, imageSource) => {
         state.currentList.imageSource = imageSource
     }
 }
@@ -26,10 +33,12 @@ const actions = {
         commit
     }, listId) => {
         return listsService.getList(listId).then(data => {
-             commit('setList', data);
+            commit('setList', data);
         });
     },
-    setBackground: ({commit}, imageSource) => {
+    setBackground: ({
+        commit
+    }, imageSource) => {
         commit('setBackground', imageSource);
     },
     getLists: ({
@@ -74,6 +83,7 @@ const actions = {
 export default {
     namespaced: true,
     state,
+    getters,
     mutations,
     actions
 }

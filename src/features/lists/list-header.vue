@@ -30,7 +30,7 @@
             <i class="fas fa-image fa-fw mr-2"/>
             <span>Change picture</span>
           </a>
-          <a v-if="todoItems && todoItems.length > 0" href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
+          <a v-if="todoItems && todoItems.length > 0 && otherLists.length > 0" href="#" class="dropdown-item" v-on:click.prevent="$emit('show-list-migrator')">
             <i class="fas fa-plane fa-fw mr-2"/>
             <span>Move active to-dos</span>
           </a>
@@ -60,7 +60,7 @@
 <script>
 import completionProgress from "@/features/lists/completion-progress.vue";
 import listService from "@/features/lists/lists.service.js";
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -73,7 +73,8 @@ export default {
   },
   computed: {
     ...mapState('todoModule', ['todoItems']),
-    ...mapState('listsModule', ['currentList']),
+    ...mapState('listsModule', ['lists', 'currentList']),
+    ...mapGetters('listsModule', ['otherLists']),
     isListActive() {
       return this.currentList.state === 1;
     },

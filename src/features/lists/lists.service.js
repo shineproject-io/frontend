@@ -28,10 +28,16 @@ export default {
   },
   create(title, description, imageSource) {
     return axios.post(`/lists`, {
-      name: title,
-      description: description,
-      imageSource: imageSource
-    })
-    .then(response => response.data);
+        name: title,
+        description: description,
+        imageSource: imageSource
+      })
+      .then(response => response.data);
+  },
+  migrate(currentListId, newListId) {
+    return axios.post(`/lists/${currentListId}/migrate`, {
+        NewListId: newListId
+      })
+      .then(response => response.data);
   }
 }

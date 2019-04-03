@@ -6,7 +6,7 @@
       v-on:list-background-updated="loadList()"
       ref="pictureSelector"
     />
-    <list-migrator :list-id="currentList.id" ref="listMigrator"/>
+    <list-migrator ref="listMigrator"/>
     <list-header
       v-on:show-picture-selector="$refs.pictureSelector.show()"
       v-on:show-list-migrator="$refs.listMigrator.show()"
