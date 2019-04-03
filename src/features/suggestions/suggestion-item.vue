@@ -18,7 +18,6 @@
 
 <script>
 export default {
-  name: "list-suggestion",
   props: {
     title: {
       Type: String,

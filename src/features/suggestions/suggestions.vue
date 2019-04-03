@@ -1,7 +1,7 @@
 <template>
   <loading-container :is-loading="isLoading" class="p-2 mb-4">
     <div v-bind:class="{'no-events': isSubmitting}">
-      <list-suggestion
+      <suggestion-item
         class="animated fadeInDown"
         v-for="suggestion in suggestions"
         v-bind:key="suggestion.suggestionTitle"
@@ -15,10 +15,14 @@
 </template>
 
 <script>
+import suggestionItem from '@/features/suggestions/suggestion-item.vue';
 import listsService from '@/features/lists/lists.service.js';
 import { mapState } from "vuex";
 
 export default {
+  components: {
+    suggestionItem
+  },
   data() {
     return {
       isSubmitting: false
