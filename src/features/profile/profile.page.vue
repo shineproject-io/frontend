@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import profileService from '@/features/profile/profile.service.js';
 import profilePictureUploader from "@/features/profile/profile-picture-uploader.vue";
 import profilePictureSpinner from "@/features/profile/profile-picture-spinner.vue";
 import profileEditor from "@/features/profile/profile-editor.vue";
@@ -64,12 +65,12 @@ export default {
         return;
       }
 
-      this.$http.post("/lists/welcome").then(listResponse => {
-        this.$http.post(`/lists/${listResponse.data}/welcome`).then(() => {
+      profileService.createWelcomeList().then(listId => {
+        profileService.createWelcomeTodoItems(listId).then(() => {
           this.$store.dispatch("listsModule/getLists");
           this.$router.push({
             path: "list",
-            query: { listId: listResponse.data }
+            query: { listId: listId }
           });
         });
       });

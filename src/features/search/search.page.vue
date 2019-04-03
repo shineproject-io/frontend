@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import searchService from "@/features/search/search.service.js";
 import searchHeader from "@/features/search/search-header.vue";
 import listSearchResult from "@/features/search/list-search-result.vue";
 import todoSearchResult from "@/features/search/todo-search-result.vue";
@@ -37,7 +38,7 @@ export default {
     search(searchQuery) {
       this.isSearching = true;
       if (searchQuery.length > 2) {
-        this.$http.get(`/search?searchQuery=${searchQuery}`).then(response => {
+        searchService.search(searchQuery).then(response => {
           this.searchResults = response.data;
           this.hasSearch = true;
           this.isSearching = false;

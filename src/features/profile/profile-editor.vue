@@ -57,6 +57,8 @@
 </template>
 
 <script>
+import profileService from '@/features/profile/profile.service.js';
+
 export default {
   props: {
     userProfile: {
@@ -110,7 +112,8 @@ export default {
     },
     deleteAccount() {
       this.isSubmitting = true;
-      this.$http.post("/userprofiles/me/delete").then(() => {
+
+      profileService.delete().then(() => {
         this.$store.dispatch("authenticationModule/signOut");
         this.$store.dispatch("listsModule/signOut");
         this.$store.dispatch("todoModule/signOut");

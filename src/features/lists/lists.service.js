@@ -39,5 +39,15 @@ export default {
         NewListId: newListId
       })
       .then(response => response.data);
+  },
+  saveDescription(listId, newValue) {
+    return axios.put(`/lists/${listId}/description`, {
+      description: newValue
+    });
+  },
+  setCover(listId, imageSource) {
+    return axios.put(`/lists/${listId}/picture`, {
+      imageSource: imageSource
+    });
   }
 }

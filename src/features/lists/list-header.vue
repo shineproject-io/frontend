@@ -114,9 +114,7 @@ export default {
         });
     },
     saveDescription(newValue) {
-      this.$http.put(`/lists/${this.currentList.id}/description`, {
-        description: newValue
-      });
+      listService.saveDescription(this.currentList.id, newValue);
     },
     loadDefaultList() {
       this.$store

@@ -53,6 +53,8 @@
 </template>
 
 <script>
+import listService from '@/features/lists/lists.service.js';
+
 export default {
   props: {
     listId: {
@@ -70,10 +72,7 @@ export default {
   },
   methods: {
     selectPicture(imageSource) {
-      this.$http.put(`/lists/${this.listId}/picture`, {
-        imageSource: imageSource
-      });
-
+      listService.setCover(this.listId, imageSource);
       this.$emit("background-updated", imageSource);
       this.$refs.listBackgroundModal.hide();
     },
