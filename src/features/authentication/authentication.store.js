@@ -4,6 +4,11 @@ const state = {
     authenticationToken: null,
     authenticationExpiry: null
 };
+const getters = {
+    isAnonymous: state => {
+        return state.authenticationToken === null;
+    }
+};
 const mutations = {
     setAuthenticationToken: (state, token) => {
         state.authenticationToken = token;
@@ -33,6 +38,7 @@ const actions = {
 export default {
     namespaced: true,
     state,
+    getters,
     mutations,
     actions
 }

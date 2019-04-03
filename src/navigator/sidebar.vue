@@ -58,6 +58,7 @@ import profileLink from "@/features/profile/profile-link";
 import listLinkWrapper from "@/features/lists/list-link-wrapper.vue";
 import signOutLink from "@/navigator/sign-out-link";
 import siteLink from "@/navigator/site-link";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "sidebar",
@@ -69,16 +70,13 @@ export default {
     creatorLink,
     signOutLink
   },
-  props: {
-    isAnonymous: {
-      type: Boolean,
-      required: true
-    }
-  },
   data() {
     return {
       menuDismissed: true
     };
+  },
+  computed: {
+    ...mapGetters("authenticationModule", ["isAnonymous"])
   },
   mounted() {
     this.$root.$on("show-menu", () => {

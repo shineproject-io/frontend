@@ -1,13 +1,13 @@
 <template>
   <loading-container :is-loading="isLoading">
-    <sidebar v-if="!isProductPage" :is-anonymous="!authenticationToken"/>
+    <sidebar/>
 
-    <div id="route-page" v-bind:class="{'full-width': isProductPage}">
-      <menu-activator v-if="!isProductPage"/>
+    <div id="route-page">
+      <menu-activator/>
       <router-view class="animated fadeIn animate-fast"/>
     </div>
 
-    <add-list v-if="authenticationToken"/>
+    <add-list v-if="!isAnonymous"/>
   </loading-container>
 </template>
 
@@ -16,10 +16,9 @@ import "@/branding/product-branding.css";
 import sidebar from "@/navigator/sidebar.vue";
 import menuActivator from "@/navigator/menu-activator.vue";
 import addList from "@/features/lists/add-list";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
-  name: "app",
   components: {
     sidebar,
     addList,
@@ -27,31 +26,26 @@ export default {
   },
   data() {
     return {
-      isLoading: true,
-      isProductPage: false
+      isLoading: true
     };
   },
   computed: {
-    ...mapState("authenticationModule", ["authenticationToken"])
+    ...mapState("authenticationModule", ["authenticationToken"]),
+    ...mapGetters("authenticationModule", ["isAnonymous"])
   },
   watch: {
     "$route.name"() {
-      this.isLoading = true;
       this.initialiseAuthentication();
-      this.identifyProductPage();
     }
   },
   mounted() {
     this.initialiseAuthentication();
-    this.identifyProductPage();
   },
   methods: {
-    identifyProductPage() {
-      this.isProductPage = this.$route.name === "features";
-    },
     initialiseAuthentication() {
+      this.isLoading = true;
       let currentRoute = this.$route.path.toLowerCase();
-      
+
       // Vue-Router will automatically re-route
       if (currentRoute === "/") {
         return;
@@ -73,10 +67,6 @@ export default {
 #route-page {
   float: right;
   width: calc(100% - 375px);
-}
-
-#route-page.full-width {
-  width: 100% !important;
 }
 
 /* iPad Landscape */
