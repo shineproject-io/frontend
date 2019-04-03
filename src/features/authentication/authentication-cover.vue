@@ -1,10 +1,8 @@
 <template>
   <transition name="fade">
-    <div class="page-cover" :style="'background-image: url(' + backgroundImage + ');'">
+    <div class="authentication-cover" :style="'background-image: url(' + backgroundImage + ');'">
       <overlay class="d-flex align-items-center">
-        <div class="container">
-          <slot></slot>
-        </div>
+        <slot></slot>
       </overlay>
     </div>
   </transition>
@@ -12,7 +10,6 @@
 
 <script>
 export default {
-  name: "page-cover",
   props: {
     backgroundImage: {
       type: String,
@@ -23,11 +20,18 @@ export default {
 </script>
 
 <style>
-.page-cover {
+.authentication-cover {
   min-height: 100vh;
   position: relative;
   background-size: cover;
   background-position: center center;
   color: white;
+}
+
+.authentication-inner {
+  margin: 0 auto;
+  width: 600px;
+  text-align: center;
+  max-width: 100%;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <page-cover class="container-fluid p-4">
-    <div class="sign-in-wrapper">
+  <authentication-cover>
+    <div class="authentication-inner">
       <h1 class="display-1">Sign in</h1>
       <p class="lead mb-4">
         <span>Welcome back, please sign in below or&nbsp;</span>
@@ -19,7 +19,6 @@
             type="email"
             v-model="emailAddress"
             class="flex-grow-1"
-            id="exampleInputEmail1"
             placeholder="Email address"
             required
           >
@@ -42,11 +41,16 @@
         />
       </form>
     </div>
-  </page-cover>
+  </authentication-cover>
 </template>
 
 <script>
+import authenticationCover from '@/features/authentication/authentication-cover.vue';
+
 export default {
+  components: {
+    authenticationCover
+  },
   data() {
     return {
       emailAddress: "",
@@ -86,13 +90,6 @@ export default {
 </script>
 
 <style scoped>
-.sign-in-wrapper {
-  margin: 0 auto;
-  width: 600px;
-  text-align: center;
-  max-width: 100%;
-}
-
 a {
   color: white;
   text-decoration: underline;

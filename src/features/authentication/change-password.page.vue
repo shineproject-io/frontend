@@ -1,9 +1,8 @@
 <template>
-  <page-cover
-    class="container-fluid p-4"
+  <authentication-cover
     background-image="https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg"
   >
-    <div class="change-password-wrapper" v-if="token">
+    <div class="authentication-inner" v-if="token">
       <h1 class="display-2">Change Password</h1>
       <p class="lead">We are sorry to see you locked out, change your password below to get back in!</p>
 
@@ -61,13 +60,17 @@
       <h1 class="display-1">Invalid Token</h1>
       <p class="lead">Sorry we don't recognise the token you used for this request</p>
     </div>
-  </page-cover>
+  </authentication-cover>
 </template>
 
 <script>
 import authenticationService from "@/features/authentication/authentication.service.js";
+import authenticationCover from "@/features/authentication/authentication-cover.vue";
 
 export default {
+  components: {
+    authenticationCover
+  },
   data() {
     return {
       token: "",
@@ -105,13 +108,6 @@ export default {
 </script>
 
 <style scoped>
-.change-password-wrapper {
-  margin: 0 auto;
-  width: 600px;
-  text-align: center;
-  max-width: 100%;
-}
-
 .change-password-form {
   padding-top: 40px;
 }

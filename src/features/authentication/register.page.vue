@@ -1,9 +1,8 @@
 <template>
-  <page-cover
-    class="container-fluid p-4"
+  <authentication-cover
     background-image="https://shinestorage.azureedge.net/productlistbackgrounds/2.jpg"
   >
-    <div class="sign-in-wrapper">
+    <div class="authentication-inner">
       <h1 class="display-1">Create an account</h1>
       <p class="lead mb-0">Welcome to Shine, please enter a few details below to get started.</p>
       <p class="lead mb-0">
@@ -43,7 +42,6 @@
             type="email"
             v-model="emailAddress"
             class="flex-grow-1"
-            id="exampleInputEmail1"
             placeholder="Enter your email address"
             required
           >
@@ -54,7 +52,6 @@
             type="password"
             v-model="password"
             class="bg-glass"
-            id="exampleInputPassword1"
             placeholder="Choose your password"
             required
           >
@@ -67,14 +64,18 @@
         ></loading-button>
       </form>
     </div>
-  </page-cover>
+  </authentication-cover>
 </template>
 
 <script>
 import authenticationService from "@/features/authentication/authentication.service.js";
 import userFields from "@/features/authentication/user-fields.mixin.js";
+import authenticationCover from "@/features/authentication/authentication-cover.vue";
 
 export default {
+  components: {
+    authenticationCover
+  },
   mixins: [userFields],
   data() {
     return {
@@ -121,13 +122,6 @@ export default {
 </script>
 
 <style scoped>
-.sign-in-wrapper {
-  margin: 0 auto;
-  width: 600px;
-  text-align: center;
-  max-width: 100%;
-}
-
 .sign-in-form {
   padding-top: 30px;
 }

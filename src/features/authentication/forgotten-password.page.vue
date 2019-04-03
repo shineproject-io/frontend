@@ -1,9 +1,8 @@
 <template>
-  <page-cover
-    class="container-fluid p-4"
+  <authentication-cover
     background-image="https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg"
   >
-    <div class="forgotten-password-wrapper" v-if="!isCompleted">
+    <div class="authentication-inner" v-if="!isCompleted">
       <h1 class="display-1">Reset Password</h1>
       <p
         class="lead"
@@ -35,13 +34,17 @@
       <h1 class="display-1">We sent you mail!</h1>
       <p class="lead">Please check your email for a link which will help you reset your password.</p>
     </div>
-  </page-cover>
+  </authentication-cover>
 </template>
 
 <script>
 import authenticationService from "@/features/authentication/authentication.service.js";
+import authenticationCover from '@/features/authentication/authentication-cover.vue';
 
 export default {
+  components: {
+    authenticationCover
+  },
   data() {
     return {
       emailAddress: "",
@@ -70,13 +73,6 @@ export default {
 </script>
 
 <style scoped>
-.forgotten-password-wrapper {
-  margin: 0 auto;
-  width: 600px;
-  text-align: center;
-  max-width: 100%;
-}
-
 .forgotten-password-form {
   padding-top: 40px;
 }
