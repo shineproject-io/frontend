@@ -6,13 +6,13 @@
       <i
         v-if="showActiveCircle"
         class="todo-circle far fa-circle fa-fw"
-        v-on:click.prevent="completeTodoItem"
+        v-on:click.prevent="changeTodoState('Completed')"
       />
 
       <i
         v-if="showCompletedCircle"
         class="todo-circle completed-circle fas fa-check-circle fa-fw"
-        v-on:click.prevent="openTodoItem"
+        v-on:click.prevent="changeTodoState('Open')"
       />
     </div>
 
@@ -25,7 +25,7 @@
     />
 
     <i
-      v-if="todoItem.state !== 'Completed' && allowDrag"
+      v-if="todoItem.state !== 'Completed'"
       class="todo-button-secondary todo-drag fas fa-arrows-alt"
     />
     <div class="btn-group dropleft mr-2">
@@ -58,10 +58,6 @@ export default {
     todoItem: {
       type: Object,
       required: true
-    },
-    allowDrag: {
-      type: Boolean,
-      default: true
     }
   },
   data() {
@@ -86,11 +82,11 @@ export default {
     deleteTodoItem() {
       this.isSubmitting = true;
 
-      this.$http
-        .delete(`/lists/${this.currentListId}/todoItems/${this.todoItem.id}`)
+      todoService
+        .deleteTodo(this.currentListId, this.todoItem.id)
         .then(() => {
-          this.$store.dispatch("todoModule/getTodoItems");
           this.isSubmitting = false;
+          this.$store.dispatch("todoModule/getTodoItems");
         });
     },
     saveTitle(newValue) {
@@ -108,21 +104,11 @@ export default {
           this.isSubmitting = false;
         });
     },
-    completeTodoItem() {
+    changeTodoState(newState) {
       this.isSubmitting = true;
 
       todoService
-        .changeState(this.currentListId, this.todoItem.id, "Completed")
-        .then(() => {
-          this.isSubmitting = false;
-          this.$store.dispatch("todoModule/getTodoItems");
-        });
-    },
-    openTodoItem() {
-      this.isSubmitting = true;
-
-      todoService
-        .changeState(this.currentListId, this.todoItem.id, "Open")
+        .changeState(this.currentListId, this.todoItem.id, newState)
         .then(() => {
           this.isSubmitting = false;
           this.$store.dispatch("todoModule/getTodoItems");

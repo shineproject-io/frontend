@@ -22,5 +22,9 @@ export default {
 
         return axios.put(`/lists/${listId}/todoItems/${todoItemId}/state`, requestModel)
             .then(response => response.data);
+    },
+    deleteTodo(listId, todoItemId) {
+        return axios.delete(`/lists/${listId}/todoItems/${todoItemId}`)
+            .then(response => response.data);
     }
 }

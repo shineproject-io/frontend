@@ -1,5 +1,5 @@
 <template>
-  <loading-container class="lined-background" :isLoading="isLoading && todoItems.length === 0">
+  <loading-container class="lined-background" :isLoading="isLoading">
     <completed-wrapper v-if="completedItems.length > 0" :todo-items="completedItems"/>
 
     <draggable

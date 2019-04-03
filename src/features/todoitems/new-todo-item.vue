@@ -37,7 +37,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("todoModule", ["completedItems", "currentListId"]),
+    ...mapState("todoModule", ["currentListId"]),
   },
   methods: {
     addTodoItem(todoItemName) {
