@@ -25,14 +25,12 @@
 <script>
 import listLink from "@/features/lists/list-link.vue";
 import draggable from "vuedraggable";
-import mobileViewportMixin from "@/mixins/mobile-viewport.mixin.js";
 
 export default {
   components: {
     listLink,
     draggable
   },
-  mixins: [mobileViewportMixin],
   data() {
     return {
       isLoading: true
@@ -46,6 +44,13 @@ export default {
       set(value) {
         this.$store.dispatch("listsModule/updateListOrder", value);
       }
+    },
+    allowDraggable() {
+      if (screen.width < 768) {
+        return false;
+      }
+
+      return true;
     }
   },
   created() {

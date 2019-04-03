@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import "@/branding/product-branding.css";
+import "@/common/product-branding.css";
 import sidebar from "@/navigator/sidebar.vue";
 import menuActivator from "@/navigator/menu-activator.vue";
 import addList from "@/features/lists/add-list";
