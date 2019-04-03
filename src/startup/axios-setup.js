@@ -16,14 +16,7 @@ Axios.interceptors.request.use(function (config) {
 		const expiry = store.state.authenticationModule.authenticationExpiry;
 		let isExpired = authenticationService.isAuthorisationExpired(expiry);
 		if (isExpired === true) {
-			store.dispatch('authenticationModule/signOut');
-			store.dispatch('listsModule/signOut');
-			store.dispatch('todoModule/signOut');
-			store.dispatch('profileModule/signOut');
-			store.dispatch("suggestionsModule/signOut");
-			router.push({
-				name: 'sign-in'
-			});
+			signOut();
 			return;
 		}
 
@@ -39,16 +32,20 @@ Axios.interceptors.response.use(
 	},
 	function (error) {
 		if (error.response && error.response.status === 401) {
-			store.dispatch('authenticationModule/signOut');
-			store.dispatch('listsModule/signOut');
-			store.dispatch('todoModule/signOut');
-			store.dispatch('profileModule/signOut');
-			store.dispatch("suggestionsModule/signOut");
-			router.push({
-				name: 'sign-in'
-			});
+			signOut()
 			return;
 		}
 		return Promise.reject(error);
 	}
 );
+
+function signOut() {
+	store.dispatch('authenticationModule/signOut');
+	store.dispatch('listsModule/signOut');
+	store.dispatch('todoModule/signOut');
+	store.dispatch('profileModule/signOut');
+	store.dispatch("suggestionsModule/signOut");
+	router.push({
+		name: 'sign-in'
+	});
+}
