@@ -82,9 +82,14 @@ export default {
     this.$root.$on("show-menu", () => {
       this.menuDismissed = false;
     });
+
+    this.$root.$on("hide-menu", () => {
+      this.menuDismissed = true;
+    });
   },
   beforeDestroy() {
     this.$root.$off("show-menu");
+    this.$root.$off("hide-menu");
   }
 };
 </script>
