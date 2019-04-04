@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="d-flex align-items-center cursor-pointer" v-on:click.prevent="toggleExpansion()">
+  <div class="completed-wrapper">
+    <div class="d-flex align-items-center cursor-pointer completed-inner" v-on:click.prevent="toggleExpansion()">
       <div class="todo-circle px-3 py-1">
         <i class="far fa-check-square fa-fw"/>
       </div>
@@ -32,7 +32,7 @@
 
 <script>
 import todoItem from "@/features/todoitems/todo-item.vue";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -44,7 +44,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("todoModule", ["completedTodoItems"]),
+    ...mapGetters("todoModule", ["completedTodoItems"])
   },
   methods: {
     toggleExpansion() {
@@ -53,3 +53,13 @@ export default {
   }
 };
 </script>
+
+<style>
+.completed-wrapper {
+  background-color: white;
+}
+
+.completed-inner {
+  border-bottom: 1px solid #f4f4f4;
+}
+</style>

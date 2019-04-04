@@ -120,7 +120,9 @@ export default {
 
 <style>
 .todo-item {
-  height: 62px;
+  min-height: 62px;
+  background-color: white;
+  border-bottom: 1px solid #F4F4F4;
 }
 
 .todo-drag {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <search-header v-on:search="search"/>
-    <loading-container class="lined-background" :is-loading="isSearching" message-suffix="search">
+    <loading-container class="search-background" :is-loading="isSearching" message-suffix="search">
       <div v-for="result in searchResults" v-bind:key="result.resultId">
         <component v-bind:is="result.resultType.toLowerCase() + '-search-result'" :result="result"/>
       </div>
@@ -54,6 +54,11 @@ export default {
 </script>
 
 <style>
+.search-background {
+	background-image: url("https://shinestorage.azureedge.net/productimages/lined-background.png");
+	min-height: calc(100vh - 278px);
+  }
+
 .search-result {
   height: 62px;
 }

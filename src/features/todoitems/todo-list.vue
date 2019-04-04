@@ -1,5 +1,5 @@
 <template>
-  <loading-container class="lined-background" :isLoading="isLoading">
+  <loading-container class="todo-background" :isLoading="isLoading">
     <completed-wrapper v-if="completedTodoItems.length > 0"/>
 
     <draggable
@@ -80,3 +80,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.todo-background {
+	background-color: #F8F8F8;
+	min-height: calc(100vh - 278px);
+  }
+</style>
