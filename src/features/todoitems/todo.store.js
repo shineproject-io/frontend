@@ -23,7 +23,7 @@ const getters = {
         return lodash.filter(state.todoItems, function (tdo) {
             return tdo.state === "Completed";
         });
-    }    
+    }
 }
 const mutations = {
     setTodoItems: (state, todoItems) => {
@@ -31,6 +31,17 @@ const mutations = {
     },
     setCurrentListId: (state, currentListId) => {
         state.currentListId = currentListId;
+    },
+    setTodoItemOrder: (state, openTodoItems) => {
+        var loop = 1;
+
+        lodash.forEach(openTodoItems, function (tdo) {
+            var stateTodo = lodash.find(state.todoItems, function (stdo) {
+                return stdo.id === tdo.id;
+            });
+
+            stateTodo.position = loop++;
+        });
     }
 }
 const actions = {
@@ -54,7 +65,7 @@ const actions = {
                 todoItemIds: lodash.map(dispatchModel.todoItems, "id")
             });
 
-            commit('setTodoItems', dispatchModel.todoItems);
+            commit('setTodoItemOrder', dispatchModel.todoItems);
         }
     },
     getTodoItems: ({
