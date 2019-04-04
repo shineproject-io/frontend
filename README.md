@@ -4,6 +4,8 @@
 
 Stay organised by creating to-do lists to help you finish what matters.
 
+Watch a video demo here - https://youtu.be/RAFEqhFVypY
+
 ShineProject is a modern web application which allows end users to create to-do lists to stay organised. This is a personal project which i have decided to put on GitHub.
   - This repository contains the VueJS single page application which is hosted at <https://shineproject.io>
   - This isn't a project intended to make any money, its just to provide a free service and be a good place to try out new technology.
