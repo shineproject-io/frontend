@@ -53,15 +53,10 @@
 </template>
 
 <script>
-import listService from '@/features/lists/lists.service.js';
+import listService from "@/features/lists/lists.service.js";
+import { mapState } from "vuex";
 
 export default {
-  props: {
-    listId: {
-      type: Number,
-      required: true
-    }
-  },
   data() {
     return {
       statusCode: 0,
@@ -70,10 +65,27 @@ export default {
       isSubmitting: false
     };
   },
+  computed: {
+    ...mapState("todoModule", ["currentListId"]),
+    errorMessage() {
+      switch (this.statusCode) {
+        case -1:
+          return "Please attach a picture";
+        case 500:
+          return "Something went wrong, we are investigating";
+        case 415:
+          return "Please make sure your picture is .PNG, .JPG or .GIF";
+        case 413:
+          return "Please ensure the picture is 6MB or less";
+        default:
+          return "Something went wrong, we are investigating";
+      }
+    }
+  },
   methods: {
     selectPicture(imageSource) {
-      listService.setCover(this.listId, imageSource);
-      this.$emit("background-updated", imageSource);
+      listService.setCover(this.currentListId, imageSource);
+      this.$store.dispatch("listsModule/setBackground", imageSource);
       this.$refs.listBackgroundModal.hide();
     },
     show() {
@@ -99,36 +111,21 @@ export default {
 
       let formData = new FormData();
       formData.append("file", this.file);
-      
-      listService.uploadCover(this.listId, formData)
+
+      listService
+        .uploadCover(this.currentListId, formData)
         .then(() => {
           this.imageFileName = "Choose a picture...";
           this.isSubmitting = false;
           this.$refs.listBackgroundModal.hide();
-          this.$emit("list-background-updated");
+          this.$store.dispatch("listsModule/getList", this.currentListId);
         })
-        .catch((error) => {
+        .catch(error => {
           this.statusCode = error.response.status;
           this.isSubmitting = false;
         });
 
       return false;
-    }
-  },
-  computed: {
-    errorMessage() {
-      switch (this.statusCode) {
-        case -1:
-          return "Please attach a picture";
-        case 500:
-          return "Something went wrong, we are investigating";
-        case 415:
-          return "Please make sure your picture is .PNG, .JPG or .GIF";
-        case 413:
-          return "Please ensure the picture is 6MB or less";
-        default:
-          return "Something went wrong, we are investigating";
-      }
     }
   }
 };

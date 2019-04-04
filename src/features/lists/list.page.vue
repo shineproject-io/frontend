@@ -1,12 +1,8 @@
 <template>
   <div v-if="currentList">
-    <picture-selector
-      :list-id="currentList.id"
-      v-on:background-updated="updateBackground"
-      v-on:list-background-updated="initialise()"
-      ref="pictureSelector"
-    />
+    <list-cover-picker ref="pictureSelector"/>
     <list-migrator ref="listMigrator"/>
+
     <list-header
       v-on:show-picture-selector="$refs.pictureSelector.show()"
       v-on:show-list-migrator="$refs.listMigrator.show()"
@@ -18,7 +14,7 @@
 <script>
 import listHeader from "@/features/lists/list-header.vue";
 import todoList from "@/features/todoitems/todo-list.vue";
-import pictureSelector from "@/features/lists/picture-selector.vue";
+import listCoverPicker from "@/features/lists/list-cover-picker.vue";
 import listMigrator from "@/features/lists/list-migrator.vue";
 import { mapState } from "vuex";
 
@@ -27,7 +23,7 @@ export default {
   components: {
     listHeader,
     todoList,
-    pictureSelector,
+    listCoverPicker,
     listMigrator
   },
   computed: {
@@ -52,9 +48,6 @@ export default {
       );
 
       this.$store.dispatch("listsModule/getList", this.currentListId);
-    },
-    updateBackground(imageSource) {
-      this.$store.dispatch("listsModule/setBackground", imageSource);
     }
   }
 };
