@@ -118,7 +118,7 @@ export default {
     },
     loadDefaultList() {
       this.$store
-        .dispatch("listsModule/getDefaultList", this.$route.query.listId)
+        .dispatch("listsModule/getDefaultList", this.currentList.id)
         .then(data => {
           this.$router.push({ path: "list", query: { listId: data.listId } });
         })
