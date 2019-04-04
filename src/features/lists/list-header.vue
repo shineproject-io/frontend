@@ -109,7 +109,7 @@ export default {
       });
     },
     saveName(newValue) {
-      listService.changeName(this.currentList.id, newValue).then(() => {
+      listService.saveName(this.currentList.id, newValue).then(() => {
         this.$store.dispatch("listsModule/getLists");
       });
     },
