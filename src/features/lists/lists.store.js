@@ -32,6 +32,7 @@ const actions = {
     getList: ({
         commit
     }, listId) => {
+        commit('setList', null);
         return listsService.getList(listId).then(data => {
             commit('setList', data);
         });
