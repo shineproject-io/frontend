@@ -52,12 +52,12 @@
 </template>
 
 <script>
-import sidebarLink from "@/navigator/sidebar-link.vue";
-import creatorLink from "@/navigator/creator-link.vue";
+import sidebarLink from "@/features/navigator/sidebar-link.vue";
+import creatorLink from "@/features/navigator/creator-link.vue";
 import profileLink from "@/features/profile/profile-link";
 import listLinkWrapper from "@/features/lists/list-link-wrapper.vue";
-import signOutLink from "@/navigator/sign-out-link";
-import siteLink from "@/navigator/site-link";
+import signOutLink from "@/features/navigator/sign-out-link";
+import siteLink from "@/features/navigator/site-link";
 import { mapGetters } from 'vuex';
 
 export default {

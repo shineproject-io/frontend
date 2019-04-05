@@ -13,8 +13,8 @@
 
 <script>
 import "@/common/product-branding.css";
-import sidebar from "@/navigator/sidebar.vue";
-import menuActivator from "@/navigator/menu-activator.vue";
+import sidebar from "@/features/navigator/sidebar.vue";
+import menuActivator from "@/features/navigator/menu-activator.vue";
 import addList from "@/features/lists/add-list";
 import { mapState, mapGetters } from "vuex";
 
