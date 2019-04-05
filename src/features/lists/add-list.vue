@@ -13,12 +13,16 @@
 
 <script>
 import listService from '@/features/lists/lists.service.js';
+import { mapState } from 'vuex';
 
 export default {
   data() {
     return {
       isSubmitting: false
     };
+  },
+  computed:{
+    ...mapState('listsModule', ['lists'])
   },
   methods: {
     newList() {
@@ -27,7 +31,7 @@ export default {
 
         this.$root.$emit('hide-menu');
 
-        listService.create('New list', 'My new list', 'https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg')
+        listService.create(`New list ${this.lists.length + 1}`, 'My new list', 'https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg')
           .then(listId => {
             this.$store.dispatch('listsModule/getLists');
             this.$router.push({
