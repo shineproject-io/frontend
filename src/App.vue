@@ -1,5 +1,5 @@
 <template>
-  <loading-container :is-loading="isLoading">
+  <loading-container :is-loading="isLoading" class="ui-light">
     <sidebar/>
 
     <div id="route-page">
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import "@/common/product-branding.css";
+import "@/common/product-branding.scss";
 import sidebar from "@/features/navigator/sidebar.vue";
 import menuActivator from "@/features/navigator/menu-activator.vue";
 import addList from "@/features/lists/add-list";
@@ -63,22 +63,18 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #route-page {
   float: right;
   width: calc(100% - 375px);
-}
 
-/* iPad Landscape */
-@media (max-width: 1024px) {
-  #route-page {
+  /* iPad Landscape */
+  @media (max-width: 1024px) {
     width: calc(100% - 300px);
   }
-}
 
-/* iPad Portrait */
-@media (max-width: 768px) {
-  #route-page {
+  /* iPad Portrait */
+  @media (max-width: 768px) {
     width: 100%;
   }
 }

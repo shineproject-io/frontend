@@ -1,33 +1,31 @@
+$primary-colour: #db5461;
+$overlay-colour: rgba(0, 0, 0, 0.6);
+
 @font-face {
 	font-family: brand-regular;
-	src: url('https://listsstorage.blob.core.windows.net/productfonts/regular.ttf')
-		format('truetype');
+	src: url('https://listsstorage.blob.core.windows.net/productfonts/regular.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: brand-bold;
-	src: url('https://listsstorage.blob.core.windows.net/productfonts/bold.ttf')
-		format('truetype');
+	src: url('https://listsstorage.blob.core.windows.net/productfonts/bold.ttf') format('truetype');
 }
 
 @font-face {
 	font-family: brand-light;
-	src: url('https://listsstorage.blob.core.windows.net/productfonts/light.ttf')
-		format('truetype');
+	src: url('https://listsstorage.blob.core.windows.net/productfonts/light.ttf') format('truetype');
 }
 
 html {
 	font-size: 14.5px;
-}
 
-@media (max-width: 500px) {
-	html {
+	@media (max-width: 500px) {
 		font-size: 13.5px;
 	}
-}
 
-body {
-	font-family: brand-regular;
+	body {
+		font-family: brand-regular;
+	}
 }
 
 h1,
@@ -42,6 +40,7 @@ h6 {
 .font-weight-bold {
 	font-family: brand-bold;
 }
+
 .font-weight-light {
 	font-family: brand-light;
 }
@@ -58,9 +57,10 @@ h6 {
 	font-size: 1.5rem;
 }
 
-.btn-primary, .btn-primary:hover {
-	background-color: #db5461;
-	border-color: #db5461;
+.btn-primary,
+.btn-primary:hover {
+	background-color: $primary-colour;
+	border-color: $primary-colour;
 }
 
 .no-select {
@@ -76,11 +76,11 @@ h6 {
 }
 
 .bg-glass {
-	background: rgba(0, 0, 0, 0.6);
+	background: $overlay-colour;
 }
 
 .bg-transparent {
-	background: rgba(0, 0, 0, 0.6);
+	background: $overlay-colour;
 }
 
 .fade-enter-active,
@@ -99,9 +99,9 @@ h6 {
 
 a {
 	color: black;
-}
 
-a:hover {
-	text-decoration: none;
-	color: black;
+	&:hover {
+		text-decoration: none;
+		color: black;
+	}
 }
