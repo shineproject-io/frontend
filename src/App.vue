@@ -68,13 +68,11 @@ export default {
   float: right;
   width: calc(100% - 375px);
 
-  /* iPad Landscape */
-  @media (max-width: 1024px) {
+  @media (max-width: $media-ipad-landscape) {
     width: calc(100% - 300px);
   }
 
-  /* iPad Portrait */
-  @media (max-width: 768px) {
+  @media (max-width: $media-ipad-portrait) {
     width: 100%;
   }
 }

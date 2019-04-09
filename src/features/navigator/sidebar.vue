@@ -58,7 +58,7 @@ import profileLink from "@/features/profile/profile-link";
 import listLinkWrapper from "@/features/lists/list-link-wrapper.vue";
 import signOutLink from "@/features/navigator/sign-out-link";
 import siteLink from "@/features/navigator/site-link";
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   name: "sidebar",
@@ -94,45 +94,17 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .sidebar {
   position: relative;
   width: 375px;
-}
 
-.sidebar-inner {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  width: 375px;
-  height: 100%;
-  border-right: 1px solid #f2f2f2;
-}
-
-.footer-bar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-top: 1px solid #f2f2f2;
-}
-
-/* iPad Landscape */
-@media (max-width: 1024px) {
-  .sidebar {
+  @media (max-width: $media-ipad-landscape) {
     width: 300px;
     overflow: hidden;
   }
 
-  .sidebar-inner {
-    width: 300px;
-  }
-}
-
-/* iPad Portrait */
-@media (max-width: 768px) {
-  .sidebar {
+  @media (max-width: $media-ipad-portrait) {
     position: fixed !important;
     z-index: 2002;
     width: 100%;
@@ -143,26 +115,48 @@ export default {
     overflow: auto;
   }
 
-  .sidebar-inner {
+  @media (max-height: $media-phone-landscape) {
+    position: relative;
+  }
+}
+
+.sidebar-inner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 375px;
+  height: 100%;
+  border-right: 1px solid #f2f2f2;
+
+  @media (max-width: $media-ipad-landscape) {
+    width: 300px;
+  }
+
+  @media (max-width: $media-ipad-portrait) {
     width: 100%;
   }
 
-  .sidebar.dismissed {
+  @media (max-height: $media-phone-landscape) {
+    position: relative;
+    height: auto;
+  }
+}
+
+.sidebar.dismissed {
+  @media (max-width: $media-ipad-portrait) {
     display: none;
   }
 }
 
-/* Sideways and very small phones */
-@media (max-height: 412px) {
-  .sidebar {
-    position: relative;
-  }
+.footer-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-top: 1px solid #f2f2f2;
 
-  .sidebar-inner {
-    position: relative;
-    height: auto;
-  }
-  .footer-bar {
+  @media (max-height: $media-phone-landscape) {
     position: unset !important;
   }
 }
