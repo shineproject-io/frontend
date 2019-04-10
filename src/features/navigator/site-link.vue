@@ -15,7 +15,7 @@
 
 <style lang="scss">
 .site-link {
-  background-color: $primary-highlight-background-colour;
+  background-color: $primary-background-highlight-colour;
   border-bottom: 1px solid $primary-border-colour;
 }
 

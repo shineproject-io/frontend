@@ -32,7 +32,7 @@ export default {
   border-top: 1px solid $primary-border-colour;
   transition: all 0.1s ease-in-out;
   height: 62px;
-  background-color: $primary-highlight-background-colour;
+  background-color: $primary-background-highlight-colour;
 
   &:hover {
     background-color: $brand-primary-colour !important;

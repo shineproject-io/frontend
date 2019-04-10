@@ -95,14 +95,6 @@ a {
   text-decoration: underline;
 }
 
-.alert a {
-  color: $default-text-colour;
-}
-
-.alert a:hover {
-  color: $default-text-colour !important;
-}
-
 .search-input-wrapper {
   display: block;
   width: 100%;

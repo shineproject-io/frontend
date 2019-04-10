@@ -72,7 +72,7 @@ export default {
 
 .c-modal-inner {
   min-height: 100px;
-  color: $default-text-colour !important;
+  color: $primary-text-colour !important;
 }
 
 .c-modal-body {

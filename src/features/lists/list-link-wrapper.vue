@@ -73,7 +73,7 @@ export default {
 }
 
 .list-link:nth-child(even) {
-  background: $primary-highlight-background-colour;
+  background: $primary-background-highlight-colour;
 }
 
 .list-link:hover {

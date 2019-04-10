@@ -27,9 +27,3 @@ export default {
   }
 };
 </script>
-
-<style scoped lang="scss">
-a {
-  color: $default-text-colour !important;
-}
-</style>

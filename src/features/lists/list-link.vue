@@ -30,7 +30,6 @@ export default {
 .list-link {
   border-left: 4px solid transparent;
   transition: border-color 0.2s ease-in-out;
-  color: $default-text-colour;
   border-radius: 2px;
   padding: 15px;
 }
@@ -44,6 +43,6 @@ export default {
 }
 
 .list-link.active {
-  border-left: 4px solid $brand-highlight-secondary-colour;
+  border-left: 4px solid $brand-secondary-highlight-colour;
 }
 </style>

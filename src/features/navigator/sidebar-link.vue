@@ -39,7 +39,6 @@ export default {
   border-left: 4px solid transparent;
   border-bottom: 1px solid $primary-border-colour;
   transition: border-color 0.2s ease-in-out;
-  color: $default-text-colour;
   border-radius: 3px;
 }
 

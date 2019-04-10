@@ -1,15 +1,16 @@
 // Loaded in via vue.config.js
 
 $brand-primary-colour: #db5461;
+$brand-primary-highlight-colour: #db5461;
 $brand-secondary-colour: #e5b25d;
+$brand-secondary-highlight-colour: #e07a5f;
 $brand-success-colour: #c0ea67;
-$brand-highlight-secondary-colour: #e07a5f;
 
 $primary-background-colour: white;
+$primary-background-highlight-colour: #f9f9f9;
 $primary-border-colour: #f2f2f2;
-$primary-highlight-background-colour: #f9f9f9;
 
-$default-text-colour: black;
+$primary-text-colour: black;
 $inverted-text-colour: white;
 
 $overlay-colour: rgba(0, 0, 0, 0.6);
