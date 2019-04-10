@@ -1,13 +1,16 @@
 <template>
-  <div v-if="currentList">
-    <list-cover-picker ref="pictureSelector"/>
-    <list-migrator ref="listMigrator"/>
+  <div>
+    <div v-if="currentList">
+      <list-cover-picker ref="pictureSelector"/>
+      <list-migrator ref="listMigrator"/>
 
-    <list-header
-      v-on:show-picture-selector="$refs.pictureSelector.show()"
-      v-on:show-list-migrator="$refs.listMigrator.show()"
-    />
-    <todo-list/>
+      <list-header
+        v-on:show-picture-selector="$refs.pictureSelector.show()"
+        v-on:show-list-migrator="$refs.listMigrator.show()"
+      />
+      <todo-list/>
+    </div>
+    <not-found v-if="isNotFound"/>
   </div>
 </template>
 
@@ -16,6 +19,7 @@ import listHeader from "@/features/lists/list-header.vue";
 import todoList from "@/features/todoitems/todo-list.vue";
 import listCoverPicker from "@/features/lists/list-cover-picker.vue";
 import listMigrator from "@/features/lists/list-migrator.vue";
+import notFound from "@/features/lists/not-found.vue";
 import { mapState } from "vuex";
 
 export default {
@@ -24,10 +28,16 @@ export default {
     listHeader,
     todoList,
     listCoverPicker,
-    listMigrator
+    listMigrator,
+    notFound
+  },
+  data() {
+    return {
+      isNotFound: false
+    };
   },
   computed: {
-    ...mapState("listsModule", ["currentList"]),
+    ...mapState("listsModule", ["currentList"])
   },
   watch: {
     "$route.query.listId"() {
@@ -41,7 +51,16 @@ export default {
   },
   methods: {
     initialise() {
-      this.$store.dispatch("listsModule/getList", this.$route.query.listId);
+      this.isNotFound = false;
+
+      this.$store
+        .dispatch("listsModule/getList", this.$route.query.listId)
+        .then(() => {
+          window.console.log(this.currentList);
+        })
+        .catch(() => {
+          this.isNotFound = true;
+        });
     }
   }
 };
