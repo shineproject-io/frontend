@@ -131,7 +131,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .selectable-picture {
   cursor: pointer;
   border: 1px solid transparent;
@@ -143,7 +143,7 @@ export default {
 }
 
 .selectable-picture:hover {
-  border: 1px solid red;
+  border: 1px solid $brand-primary-colour;
 }
 
 @media (max-width: 500px) {

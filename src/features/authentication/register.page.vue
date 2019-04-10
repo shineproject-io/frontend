@@ -121,18 +121,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .sign-in-form {
   padding-top: 30px;
 }
 
 a {
-  color: white;
+  color: $inverted-text-colour;
   text-decoration: underline;
-}
-
-a:hover {
-  color: whitesmoke !important;
 }
 
 .search-input-wrapper {
@@ -144,7 +140,7 @@ a:hover {
   border-radius: 5px;
   outline: none;
   font-size: 20px;
-  color: white;
+  color: $inverted-text-colour;
 }
 
 .search-input-wrapper i {
@@ -160,6 +156,6 @@ input {
   border-radius: 5px;
   outline: none;
   font-size: 20px;
-  color: white;
+  color: $inverted-text-colour;
 }
 </style>

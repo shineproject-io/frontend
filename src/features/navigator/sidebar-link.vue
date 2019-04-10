@@ -34,12 +34,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .sidebar-link {
   border-left: 4px solid transparent;
-  border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid $primary-border-colour;
   transition: border-color 0.2s ease-in-out;
-  color: black;
+  color: $default-text-colour;
   border-radius: 3px;
 }
 
@@ -59,11 +59,11 @@ export default {
 }
 
 .sidebar-link:hover:not(.active) {
-  border-left: 4px solid #e5b25d;
+  border-left: 4px solid $brand-secondary-colour;
 }
 
 .sidebar-link.active {
-  border-left: 4px solid #e07a5f;
+  border-left: 4px solid $brand-primary-colour;
 }
 
 .sidebar-link .fa-chevron-right {

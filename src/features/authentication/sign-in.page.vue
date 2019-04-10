@@ -89,22 +89,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 a {
-  color: white;
+  color: $inverted-text-colour;
   text-decoration: underline;
 }
 
-a:hover {
-  color: whitesmoke !important;
-}
-
 .alert a {
-  color: black;
+  color: $default-text-colour;
 }
 
 .alert a:hover {
-  color: black !important;
+  color: $default-text-colour !important;
 }
 
 .search-input-wrapper {
@@ -116,7 +112,7 @@ a:hover {
   border-radius: 5px;
   outline: none;
   font-size: 20px;
-  color: white;
+  color: $inverted-text-colour;
 }
 
 .search-input-wrapper i {
@@ -132,6 +128,6 @@ input {
   border-radius: 5px;
   outline: none;
   font-size: 20px;
-  color: white;
+  color: $inverted-text-colour;
 }
 </style>

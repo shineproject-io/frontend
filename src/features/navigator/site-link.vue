@@ -13,10 +13,10 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .site-link {
-  background-color: #f9f9f9;
-  border-bottom: 1px solid #f2f2f2;
+  background-color: $primary-highlight-background-colour;
+  border-bottom: 1px solid $primary-border-colour;
 }
 
 .site-item-icon {

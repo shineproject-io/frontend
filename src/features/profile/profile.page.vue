@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .profile-page-wrapper {
   width: 800px;
   max-width: 95%;
@@ -93,6 +93,6 @@ export default {
 }
 
 .profile-switcher .nav-link {
-  color: white;
+  color: $inverted-text-colour;
 }
 </style>

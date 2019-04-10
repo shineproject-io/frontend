@@ -16,10 +16,10 @@ export default {
   name: "site-link",
   methods: {
     signOut() {
-      this.$store.dispatch('authenticationModule/signOut');
-      this.$store.dispatch('listsModule/signOut');
-      this.$store.dispatch('todoModule/signOut');
-      this.$store.dispatch('profileModule/signOut');
+      this.$store.dispatch("authenticationModule/signOut");
+      this.$store.dispatch("listsModule/signOut");
+      this.$store.dispatch("todoModule/signOut");
+      this.$store.dispatch("profileModule/signOut");
       this.$store.dispatch("suggestionsModule/signOut");
       this.$router.push({ name: "features" });
     }
@@ -27,16 +27,16 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .sign-out-link {
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid $primary-border-colour;
   transition: all 0.1s ease-in-out;
   height: 62px;
-  background-color: #f9f9f9;
-}
+  background-color: $primary-highlight-background-colour;
 
-.sign-out-link:hover {
-  background-color: #e07a5f !important;
-  color: white !important;
+  &:hover {
+    background-color: $brand-primary-colour !important;
+    color: $inverted-text-colour !important;
+  }
 }
 </style>

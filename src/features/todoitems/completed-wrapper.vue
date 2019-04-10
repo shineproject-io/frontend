@@ -54,12 +54,12 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .completed-wrapper {
-  background-color: white;
+  background-color: $primary-background-colour;
 }
 
 .completed-inner {
-  border-bottom: 1px solid #f4f4f4;
+  border-bottom: 1px solid $primary-border-colour;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-white"
+    class="feature-footer"
     style="background-image: url('https://shinestorage.azureedge.net/productimages/texture.png');"
   >
     <div class="container text-center text-lg-left p-5">
@@ -39,3 +39,9 @@
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.feature-footer {
+  color: $inverted-text-colour;
+}
+</style>

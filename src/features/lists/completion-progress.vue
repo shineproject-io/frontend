@@ -65,3 +65,22 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.list-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20px;
+  opacity: 0.5;
+  background-color: transparent;
+  border-radius: 0 !important;
+}
+
+.list-progress .progress-bar {
+  width: 0;
+  transition: width 0.6s ease-in-out;
+  background-color: $brand-success-colour !important;
+}
+</style>

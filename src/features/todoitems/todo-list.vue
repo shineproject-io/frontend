@@ -81,9 +81,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .todo-background {
-	background-color: #F8F8F8;
+	background-color: $primary-highlight-background-colour;
 	min-height: calc(100vh - 278px);
   }
 </style>

@@ -129,8 +129,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 a.profile-editor-link {
-  color: white !important;
+  color: $inverted-text-colour !important;
 }
 </style>

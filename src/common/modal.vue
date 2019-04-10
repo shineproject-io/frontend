@@ -3,7 +3,7 @@
     <div v-if="isVisible">
       <div class="c-modal-overlay position-fixed" v-on:click="hide"/>
 
-      <div class="c-modal bg-white border rounded">
+      <div class="c-modal border rounded">
         <div class="c-modal-inner">
           <div class="c-modal-header d-flex align-items-center border-bottom px-2">
             <div class="flex-grow-1">
@@ -46,7 +46,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .c-modal-overlay {
   position: fixed;
   left: 0;
@@ -64,14 +64,15 @@ export default {
   margin: 0 auto;
   z-index: 3001;
   margin-top: 30px;
-      position: fixed;
-    left: 50%;
-    transform: translate(-50%, 0);
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: $primary-background-colour
 }
 
 .c-modal-inner {
   min-height: 100px;
-  color: black !important;
+  color: $default-text-colour !important;
 }
 
 .c-modal-body {

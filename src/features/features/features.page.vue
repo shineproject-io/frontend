@@ -29,20 +29,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .desktop-50 {
   width: 50%;
-}
 
-/* iPad Landscape */
-@media (max-width: 1024px) {
-  .desktop-50 {
+  @media (max-width: $media-ipad-landscape) {
     width: 100%;
   }
 }
 
 .btn:hover {
-  color: white !important;
+  color: $inverted-text-colour !important;
   text-decoration: underline;
 }
 </style>

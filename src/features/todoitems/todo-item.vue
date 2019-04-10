@@ -118,11 +118,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .todo-item {
   min-height: 62px;
-  background-color: white;
-  border-bottom: 1px solid #F4F4F4;
+  background-color: $primary-background-colour;
+  border-bottom: 1px solid $primary-border-colour;
 }
 
 .todo-drag {
@@ -135,20 +135,20 @@ export default {
 }
 
 .completed-circle {
-  color: #c0ea67;
+  color: $brand-success-colour;
 }
 
 .todo-circle:hover {
-  color: #c0ea67;
+  color: $brand-success-colour;
 }
 
 .todo-button-primary {
-  color: #db5461;
+  color: $brand-primary-colour;
   padding: 10px;
 }
 
 .todo-button-primary:hover {
-  color: #e5b25d;
+  color: $brand-secondary-colour;
 }
 
 .todo-button-secondary {
@@ -157,7 +157,7 @@ export default {
 }
 
 .todo-button-secondary:hover {
-  color: #e5b25d;
+  color: $brand-secondary-colour;
 }
 
 .todo-title {

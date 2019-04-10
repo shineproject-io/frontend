@@ -19,13 +19,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .authentication-cover {
   min-height: 100vh;
   position: relative;
   background-size: cover;
   background-position: center center;
-  color: white;
+  color: $inverted-text-colour;
 }
 
 .authentication-inner {

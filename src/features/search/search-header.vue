@@ -1,6 +1,6 @@
 <template>
   <page-header>
-    <div class="d-flex text-white">
+    <div class="d-flex">
       <h1 class="display-2 mb-3">Search</h1>
     </div>
     <div id="search-wrapper" class="align-content-center d-flex bg-glass animated pulse">
@@ -36,7 +36,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 #search-wrapper {
   max-width: 600px;
   width: 100%;
@@ -44,16 +44,15 @@ export default {
 
 #search-wrapper i {
   padding: 20px;
-  color: white;
+  color: $inverted-text-colour;
 }
 
 input#search-field {
-  /* border: 1px solid #F2F2F2 !important; */
   border: 0;
   background-color: transparent;
   outline: none;
   font-size: 20px;
-  color: white;
+  color: $inverted-text-colour;
   padding: 10px 20px;
   border-radius: 5px;
   width: 100%;

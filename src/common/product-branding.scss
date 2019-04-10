@@ -95,10 +95,10 @@ h6 {
 }
 
 a {
-	color: black;
+	color: $default-text-colour;
 
 	&:hover {
 		text-decoration: none;
-		color: black;
+		color: $default-text-colour;
 	}
 }

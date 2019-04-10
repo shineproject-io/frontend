@@ -4,28 +4,22 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .menu-activator {
   position: fixed;
   top: 0;
   left: 0;
   cursor: pointer;
-  color: white;
+  color: $inverted-text-colour;
   z-index: 2000;
   padding: 15px 20px;
-}
 
-@media (min-width: 769px) {
-  .menu-activator {
+  @media (min-width: $media-ipad-portrait) {
     display: none !important;
   }
-}
 
-.menu-activator i {
-  font-size: 18px !important;
-}
-
-.menu-activator span {
-  font-weight: bold;
+  i {
+    font-size: 18px !important;
+  }
 }
 </style>

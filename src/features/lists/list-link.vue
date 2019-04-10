@@ -26,11 +26,11 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .list-link {
   border-left: 4px solid transparent;
   transition: border-color 0.2s ease-in-out;
-  color: black;
+  color: $default-text-colour;
   border-radius: 2px;
   padding: 15px;
 }
@@ -40,10 +40,10 @@ export default {
 }
 
 .list-link:hover:not(.active) {
-  border-left: 4px solid #e5b25d;
+  border-left: 4px solid $brand-secondary-colour;
 }
 
 .list-link.active {
-  border-left: 4px solid #e07a5f;
+  border-left: 4px solid $brand-highlight-secondary-colour;
 }
 </style>

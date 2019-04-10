@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar bg-white" v-bind:class="{ 'dismissed': menuDismissed }">
+  <div class="sidebar" v-bind:class="{ 'dismissed': menuDismissed }">
     <div class="sidebar-inner">
       <site-link class="link-border" v-on:dismiss-menu="menuDismissed = true"/>
       <div v-on:click="menuDismissed = true">
@@ -98,6 +98,7 @@ export default {
 .sidebar {
   position: relative;
   width: 375px;
+  background-color: $primary-background-colour;
 
   @media (max-width: $media-ipad-landscape) {
     width: 300px;
@@ -127,7 +128,7 @@ export default {
   top: 0;
   width: 375px;
   height: 100%;
-  border-right: 1px solid #f2f2f2;
+  border-right: 1px solid $primary-border-colour;
 
   @media (max-width: $media-ipad-landscape) {
     width: 300px;
@@ -154,7 +155,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  border-top: 1px solid #f2f2f2;
+  border-top: 1px solid $primary-border-colour;
 
   @media (max-height: $media-phone-landscape) {
     position: unset !important;

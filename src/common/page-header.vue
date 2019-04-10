@@ -22,27 +22,25 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .page-header {
   height: 275px;
   position: relative;
   background-size: cover;
   background-position: center center;
-}
+  color: $inverted-text-colour;
 
-.page-header .inner {
-  padding: 60px;
-  width: 100%;
-}
-
-/* iPad Portrait */
-@media (max-width: 767px) {
-  .page-header {
+  @media (max-width: $media-ipad-portrait) {
     height: 325px;
   }
 
-  .page-header .inner {
-    padding: 15px;
+  .inner {
+    padding: 60px;
+    width: 100%;
+
+    @media (max-width: $media-ipad-portrait) {
+      padding: 15px;
+    }
   }
 }
 </style>

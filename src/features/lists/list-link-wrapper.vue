@@ -62,24 +62,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #list-link-wrapper {
   max-height: calc(100vh - 302px);
   overflow: auto;
+
+  @media (max-height: $media-phone-landscape) {
+    max-height: unset !important;
+  }
 }
 
 .list-link:nth-child(even) {
-  background: #f9f9f9;
+  background: $primary-highlight-background-colour;
 }
 
 .list-link:hover {
-  background-color: #e5b25d;
-  color: white !important;
-}
-
-@media (max-height: 412px) {
-  #list-link-wrapper {
-    max-height: unset !important;
-  }
+  background-color: $brand-secondary-colour;
+  color: $inverted-text-colour !important;
 }
 </style>

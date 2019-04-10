@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white">
+  <div class="feature-customisation">
     <div class="container py-5">
       <div class="d-flex flex-column flex-column-reverse flex-lg-row align-items-center py-5">
         <div class="flex-column flex-lg-fill text-center desktop-50">
@@ -22,3 +22,9 @@
     </div>
   </div>
 </template>
+
+<style lang="scss">
+  .feature-customisation{
+    background-color: $primary-background-colour
+  }
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-cover text-white" :style="'background-image: url(https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg);'">
+  <div class="profile-cover" :style="'background-image: url(https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg);'">
     <div class="profile-cover-inner">
       <overlay class="d-flex align-items-center"/>
       <div class="position-relative" style="z-index: 2001;">
@@ -11,12 +11,13 @@
   </div>
 </template>
 
-<style>
+<style lang="scss">
 .profile-cover {
   min-height: 100vh;
   position: relative;
   background-size: cover;
   background-position: center center;
+  color: $inverted-text-colour;
 }
 .profile-cover-inner {
   max-height: 100vh;

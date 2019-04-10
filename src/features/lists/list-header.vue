@@ -6,7 +6,6 @@
           class="display-2 flex-grow-1 mb-2"
           :text="currentList.name"
           v-on:updated="saveName"
-          class-list="text-white"
           placeholder="What is this list for..."
         />
       </h1>
@@ -50,7 +49,7 @@
       class="d-block lead"
       :text="currentList.description"
       v-on:updated="saveDescription"
-      class-list="text-white mb-2"
+      class-list="mb-2"
       placeholder="Describe why this list is important..."
     />
 
@@ -130,31 +129,14 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .list-dropdown {
-  border-color: #db5461 !important;
-  color: #db5461 !important;
+  border-color: $brand-primary-colour !important;
+  color: $brand-primary-colour !important;
 }
 
 .list-dropdown:hover {
-  border-color: #e5b25d !important;
-  color: #e5b25d !important;
-}
-
-.list-progress {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 20px;
-  opacity: 0.5;
-  background-color: transparent;
-  border-radius: 0 !important;
-}
-
-.list-progress .progress-bar {
-  width: 0;
-  transition: width 0.6s ease-in-out;
-  background-color: #c0ea67 !important;
+  border-color: $brand-secondary-colour !important;
+  color: $brand-secondary-colour !important;
 }
 </style>

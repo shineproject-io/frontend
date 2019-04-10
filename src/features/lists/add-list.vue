@@ -46,22 +46,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .addition {
   position: fixed;
   right: 25px;
   bottom: 25px;
   border-radius: 50%;
   padding: 12px 14px;
-  background-color: #db5461;
-  color: white;
+  background-color: $brand-primary-colour;
+  color: $inverted-text-colour;
   font-size: 14px;
   transition: background-color 0.2s ease-in-out;
   z-index: 2005;
 }
 
 .addition:hover {
-  color: white;
-  background-color: #e5b25d;
+  color: $inverted-text-colour;
+  background-color: $brand-secondary-colour;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-white animated slideInDown animate-fast"
+    class="feature-header animated slideInDown animate-fast"
     style="background-image: url('https://shinestorage.azureedge.net/productimages/texture.png');"
   >
     <div class="container text-center text-lg-left pt-3">
@@ -38,3 +38,9 @@
     </div>
   </div>
 </template>
+
+<style lang="scss">
+.feature-header {
+  color: $inverted-text-colour;
+}
+</style>
