@@ -131,12 +131,12 @@ export default {
 
 <style lang="scss">
 .list-dropdown {
-  border-color: $brand-primary-colour !important;
-  color: $brand-primary-colour !important;
+  border-color: $brand-primary-colour;
+  color: $brand-primary-colour;
 }
 
 .list-dropdown:hover {
-  border-color: $brand-secondary-colour !important;
-  color: $brand-secondary-colour !important;
+  border-color: $brand-secondary-colour;
+  color: $brand-secondary-colour;
 }
 </style>

@@ -25,7 +25,7 @@
 
 @media (min-width: 769px) {
   .sidebar-close {
-    display: none !important;
+    display: none;
   }
 }
 </style>

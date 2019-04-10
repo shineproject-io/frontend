@@ -161,7 +161,7 @@ export default {
 }
 
 .todo-title {
-  padding-top: 20px !important;
-  padding-bottom: 20px !important;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 </style>

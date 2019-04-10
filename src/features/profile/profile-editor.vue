@@ -131,6 +131,6 @@ export default {
 
 <style lang="scss">
 a.profile-editor-link {
-  color: $inverted-text-colour !important;
+  color: $inverted-text-colour;
 }
 </style>

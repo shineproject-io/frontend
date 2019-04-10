@@ -106,7 +106,7 @@ export default {
   }
 
   @media (max-width: $media-ipad-portrait) {
-    position: fixed !important;
+    position: fixed;
     z-index: 2002;
     width: 100%;
     left: 0;
@@ -123,6 +123,7 @@ export default {
 
 .sidebar-inner {
   position: fixed;
+  background-color: $primary-background-colour;
   left: 0;
   right: 0;
   top: 0;
@@ -158,7 +159,7 @@ export default {
   border-top: 1px solid $primary-border-colour;
 
   @media (max-height: $media-phone-landscape) {
-    position: unset !important;
+    position: unset;
   }
 }
 </style>

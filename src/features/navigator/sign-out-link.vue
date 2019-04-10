@@ -35,8 +35,8 @@ export default {
   background-color: $primary-background-highlight-colour;
 
   &:hover {
-    background-color: $brand-primary-colour !important;
-    color: $inverted-text-colour !important;
+    background-color: $brand-primary-highlight-colour;
+    color: $inverted-text-colour;
   }
 }
 </style>

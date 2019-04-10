@@ -67,16 +67,16 @@ export default {
   position: fixed;
   left: 50%;
   transform: translate(-50%, 0);
-  background-color: $primary-background-colour
-}
+  background-color: $primary-background-colour;
 
-.c-modal-inner {
-  min-height: 100px;
-  color: $primary-text-colour !important;
-}
+  .c-modal-inner {
+    min-height: 100px;
+    color: $primary-text-colour;
+  }
 
-.c-modal-body {
-  max-height: 60vh;
-  overflow: auto;
+  .c-modal-body {
+    max-height: 60vh;
+    overflow: auto;
+  }
 }
 </style>

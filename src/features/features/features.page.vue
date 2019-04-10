@@ -39,7 +39,7 @@ export default {
 }
 
 .btn:hover {
-  color: $inverted-text-colour !important;
+  color: $inverted-text-colour;
   text-decoration: underline;
 }
 </style>

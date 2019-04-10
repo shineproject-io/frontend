@@ -68,7 +68,7 @@ export default {
   overflow: auto;
 
   @media (max-height: $media-phone-landscape) {
-    max-height: unset !important;
+    max-height: unset;
   }
 }
 
@@ -78,6 +78,6 @@ export default {
 
 .list-link:hover {
   background-color: $brand-secondary-colour;
-  color: $inverted-text-colour !important;
+  color: $inverted-text-colour;
 }
 </style>

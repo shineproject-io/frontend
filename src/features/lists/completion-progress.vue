@@ -75,12 +75,12 @@ export default {
   height: 20px;
   opacity: 0.5;
   background-color: transparent;
-  border-radius: 0 !important;
+  border-radius: 0;
 }
 
 .list-progress .progress-bar {
   width: 0;
   transition: width 0.6s ease-in-out;
-  background-color: $brand-success-colour !important;
+  background-color: $brand-success-colour;
 }
 </style>

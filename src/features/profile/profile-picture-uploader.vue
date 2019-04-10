@@ -132,22 +132,22 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .profile-picture-uploader {
   position: relative;
   border-radius: 50%;
-}
 
-.profile-picture-uploader:hover .overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  display: initial !important;
-  cursor: pointer;
+  &:hover .overlay {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    display: initial !important;
+    cursor: pointer;
+  }
 }
 
 .upload-icon {

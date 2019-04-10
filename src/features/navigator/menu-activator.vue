@@ -15,11 +15,11 @@
   padding: 15px 20px;
 
   @media (min-width: $media-ipad-portrait) {
-    display: none !important;
+    display: none;
   }
 
   i {
-    font-size: 18px !important;
+    font-size: 18px;
   }
 }
 </style>
