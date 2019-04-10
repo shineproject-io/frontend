@@ -10,6 +10,9 @@ const getters = {
         return lodash.filter(state.lists, lst => {
             return lst.id !== state.currentList.id;
         });
+    },
+    currentListId: state => {
+        return state.currentList.id;
     }
 }
 const mutations = {

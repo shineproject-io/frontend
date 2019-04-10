@@ -51,7 +51,7 @@
 
 <script>
 import todoService from "@/features/todoitems/todo.service.js";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -67,7 +67,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("todoModule", ["currentListId"]),
+    ...mapGetters("listsModule", ["currentListId"]),
     showActiveCircle() {
       return !this.isSubmitting && this.todoItem.state === "Open";
     },

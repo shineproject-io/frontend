@@ -21,7 +21,7 @@ import completedWrapper from "@/features/todoitems/completed-wrapper";
 import todoItem from "@/features/todoitems/todo-item.vue";
 import newTodoItem from "@/features/todoitems/new-todo-item.vue";
 import draggable from "vuedraggable";
-import { mapState, mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -37,19 +37,14 @@ export default {
     };
   },
   computed: {
-    ...mapState("todoModule", ["todoItems", "currentListId"]),
+    ...mapGetters("listsModule", ["currentListId"]),
     ...mapGetters("todoModule", ["openTodoItems", "completedTodoItems"]),
     todoItems: {
       get() {
         return this.openTodoItems;
       },
       set(value) {
-        var dispatchModel = {
-          listId: this.currentListId,
-          todoItems: value
-        };
-
-        this.$store.dispatch("todoModule/setTodoItemsOrder", dispatchModel);
+        this.$store.dispatch("todoModule/setTodoItemsOrder", value);
       }
     }
   },

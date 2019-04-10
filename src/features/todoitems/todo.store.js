@@ -5,7 +5,6 @@ import todoService from '@/features/todoitems/todo.service.js';
 
 const state = {
     todoItems: [],
-    currentListId: null
 };
 const getters = {
     openTodoItems: state => {
@@ -29,9 +28,6 @@ const mutations = {
     setTodoItems: (state, todoItems) => {
         state.todoItems = todoItems;
     },
-    setCurrentListId: (state, currentListId) => {
-        state.currentListId = currentListId;
-    },
     setTodoItemOrder: (state, openTodoItems) => {
         var loop = 1;
 
@@ -49,30 +45,28 @@ const actions = {
         commit
     }) => {
         commit('setTodoItems', []);
-        commit('setCurrentListId', []);
-    },
-    setCurrentListId: ({
-        commit
-    }, listId) => {
-        commit('setCurrentListId', listId);
-        commit('setTodoItems', []);
     },
     setTodoItemsOrder: ({
-        commit
-    }, dispatchModel) => {
-        if (dispatchModel.todoItems.length > 0) {
-            axios.post(`/lists/${dispatchModel.listId}/todoItems/order`, {
-                todoItemIds: lodash.map(dispatchModel.todoItems, "id")
+        commit,
+        rootState
+    }, todoItems) => {
+        var currentListId = rootState.listsModule.currentList.id;
+
+        if (todoItems.length > 0) {
+            axios.post(`/lists/${currentListId}/todoItems/order`, {
+                todoItemIds: lodash.map(todoItems, "id")
             });
 
-            commit('setTodoItemOrder', dispatchModel.todoItems);
+            commit('setTodoItemOrder', todoItems);
         }
     },
     getTodoItems: ({
         commit,
-        state
+        rootState
     }) => {
-        return axios.get(`/lists/${state.currentListId}/todoItems`).then(response => {
+        var currentListId = rootState.listsModule.currentList.id;
+
+        return axios.get(`/lists/${currentListId}/todoItems`).then(response => {
             commit('setTodoItems', response.data);
         });
     },

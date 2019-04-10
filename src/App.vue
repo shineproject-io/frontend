@@ -1,5 +1,5 @@
 <template>
-  <loading-container :is-loading="isLoading" class="ui-light">
+  <loading-container :is-loading="isLoading">
     <sidebar/>
 
     <div id="route-page">

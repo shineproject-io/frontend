@@ -54,7 +54,7 @@
 
 <script>
 import listService from "@/features/lists/lists.service.js";
-import { mapState } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
@@ -66,7 +66,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("todoModule", ["currentListId"]),
+    ...mapGetters("listsModule", ["currentListId"]),
     errorMessage() {
       switch (this.statusCode) {
         case -1:

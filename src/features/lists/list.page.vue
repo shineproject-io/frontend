@@ -27,8 +27,7 @@ export default {
     listMigrator
   },
   computed: {
-    ...mapState("todoModule", ["currentListId"]),
-    ...mapState("listsModule", ["currentList"])
+    ...mapState("listsModule", ["currentList"]),
   },
   watch: {
     "$route.query.listId"() {
@@ -42,12 +41,7 @@ export default {
   },
   methods: {
     initialise() {
-      this.$store.dispatch(
-        "todoModule/setCurrentListId",
-        this.$route.query.listId
-      );
-
-      this.$store.dispatch("listsModule/getList", this.currentListId);
+      this.$store.dispatch("listsModule/getList", this.$route.query.listId);
     }
   }
 };
