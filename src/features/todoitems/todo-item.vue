@@ -5,7 +5,8 @@
 
       <i
         v-if="showActiveCircle"
-        class="todo-circle far fa-circle fa-fw"
+        class="todo-circle fa-fw"
+        v-bind:class="[todoItem.isImportant ? 'fas fa-exclamation-circle' : 'far fa-circle']"
         v-on:click.prevent="changeTodoState('Completed')"
       />
 
@@ -40,6 +41,24 @@
       </button>
       <div class="dropdown-menu" x-placement="left-start">
         <div class="dropdown-header">Edit to-do</div>
+        <a
+          href="#"
+          v-if="!todoItem.isImportant"
+          class="dropdown-item"
+          v-on:click.prevent="toggleImportance"
+        >
+          <i class="fas fa-exclamation-circle fa-fw mr-1"/>
+          <span>Mark as important</span>
+        </a>
+        <a
+          href="#"
+          v-if="todoItem.isImportant"
+          class="dropdown-item"
+          v-on:click.prevent="toggleImportance"
+        >
+          <i class="fas fa-minus-circle fa-fw mr-1"/>
+          <span>Mark as not important</span>
+        </a>
         <a href="#" class="dropdown-item" v-on:click.prevent="deleteTodoItem">
           <i class="fas fa-trash fa-fw mr-1"/>
           <span>Delete</span>
@@ -82,8 +101,20 @@ export default {
     deleteTodoItem() {
       this.isSubmitting = true;
 
+      todoService.deleteTodo(this.currentListId, this.todoItem.id).then(() => {
+        this.isSubmitting = false;
+        this.$store.dispatch("todoModule/getTodoItems");
+      });
+    },
+    toggleImportance() {
+      this.isSubmitting = true;
+
       todoService
-        .deleteTodo(this.currentListId, this.todoItem.id)
+        .toggleImportance(
+          this.currentListId,
+          this.todoItem.id,
+          this.todoItem.isImportant
+        )
         .then(() => {
           this.isSubmitting = false;
           this.$store.dispatch("todoModule/getTodoItems");
@@ -163,5 +194,9 @@ export default {
 .todo-title {
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.todo-circle.fa-exclamation-circle:not(:hover) {
+  color: gray;
 }
 </style>

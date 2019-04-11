@@ -55,9 +55,6 @@ export default {
 
       this.$store
         .dispatch("listsModule/getList", this.$route.query.listId)
-        .then(() => {
-          window.console.log(this.currentList);
-        })
         .catch(() => {
           this.isNotFound = true;
         });

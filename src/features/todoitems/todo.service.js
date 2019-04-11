@@ -23,5 +23,12 @@ export default {
     },
     deleteTodo(listId, todoItemId) {
         return axios.delete(`/lists/${listId}/todoItems/${todoItemId}`);
+    },
+    toggleImportance(listId, todoItemId, isImportant) {
+        var requestModel = {
+            isImportant: !isImportant
+        };
+
+        return axios.put(`/lists/${listId}/todoItems/${todoItemId}/importance`, requestModel);
     }
 }
