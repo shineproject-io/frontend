@@ -16,10 +16,10 @@ export default {
   computed: {
     backgroundImage() {
       if (new Date().getHours() < 12) {
-        return "https://listsstorage.blob.core.windows.net/productimages/morning.jpg";
+        return "https://shinestorage.azureedge.net/productimages/morning.jpg";
       }
       
-      return "https://listsstorage.blob.core.windows.net/productimages/evening.jpg";
+      return "https://shinestorage.azureedge.net/productimages/evening.jpg";
     }
   }
 };
