@@ -8,22 +8,23 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@thomaswilliammcclean/vuestack": "^1.0.4",
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.1",
     "lodash": "^4.17.11",
     "vue": "^2.6.10",
     "vue-analytics": "^5.16.4",
-    "vue-router": "^3.0.2",
-    "vuedraggable": "^2.20.0",
-    "vuex": "^3.1.0",
-    "vuex-persist": "^2.0.0"
+    "vue-router": "^3.0.6",
+    "vuedraggable": "^2.21.0",
+    "vuex": "^3.1.1",
+    "vuex-persist": "^2.0.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.5.5",
-    "@vue/cli-plugin-eslint": "^3.5.1",
-    "@vue/cli-service": "^3.5.3",
-    "node-sass": "^4.11.0",
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
+    "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
   },

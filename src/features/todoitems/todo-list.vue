@@ -1,19 +1,21 @@
 <template>
-  <loading-container class="todo-background" :isLoading="isLoading">
-    <completed-wrapper v-if="completedTodoItems.length > 0"/>
+  <div class="todo-background">
+    <loading-container :isLoading="isLoading">
+      <completed-wrapper v-if="completedTodoItems.length > 0"/>
 
-    <draggable
-      v-model="todoItems"
-      :pull="false"
-      handle=".todo-drag"
-      @start="drag=true"
-      @end="drag=false"
-    >
-      <todo-item v-for="todoItem in todoItems" v-bind:key="todoItem.id" :todo-item="todoItem"/>
-    </draggable>
+      <draggable
+        v-model="todoItems"
+        :pull="false"
+        handle=".todo-drag"
+        @start="drag=true"
+        @end="drag=false"
+      >
+        <todo-item v-for="todoItem in todoItems" v-bind:key="todoItem.id" :todo-item="todoItem"/>
+      </draggable>
 
-    <new-todo-item v-on:todo-item-added="newTodoItemAdded" :is-focused="focusNewTodoItemField"/>
-  </loading-container>
+      <new-todo-item v-on:todo-item-added="newTodoItemAdded" :is-focused="focusNewTodoItemField"/>
+    </loading-container>
+  </div>
 </template>
 
 <script>
@@ -78,7 +80,7 @@ export default {
 
 <style lang="scss">
 .todo-background {
-	background-color: $primary-background-highlight-colour;
-	min-height: calc(100vh - 278px);
-  }
+  background-color: $primary-background-highlight-colour;
+  min-height: calc(100vh - 278px);
+}
 </style>

@@ -35,7 +35,7 @@ export default {
   }
 
   .inner {
-    padding: 60px;
+    padding: 95px 60px;
     width: 100%;
 
     @media (max-width: $media-ipad-portrait) {
