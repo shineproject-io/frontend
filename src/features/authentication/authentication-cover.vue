@@ -28,6 +28,11 @@ export default {
   color: $inverted-text-colour;
 }
 
+.authentication-cover .overlay {
+  display: flex;
+  align-items: center;
+}
+
 .authentication-inner {
   margin: 0 auto;
   width: 600px;
