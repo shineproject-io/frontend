@@ -1,5 +1,5 @@
 <template>
-  <loading-container id="list-link-wrapper" :is-loading="isLoading" message-suffix="lists">
+  <div>
     <draggable
       v-model="lists"
       :pull="false"
@@ -19,7 +19,7 @@
       <i class="fas fa-chalkboard fa-fw mb-3" style="font-size: 20px;"/>
       <p class="mb-1">You don't have any active lists!</p>
     </div>
-  </loading-container>
+  </div>
 </template>
 
 <script>
@@ -30,11 +30,6 @@ export default {
   components: {
     listLink,
     draggable
-  },
-  data() {
-    return {
-      isLoading: true
-    };
   },
   computed: {
     lists: {
@@ -54,10 +49,7 @@ export default {
     }
   },
   created() {
-    this.isLoading = true;
-    this.$store.dispatch("listsModule/getLists").then(() => {
-      this.isLoading = false;
-    });
+    this.$store.dispatch("listsModule/getLists");
   }
 };
 </script>

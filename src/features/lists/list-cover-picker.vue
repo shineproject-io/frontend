@@ -2,52 +2,50 @@
   <modal ref="listBackgroundModal">
     <h6 slot="header" class="mb-0">Change list background</h6>
     <div slot="body" class="p-3">
-      <loading-container :is-loading="isSubmitting" message-suffix="photo">
-        <p>Upload your own photo</p>
-        <error-renderer v-if="statusCode !== 0" :errorMessage="errorMessage"/>
-        <div class="input-group mb-3">
-          <div class="custom-file">
-            <input
-              type="file"
-              class="custom-file-input"
-              v-on:change="fileInputChange($event.target.files)"
-            >
-            <label class="custom-file-label" for="inputGroupFile01">{{imageFileName}}</label>
-          </div>
+      <p>Upload your own photo</p>
+      <error-renderer v-if="statusCode !== 0" :errorMessage="errorMessage"/>
+      <div class="input-group mb-3">
+        <div class="custom-file">
+          <input
+            type="file"
+            class="custom-file-input"
+            v-on:change="fileInputChange($event.target.files)"
+          >
+          <label class="custom-file-label" for="inputGroupFile01">{{imageFileName}}</label>
         </div>
-        <hr>
-        <p>Or select one of ours</p>
-        <div
-          class="selectable-picture"
-          style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg');"
-          v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg')"
-        />
-        <div
-          class="selectable-picture"
-          style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/2.jpg');"
-          v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/2.jpg')"
-        />
-        <div
-          class="selectable-picture"
-          style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg');"
-          v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg')"
-        />
-        <div
-          class="selectable-picture"
-          style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/4.jpg');"
-          v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/4.jpg')"
-        />
-        <div
-          class="selectable-picture"
-          style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/5.jpg');"
-          v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/5.jpg')"
-        />
-        <div
-          class="selectable-picture"
-          style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg');"
-          v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg')"
-        />
-      </loading-container>
+      </div>
+      <hr>
+      <p>Or select one of ours</p>
+      <div
+        class="selectable-picture"
+        style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg');"
+        v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/1.jpg')"
+      />
+      <div
+        class="selectable-picture"
+        style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/2.jpg');"
+        v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/2.jpg')"
+      />
+      <div
+        class="selectable-picture"
+        style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg');"
+        v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/3.jpg')"
+      />
+      <div
+        class="selectable-picture"
+        style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/4.jpg');"
+        v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/4.jpg')"
+      />
+      <div
+        class="selectable-picture"
+        style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/5.jpg');"
+        v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/5.jpg')"
+      />
+      <div
+        class="selectable-picture"
+        style="background-image: url('https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg');"
+        v-on:click.prevent="selectPicture('https://shinestorage.azureedge.net/productlistbackgrounds/6.jpg')"
+      />
     </div>
   </modal>
 </template>

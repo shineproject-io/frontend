@@ -1,20 +1,18 @@
 <template>
   <div class="todo-background">
-    <loading-container :isLoading="isLoading">
-      <completed-wrapper v-if="completedTodoItems.length > 0"/>
+    <completed-wrapper v-if="completedTodoItems.length > 0"/>
 
-      <draggable
-        v-model="todoItems"
-        :pull="false"
-        handle=".todo-drag"
-        @start="drag=true"
-        @end="drag=false"
-      >
-        <todo-item v-for="todoItem in todoItems" v-bind:key="todoItem.id" :todo-item="todoItem"/>
-      </draggable>
+    <draggable
+      v-model="todoItems"
+      :pull="false"
+      handle=".todo-drag"
+      @start="drag=true"
+      @end="drag=false"
+    >
+      <todo-item v-for="todoItem in todoItems" v-bind:key="todoItem.id" :todo-item="todoItem"/>
+    </draggable>
 
-      <new-todo-item v-on:todo-item-added="newTodoItemAdded" :is-focused="focusNewTodoItemField"/>
-    </loading-container>
+    <new-todo-item v-on:todo-item-added="newTodoItemAdded" :is-focused="focusNewTodoItemField"/>
   </div>
 </template>
 
@@ -34,7 +32,6 @@ export default {
   },
   data() {
     return {
-      isLoading: true,
       focusNewTodoItemField: false
     };
   },
@@ -61,13 +58,10 @@ export default {
   },
   methods: {
     loadTodoItems() {
-      this.isLoading = true;
-
       this.$store.dispatch("todoModule/getTodoItems").then(() => {
         if (this.todoItems.length === 0) {
           this.focusNewTodoItemField = true;
         }
-        this.isLoading = false;
       });
     },
     newTodoItemAdded() {

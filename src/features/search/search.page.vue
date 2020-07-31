@@ -1,13 +1,13 @@
 <template>
   <div>
     <search-header v-on:search="search"/>
-    <loading-container class="search-background" :is-loading="isSearching" message-suffix="search">
+    <div>
       <div v-for="result in searchResults" v-bind:key="result.resultId">
         <component v-bind:is="result.resultType.toLowerCase() + '-search-result'" :result="result"/>
       </div>
       <no-search v-if="!hasSearch"/>
       <no-results v-if="searchResults.length === 0 && hasSearch"/>
-    </loading-container>
+    </div>
   </div>
 </template>
 

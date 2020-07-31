@@ -1,5 +1,5 @@
 <template>
-  <loading-container :is-loading="isLoading">
+  <div>
     <sidebar/>
 
     <div id="route-page">
@@ -8,7 +8,7 @@
     </div>
 
     <add-list v-if="!isAnonymous"/>
-  </loading-container>
+  </div>
 </template>
 
 <script>
@@ -16,6 +16,7 @@ import "@/common/product-branding.scss";
 import sidebar from "@/features/navigator/sidebar.vue";
 import menuActivator from "@/features/navigator/menu-activator.vue";
 import addList from "@/features/lists/add-list";
+import '@tomorepo/overlay/dist/overlay.css';
 import { mapState, mapGetters } from "vuex";
 
 export default {
@@ -23,11 +24,6 @@ export default {
     sidebar,
     addList,
     menuActivator
-  },
-  data() {
-    return {
-      isLoading: true
-    };
   },
   computed: {
     ...mapState("authenticationModule", ["authenticationToken"]),
@@ -43,7 +39,6 @@ export default {
   },
   methods: {
     initialiseAuthentication() {
-      this.isLoading = true;
       let currentRoute = this.$route.path.toLowerCase();
 
       // Vue-Router will automatically re-route
@@ -55,8 +50,6 @@ export default {
         this.$router.push({ name: "sign-in" });
       } else if (currentRoute.includes("welcome") && this.authenticationToken) {
         this.$router.push({ name: "profile" });
-      } else {
-        this.isLoading = false;
       }
     }
   }

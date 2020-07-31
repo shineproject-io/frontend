@@ -1,17 +1,15 @@
 <template>
-  <loading-container :is-loading="isLoading" class="p-2 mb-4">
-    <div class="suggestions-wrapper" v-bind:class="{'no-events': isSubmitting}">
-      <suggestion-item
-        class="animated fadeInDown"
-        v-for="suggestion in suggestions"
-        v-bind:key="suggestion.suggestionTitle"
-        :title="suggestion.suggestionTitle"
-        :description="suggestion.suggestionDescription"
-        :icon="suggestion.suggestionIcon"
-        v-on:perform="createList(suggestion.listTitle, suggestion.listDescription, suggestion.listBackgroundImageUrl)"
-      />
-    </div>
-  </loading-container>
+  <div class="suggestions-wrapper" v-bind:class="{'no-events': isSubmitting}">
+    <suggestion-item
+      class="animated fadeInDown"
+      v-for="suggestion in suggestions"
+      v-bind:key="suggestion.suggestionTitle"
+      :title="suggestion.suggestionTitle"
+      :description="suggestion.suggestionDescription"
+      :icon="suggestion.suggestionIcon"
+      v-on:perform="createList(suggestion.listTitle, suggestion.listDescription, suggestion.listBackgroundImageUrl)"
+    />
+  </div>
 </template>
 
 <script>
@@ -29,10 +27,7 @@ export default {
     };
   },
   computed: {
-    ...mapState("suggestionsModule", ["suggestions"]),
-    isLoading() {
-      return this.suggestions.length === 0;
-    }
+    ...mapState("suggestionsModule", ["suggestions"])
   },
   mounted() {
     this.$store.dispatch("suggestionsModule/getSuggestions");

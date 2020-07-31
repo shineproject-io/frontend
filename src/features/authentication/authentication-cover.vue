@@ -2,7 +2,7 @@
   <transition name="fade">
     <div class="authentication-cover" :style="'background-image: url(' + backgroundImage + ');'">
       <overlay class="d-flex align-items-center">
-        <slot></slot>
+        <slot />
       </overlay>
     </div>
   </transition>

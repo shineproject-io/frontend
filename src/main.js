@@ -8,7 +8,7 @@ import '@/startup/axios-setup.js';
 import '@/startup/common-components.js';
 
 import 'animate.css';
-import '@thomaswilliammcclean/vuestack';
+import '@tomorepo/overlay';
 
 Vue.config.productionTip = false;
 
