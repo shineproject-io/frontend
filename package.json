@@ -10,7 +10,7 @@
   "dependencies": {
     "@tomorepo/overlay": "^1.4.0",
     "animate.css": "^3.7.2",
-    "axios": "^0.18.1",
+    "axios": "^0.21.1",
     "jquery": "^3.5.1",
     "lodash": "^4.17.19",
     "vue": "^2.6.11",
